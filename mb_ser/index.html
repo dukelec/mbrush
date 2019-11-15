@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<link rel="apple-touch-icon" sizes="192x192" href="img/icon.png">
+<link rel="icon" type="image/png" href="img/icon.png" />
+<link rel="manifest" href="manifest.json" />
+<title>PrinCube</title>
+
+<!-- Import the Ionic CSS -->
+<link href="/css/ionic.bundle.css" rel="stylesheet">
+<!-- Import Ionic -->
+<script type="module" src="/js/libs/ionic/ionic.esm.js"></script>
+<script nomodule="" src="/js/libs/ionic/ionic.js"></script>
+
+<script src="./js/libs/konva.min.js" defer></script>
+<script src="./js/libs/msgpack.min.js" defer></script>
+<script type="module" src="./js/app.js"></script>
+<style>
+ion-toolbar, ion-header {
+    --min-height: 48px;
+}
+
+ion-menu {
+    --width: 200px;
+}
+
+ion-title {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+* {
+    user-select: text;
+}
+</style>
+<script>
+</script>
+<style id="app_style"></style>
+</head>
+<body>
+<ion-app>
+<ion-menu side="start" menu-id="main_menu">
+    <ion-header>
+        <ion-toolbar mode="md" color="primary">
+        <ion-title id="index_menu">Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-item>
+                <ion-router-link href="#">
+                    <ion-icon name="home"></ion-icon> <span id="index_home">Home<span>
+                </ion-router-link>
+            </ion-item>
+            <ion-item>
+                <ion-router-link href="#/setting">
+                    <ion-icon name="settings"></ion-icon> <span id="index_setting">Setting<span>
+                </ion-router-link>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<div class="ion-page" main>
+    <ion-header>
+        <ion-toolbar color="light" mode="md">
+            <ion-buttons slot="start">
+                <ion-menu-button auto-hide="false" menu="main_menu""></ion-menu-button>
+            </ion-buttons>
+            <ion-title id="nav_title">Home</ion-title>
+            <ion-buttons slot="secondary">
+                <ion-title size="small" id="nav_sta"></ion-title>
+                <ion-button><img id="nav_con" height="22px" src="img/offline.svg"></ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content id="app">
+        <ion-item lines="none">
+            Loading &nbsp; <ion-spinner name="dots"></ion-spinner>
+        </ion-item>
+    </ion-content>
+</div>
+</ion-app>
+<ion-menu-controller></ion-menu-controller>
+
+<div id="heartbeat_elem" style="display:none;"><div>
+</body>
+</html>

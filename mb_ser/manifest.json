@@ -1,0 +1,12 @@
+{
+  "short_name": "PrinCube",
+  "name": "PrinCube",
+  "icons": [
+    {
+      "src":"img/icon.png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}

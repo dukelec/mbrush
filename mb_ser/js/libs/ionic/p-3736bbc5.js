@@ -1,0 +1,1 @@
+const r=(r,e,n)=>{const s=new MutationObserver(r=>{n(t(r,e))});return s.observe(r,{childList:!0,subtree:!0}),s},t=(r,t)=>{let n;return r.forEach(r=>{for(let s=0;s<r.addedNodes.length;s++)n=e(r.addedNodes[s],t)||n}),n},e=(r,t)=>{if(1===r.nodeType)return(r.tagName===t.toUpperCase()?[r]:Array.from(r.querySelectorAll(t))).find(r=>!0===r.checked)};export{e as f,r as w};

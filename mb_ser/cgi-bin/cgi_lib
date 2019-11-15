@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# https://oinkzwurgl.org/hacking/bash_cgi/
+function cgi_decode()
+{
+    [ $# -ne 1 ] && return
+    local v t h
+    # replace all + with whitespace and append %%
+    t="${1//+/ }%%"
+    while [ "${#t}" -gt 0 -a "${t}" != "%" ]; do
+        v="${v}${t%%\%*}" # digest up to the first %
+        t="${t#*%}"       # remove digested part
+        # decode if there is anything to decode and if not at end of string
+        if [ "${#t}" -gt 0 -a "${t}" != "%" ]; then
+            h="${t:0:2}" # save first two chars
+            t="${t:2}" # remove these
+            v="${v}"`echo -e \\\\x"${h}"` # convert hex to special char
+        fi
+    done
+    # return decoded string
+    echo "${v}"
+}
+
+function cgi_init()
+{
+    local q p k v s
+
+    if [ -z "$1" ]; then
+        read QUERY_STRING_POST
+        [ ! -z "${QUERY_STRING}" ] && q="${QUERY_STRING}&"
+        [ ! -z "${QUERY_STRING_POST}" ] && q="${q}${QUERY_STRING_POST}&"
+    else
+        q="$1&"
+    fi
+
+    while [ ! -z "$q" ]; do
+        p="${q%%&*}"  # get first part of query string
+        k="${p%%=*}"  # get the key (variable name) from it
+        v="${p#*=}"   # get the value from it
+        q="${q#$p&*}" # strip first part from query string
+        export "cgi_$k"="`cgi_decode \"$v\"`"
+    done
+}
+

@@ -1,0 +1,3 @@
+replace qdecoder/examples/upload.c
+
+./configure --target=mips-linux-gnu --host=mips-linux-gnu CC=mips-linux-gnu-gcc -prefix=/mnt/TT/x1021/tools/toolchains/mips-gcc520-glibc222/mips-linux-gnu

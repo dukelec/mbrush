@@ -1,0 +1,51 @@
+#! /bin/sh
+#
+
+if [ "$1" != "start" ]; then
+    exit
+fi
+
+cd /root
+
+if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
+    rm -rf mb_conf/reset
+    state="$(cat /sys/mb/state)"
+    short="${state:4:8}"
+    echo "ssid=PrinCube-$short&passwd=12345678" > mb_conf/wifi.conf
+fi
+
+source mb_ser/cgi-bin/cgi_lib
+cgi_init "$(cat mb_conf/wifi.conf)"
+
+ssid="$(echo -n "$cgi_ssid" | tr -d "\n" | od -A n -t x1 | tr -d " " | tr -d "\n")"
+
+function get_psk() {
+    psk_str="$(wpa_passphrase "$cgi_ssid" "$cgi_passwd")" || { touch mb_conf/reset; reboot; exit; }
+    echo "$psk_str" | while read -r line; do
+        if [ "${line:0:4}" == "psk=" ]; then
+            echo "${line:4}"
+            break
+        fi
+    done
+}
+
+psk="$(get_psk)"
+[ "$psk" == "" ] && { touch mb_conf/reset; reboot; exit; }
+
+echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" > mb_etc/wpa_temp.conf
+
+ifconfig wlan0 192.168.44.1
+ifconfig usb0 192.168.88.1 up
+wpa_supplicant -B -i wlan0 -c mb_etc/wpa_temp.conf &
+busybox httpd -h mb_ser -c httpd.conf # -f -p 80 -vvv
+stunnel mb_etc/stunnel.conf
+
+busybox udhcpd mb_etc/udhcpd_wlan0.conf
+busybox udhcpd mb_etc/udhcpd_usb0.conf
+
+ip addr add "fd44::1/64" dev wlan0
+ip addr add "fd88::1/64" dev usb0
+radvd -C mb_etc/radvd.conf # -d5 -n
+
+echo 4 > /proc/sysrq-trigger
+
