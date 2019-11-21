@@ -11,7 +11,7 @@ if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
     rm -rf mb_conf/reset
     state="$(cat /sys/mb/state)"
     short="${state:4:8}"
-    echo "ssid=PrinCube-$short&passwd=12345678" > mb_conf/wifi.conf
+    echo "ssid=PrinCube-$short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
 fi
 
 source mb_ser/cgi-bin/cgi_lib
@@ -32,7 +32,7 @@ function get_psk() {
 psk="$(get_psk)"
 [ "$psk" == "" ] && { touch mb_conf/reset; reboot; exit; }
 
-echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" > mb_etc/wpa_temp.conf
+echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" -e "s/_FREQ_/$cgi_freq/g" > mb_etc/wpa_temp.conf
 
 ifconfig wlan0 192.168.44.1
 ifconfig usb0 192.168.88.1 up

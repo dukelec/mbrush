@@ -34,6 +34,7 @@ async function save_conf() {
     
     wifi_conf.ssid = document.getElementById('wifi_ssid').value;
     wifi_conf.passwd = document.getElementById('wifi_passwd').value;
+    wifi_conf.freq = document.getElementById('wifi_freq').value;
 }
 
 function update_ui() {
@@ -61,6 +62,7 @@ function update_ui() {
     
     document.getElementById('wifi_ssid').value = wifi_conf.ssid;
     document.getElementById('wifi_passwd').value = wifi_conf.passwd;
+    document.getElementById('wifi_freq').value = wifi_conf.freq;
     block_ui_event = false;
 }
 
@@ -138,6 +140,7 @@ async function wifi_from_dev() {
         let conf = JSON.parse('{"' + ret.wifi.replace(/=/g, '": "').replace(/&/g, '", "') + '"}');
         wifi_conf.ssid = decodeURIComponent(conf.ssid);
         wifi_conf.passwd = decodeURIComponent(conf.passwd);
+        wifi_conf.freq = conf.freq;
     } else {
         alert(L('Read wifi conf from device error'));
         return;
@@ -155,8 +158,10 @@ async function wifi_to_dev() {
         alert(L('Passwd at least 8 char!'));
         return;
     }
+    if (!wifi_conf.freq)
+        wifi_conf.freq = 2462;
     
-    let val = `ssid=${encodeURIComponent(wifi_conf.ssid)}&passwd=${encodeURIComponent(wifi_conf.passwd)}`;
+    let val = `ssid=${encodeURIComponent(wifi_conf.ssid)}&passwd=${encodeURIComponent(wifi_conf.passwd)}&freq=${wifi_conf.freq}`;
     console.log(val);
     
     let ret = await fetch_timo('/cgi-bin/cmd?cmd=set_wifi', {
@@ -338,6 +343,25 @@ let Setting = {
     <ion-item>
         <ion-input placeholder="${L('Password')}" id="wifi_passwd"></ion-input>
     </ion-item>
+    <ion-item>
+        <ion-label>${L('Channel')}</ion-label>
+        <ion-select id="wifi_freq">
+            <ion-select-option value="2412">1</ion-select-option>
+            <ion-select-option value="2417">2</ion-select-option>
+            <ion-select-option value="2422">3</ion-select-option>
+            <ion-select-option value="2427">4</ion-select-option>
+            <ion-select-option value="2432">5</ion-select-option>
+            <ion-select-option value="2437">6</ion-select-option>
+            <ion-select-option value="2442">7</ion-select-option>
+            <ion-select-option value="2447">8</ion-select-option>
+            <ion-select-option value="2452">9</ion-select-option>
+            <ion-select-option value="2457">10</ion-select-option>
+            <ion-select-option value="2462">11</ion-select-option>
+            <ion-select-option value="2467">12 (${L('Not allowed in the US')})</ion-select-option>
+            <ion-select-option value="2472">13 (${L('Not allowed in the US')})</ion-select-option>
+            <!--ion-select-option value="2484">14 (${L('Japan only')})</ion-select-option-->
+        </ion-select>
+    </ion-item>
     
     <ion-item>
         <ion-label></ion-label>
@@ -427,6 +451,7 @@ let Setting = {
         document.getElementById('space_n').addEventListener('ionChange', save_update_ui);
         document.getElementById('dpi_step').addEventListener('ionChange', save_update_ui);
         document.getElementById('buzzer_en').addEventListener('ionChange', save_update_ui);
+        document.getElementById('wifi_freq').addEventListener('ionChange', save_update_ui);
         
         document.getElementById('fw_upload_btn').onclick = async () => {
             let input = document.getElementById('input_fw');

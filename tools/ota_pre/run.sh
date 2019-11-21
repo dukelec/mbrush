@@ -15,6 +15,8 @@ mv mb_ser_new mb_ser
 mv mb_conf_new mb_conf
 mv mb_etc_new mb_etc
 
+ln -sf /root/mb_etc/S80mb /etc/init.d/S80mb
+
 sync
 nohup sh -c "sleep 4 && reboot" > /dev/null &
 

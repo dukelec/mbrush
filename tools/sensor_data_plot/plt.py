@@ -22,11 +22,11 @@ with open(sys.argv[1], 'rb') as f:
 
 print("dat len", len(dat))
 
-t_array = []
-td_array = []
-tavg_array = []
-x_array = []
-iqc_array = []
+t_array = []    # time, x-axis
+td_array = []   # period
+tavg_array = [] # period filtered
+x_array = []    # sensor x delta value
+iqc_array = []  # sensor IQC
 
 DEEP = 20000
 
@@ -35,7 +35,7 @@ for i in range(DEEP):
     if t == 0:
         break
     t_array.append(t)
-    td_array.append(struct.unpack("<I", dat[DEEP*4+i*4 : DEEP*4+i*4+4])[0]) # *26/20)
+    td_array.append(struct.unpack("<I", dat[DEEP*4+i*4 : DEEP*4+i*4+4])[0] * 325/100)
     tavg_array.append(struct.unpack("<I", dat[DEEP*8+i*4 : DEEP*8+i*4+4])[0])
     x_array.append(struct.unpack("<b", dat[DEEP*12+i : DEEP*12+i+1])[0] * 1000)
     iqc_array.append(struct.unpack("<B", dat[DEEP*13+i : DEEP*13+i+1])[0] * 10)
