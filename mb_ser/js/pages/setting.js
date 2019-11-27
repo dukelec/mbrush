@@ -259,10 +259,10 @@ let Setting = {
     <ion-item>
         <ion-segment id="c_width">
             <ion-segment-button value="0">
-                <ion-label>4.5mm</ion-label>
+                <ion-label>4.4mm</ion-label>
             </ion-segment-button>
             <ion-segment-button value="1">
-                <ion-label>5.4mm</ion-label>
+                <ion-label>4.9mm</ion-label>
             </ion-segment-button>
         </ion-segment>
     </ion-item>
