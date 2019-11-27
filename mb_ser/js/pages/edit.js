@@ -114,7 +114,7 @@ function text_modal_edit_init(text) {
         document.getElementById('font_sel').value = font;
         document.getElementById('font_sel2').value = font;
     }
-    document.getElementById('font_size').value = Number(text.fontSize()) / 16;
+    document.getElementById('font_size').value = Number(text.fontSize()) / 32;
     document.getElementById('font_style').value = text.fontStyle();
     document.getElementById('txt_align_sel').value = text.align();
     document.getElementById('txt_color').value = text.fill();
@@ -175,10 +175,10 @@ function text_modal_init() {
             'text': txt_e.value,
             'fill': document.getElementById('txt_color').value,
             'fontFamily': font_sel.value == font_sel2.value ? font_sel.value : [font_sel.value, font_sel2.value],
-            'fontSize': 16 * Number(document.getElementById('font_size').value),
+            'fontSize': 32 * Number(document.getElementById('font_size').value),
             'align': document.getElementById('txt_align_sel').value,
             'fontStyle': document.getElementById('font_style').value,
-            'x': 50,
+            'x': 120,
             'y': 50
         };
         if (shadow_en_e.checked) {

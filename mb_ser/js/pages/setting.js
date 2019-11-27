@@ -256,13 +256,13 @@ let Setting = {
             </ion-segment-button>
         </ion-segment>
     </ion-item>
-    <ion-item style="display: none;">
+    <ion-item>
         <ion-segment id="c_width">
             <ion-segment-button value="0">
-                <ion-label>New</ion-label>
+                <ion-label>4.5mm</ion-label>
             </ion-segment-button>
             <ion-segment-button value="1">
-                <ion-label>Old</ion-label>
+                <ion-label>5.4mm</ion-label>
             </ion-segment-button>
         </ion-segment>
     </ion-item>
@@ -357,8 +357,8 @@ let Setting = {
             <ion-select-option value="2452">9</ion-select-option>
             <ion-select-option value="2457">10</ion-select-option>
             <ion-select-option value="2462">11</ion-select-option>
-            <ion-select-option value="2467">12 (${L('Not allowed in the US')})</ion-select-option>
-            <ion-select-option value="2472">13 (${L('Not allowed in the US')})</ion-select-option>
+            <!--ion-select-option value="2467">12 (${L('Not allowed in the US')})</ion-select-option-->
+            <!--ion-select-option value="2472">13 (${L('Not allowed in the US')})</ion-select-option-->
             <!--ion-select-option value="2484">14 (${L('Japan only')})</ion-select-option-->
         </ion-select>
     </ion-item>
