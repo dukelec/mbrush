@@ -392,10 +392,10 @@ let Setting = {
         <ion-label>${L('Sensor IQC')}</ion-label> <span id="dev_info_iqc">${mb.dev_info.iqc}</span>
     </ion-item>
     <ion-item>
-        <ion-label>${L('HTTPS Certificate')}</ion-label> <a href="/mb_ca.pem" download>mb_ca.pem</a>
+        <ion-label>HTTPS ${L('Certificate')}</ion-label> <a href="/mb_ca.pem" download>mb_ca.pem</a>
     </ion-item>
     <ion-item style="display: ${location.protocol != 'https:' ? 'inline' : 'none'};">
-        <ion-label>${L('HTTPS Link')}</ion-label> <a href="https://${location.host}">https://${location.host}</a>
+        <ion-label>HTTPS ${L('Link')}</ion-label> <a href="https://${location.host}">https://${location.host}</a>
     </ion-item>
 </ion-list>
 
@@ -403,6 +403,9 @@ let Setting = {
     <ion-list-header>
         ${L('Firmware Update')}
     </ion-list-header>
+    <ion-item>
+        <ion-label>${L('Last Firmware')}</ion-label> <a href="https://github.com/dukelec/mb/releases" target="_blank">${L('Link')}</a>
+    </ion-item>
     <ion-item>
         <input type="file" id="input_fw" accept=".tar" class="float-left">
     </ion-item>

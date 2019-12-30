@@ -21,13 +21,26 @@ fi
 echo "MB: cgi source"
 source mb_ser/cgi-bin/cgi_lib
 echo "MB: cgi_init"
-cgi_init "$(cat mb_conf/wifi.conf)"
+
+function wifi_reset()
+{
+    touch mb_conf/reset
+    sync
+    [ ! -z "$1" ] && echo "MB: wifi_reset: $1"
+    reboot
+    exit
+}
+
+wifi_conf="$(cat mb_conf/wifi.conf)"
+[ $? -ne 0 ] && wifi_reset "read wifi.conf error"
+[ -z "$wifi_conf" ] && wifi_reset "wifi.conf empty"
+cgi_init "$wifi_conf" || wifi_reset "parse wifi.conf error, val: $wifi_conf"
 
 echo "MB: get ssid"
 ssid="$(echo -n "$cgi_ssid" | tr -d "\n" | od -A n -t x1 | tr -d " " | tr -d "\n")"
 
 function get_psk() {
-    psk_str="$(wpa_passphrase "$cgi_ssid" "$cgi_passwd")" || { touch mb_conf/reset; reboot; exit; }
+    psk_str="$(wpa_passphrase "$cgi_ssid" "$cgi_passwd")" || wifi_reset "get psk_str error"
     echo "$psk_str" | while read -r line; do
         if [ "${line:0:4}" == "psk=" ]; then
             echo "${line:4}"
@@ -38,7 +51,7 @@ function get_psk() {
 
 echo "MB: get psk"
 psk="$(get_psk)"
-[ "$psk" == "" ] && { touch mb_conf/reset; reboot; exit; }
+[ -z "$psk" ] && wifi_reset "psk empty"
 
 echo "MB: prepare wpa_tpl.conf"
 echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" -e "s/_FREQ_/$cgi_freq/g" > mb_etc/wpa_temp.conf

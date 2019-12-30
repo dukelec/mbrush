@@ -69,6 +69,7 @@ const router = async () => {
 
 window.addEventListener('hashchange', router);
 window.addEventListener('load', async function() {
+    console.info('source code and documents of this app:\n\thttps://github.com/dukelec/mb');
     console.log("load app");
     mb.db = await new Idb();
     mb.conf = await mb.db.get('var', 'conf');
