@@ -22,8 +22,10 @@ fi
 find mbrush-fw/ -type d -name ".git" | xargs rm -rf
 
 version="$(cat ../mb_ser/version)"
-echo "version: $version"
-find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version/g" '{}' \;
+version_app="${version%%_*}"
+
+echo "version: $version, APP: $version_app"
+find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version_app/g" '{}' \;
 rm -rf mbrush-fw/mb_ser/upload/*
 mv mbrush-fw/mb_ser/demo/demo.mbd mbrush-fw/mb_ser/upload/0.mbd
 

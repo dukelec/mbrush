@@ -1,22 +1,29 @@
 #! /bin/sh
 #
 
+echo "MB: $1"
+
 if [ "$1" != "start" ]; then
     exit
 fi
 
 cd /root
+echo "MB: enter /root"
 
 if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
+    echo "MB: reset wifi config"
     rm -rf mb_conf/reset
     state="$(cat /sys/mb/state)"
     short="${state:4:8}"
     echo "ssid=PrinCube-$short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
 fi
 
+echo "MB: cgi source"
 source mb_ser/cgi-bin/cgi_lib
+echo "MB: cgi_init"
 cgi_init "$(cat mb_conf/wifi.conf)"
 
+echo "MB: get ssid"
 ssid="$(echo -n "$cgi_ssid" | tr -d "\n" | od -A n -t x1 | tr -d " " | tr -d "\n")"
 
 function get_psk() {
@@ -29,23 +36,32 @@ function get_psk() {
     done
 }
 
+echo "MB: get psk"
 psk="$(get_psk)"
 [ "$psk" == "" ] && { touch mb_conf/reset; reboot; exit; }
 
+echo "MB: prepare wpa_tpl.conf"
 echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" -e "s/_FREQ_/$cgi_freq/g" > mb_etc/wpa_temp.conf
 
+echo "MB: ifconfig up"
 ifconfig wlan0 192.168.44.1
 ifconfig usb0 192.168.88.1 up
-wpa_supplicant -B -i wlan0 -c mb_etc/wpa_temp.conf &
+echo "MB: wpa up"
+wpa_supplicant -B -i wlan0 -c mb_etc/wpa_temp.conf
+echo "MB: httpd up"
 busybox httpd -h mb_ser -c httpd.conf # -f -p 80 -vvv
+echo "MB: ssl up"
 stunnel mb_etc/stunnel.conf
 
+echo "MB: dhcp up"
 busybox udhcpd mb_etc/udhcpd_wlan0.conf
 busybox udhcpd mb_etc/udhcpd_usb0.conf
 
+echo "MB: ipv6 up"
 ip addr add "fd44::1/64" dev wlan0
 ip addr add "fd88::1/64" dev usb0
 radvd -C mb_etc/radvd.conf # -d5 -n
 
 echo 4 > /proc/sysrq-trigger
+echo "MB: done"
 
