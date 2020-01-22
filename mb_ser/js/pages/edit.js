@@ -49,14 +49,15 @@ function tr_attach(obj) {
 
 async function install_fonts() {
     for (let name in mb.draft.fonts) {
-        let installed = document.fonts.check(`1em '${name}'`);
-        if (!installed) {
+        // Workaround: Do not check if it is already installed, as the check always returns true for Safari.
+        //let installed = document.fonts.check(`1em '${name}'`);
+        //if (!installed) {
             const font = new FontFace(name, mb.draft.fonts[name]);
             await font.load();
             document.fonts.add(font);
             layer.batchDraw();
             console.log('font install done:', name);
-        }
+        //}
     }
 }
 
@@ -276,9 +277,11 @@ customElements.define('modal-fonts', class extends HTMLElement {
             let input = document.getElementById('input_file');
             input.accept = null;
             input.onchange = function () {
+                if (!this.files.length)
+                    return;
                 var file = this.files[0];
                 var name = file.name.replace(/\.[^/.]+$/, "");
-                if (file && name) {
+                if (name) {
                     var reader = new FileReader();
                     reader.onload = async function() {
                         mb.draft.fonts[name] = new Uint8Array(reader.result);

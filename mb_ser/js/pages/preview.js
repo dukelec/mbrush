@@ -333,14 +333,14 @@ async function enter() {
     document.getElementById('saturation').addEventListener('ionChange', save_update_ui);
     
     for (let name in mb.draft.fonts) {
-        let installed = document.fonts.check(`1em '${name}'`);
-        if (!installed) {
+        //let installed = document.fonts.check(`1em '${name}'`);
+        //if (!installed) {
             const font = new FontFace(name, mb.draft.fonts[name]);
             await font.load();
             document.fonts.add(font);
             layer.batchDraw(); 
             console.log('font install done:', name);
-        }
+        //}
     }
     
     if (mb.draft.crops)
