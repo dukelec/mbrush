@@ -40,7 +40,6 @@ function pinchZoomWheelEvent(stage) {
 
 // For mobile
 let lastDist;
-let point;
 
 function getDistance(p1, p2) {
     return Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2));
@@ -48,8 +47,8 @@ function getDistance(p1, p2) {
 
 function clientPointerRelativeToStage(clientX, clientY, stage) {
     return {
-        x: clientX - stage.getContent().offsetLeft,
-        y: clientY - stage.getContent().offsetTop,
+        x: clientX - stage.getContent().offsetParent.offsetLeft,
+        y: clientY - stage.getContent().offsetParent.offsetTop,
     }
 }
 
@@ -74,10 +73,10 @@ function pinchZoomTouchEvent(stage) {
                 if (!lastDist) lastDist = dist;
                 const delta = dist - lastDist;
 
+                // px, py: middle point according to browser
                 const px = (t1.clientX + t2.clientX) / 2;
                 const py = (t1.clientY + t2.clientY) / 2;
-                const pointer = point || clientPointerRelativeToStage(px, py, stage);
-                if (!point) point = pointer;
+                const pointer = clientPointerRelativeToStage(px, py, stage);
 
                 const startPos = {
                     x: pointer.x / oldScale - stage.x() / oldScale,
@@ -91,7 +90,6 @@ function pinchZoomTouchEvent(stage) {
                     x: newScale,
                     y: newScale
                 });
-
                 const newPosition = {
                     x: (pointer.x / newScale - startPos.x) * newScale,
                     y: (pointer.y / newScale - startPos.y) * newScale,
@@ -105,14 +103,12 @@ function pinchZoomTouchEvent(stage) {
 
         stage.getContent().addEventListener('touchend', (evt) => {
             lastDist = 0;
-            point = undefined;
         }, false);
     }
 }
 
 function konva_zoom(stage) {
     lastDist = undefined;
-    point = undefined;
     pinchZoomWheelEvent(stage);
     pinchZoomTouchEvent(stage);
 }
