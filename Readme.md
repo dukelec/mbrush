@@ -10,3 +10,10 @@ Print anything, anywhere, anytime.
  - Japanese Manual: <a href="doc/manual_ja.md">doc/manual_ja.md</a>
  - Development API: <a href="doc/dev.md">doc/dev.md</a>
 
+## Build
+Execute `./release_fw.sh` under `tools/` directory to generate a firmware upgrade tarball.
+
+```
+github_mb/tools $ ./release_fw.sh [brand_name]
+```
+

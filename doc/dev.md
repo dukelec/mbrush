@@ -57,6 +57,12 @@ Read and write config string:
   cmd=set_app_conf&app_conf=APP_CONFIGS
   cmd=get_wifi
   cmd=set_wifi&wifi=WIFI_CONFIGS
+note:
+The parameter period_us is not used in mb.conf by default.
+If it is used and is not equal to 0,
+the sensor data will be replaced with a fixed printing speed.
+period_us is the printing interval of each group,
+in microseconds, the range is [110, 0x7ffff].
 
 cmd=upgrade
 ret: {"status": "ok"}

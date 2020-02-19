@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 brand="$1"
 [ "$brand" == "" ] && brand="PrinCube"
@@ -29,13 +30,13 @@ find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version_app/g" '{
 rm -rf mbrush-fw/mb_ser/upload/*
 mv mbrush-fw/mb_ser/demo/*.mbd mbrush-fw/mb_ser/upload/
 
-if [ "$brand" == "Princube" ]; then
+if [ "$brand" == "PrinCube" ]; then
     echo "brand: $brand"
     tar cf $brand-fw-$version.tar mbrush-fw/
 elif [ "$brand" == "PC" ]; then
-    echo "brand: PrinCube simulate"
+    echo "brand: PC simulate"
     rm mbrush-fw/uImage mbrush-fw/run.sh
-    tar cf princube-sim-$version.tar mbrush-fw/
+    tar cf pc-sim-$version.tar mbrush-fw/
 else
     echo "brand: $brand"
     find mbrush-fw/ -type f \( -name "*.json" -o -name "*.html" -o -name "*.conf" -o -name "S80mb" \) \
@@ -44,4 +45,5 @@ else
 fi
 
 rm -rf mbrush-fw/
+echo "done."
 
