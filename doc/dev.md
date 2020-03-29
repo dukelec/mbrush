@@ -98,7 +98,7 @@ args:
   cal.c,m,y: 1~255, default 255
   invert: print direction: 0: left to right, 1: right to left
   c_order: 0: CMY, 1: CYM. default 0
-  c_width: cartridge chip width: 0: 4.5mm, 1: 5.4mm. default 0
+  c_width: cartridge chip width: 0: 4.4mm, 1: 4.9mm. default 0
   dpi_step: dpi setting: 1: 1200x1200, 2: 1200x600, 4: 1200x300
   st_cb: progress status callback function
 ret:
