@@ -61,6 +61,7 @@ let trans_zh_hk = {
     'Color': '顏色',
     'Shadow': '陰影',
     'Blur': '模糊',
+    'Invalid font file!': '無效字形文件！',
     'Save successed': '保存成功',
     'At least select two items': '最少需要選中兩項',
     'Not a group': '不是一個組合',

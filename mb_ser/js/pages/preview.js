@@ -159,10 +159,12 @@ function dump_crop(direction) {
     let ref_crop = tr[0]._node;
     ref_crop.draggable(false);
     tr.destroy();
+    let new_c;
     if (direction == 'down')
-        new_crop(ref_crop.x(), ref_crop.y() + ref_crop.height(), ref_crop.width(), ref_crop.height());
+        new_c = new_crop(ref_crop.x(), ref_crop.y() + ref_crop.height(), ref_crop.width(), ref_crop.height());
     else
-        new_crop(ref_crop.x() + ref_crop.width(), ref_crop.y(), ref_crop.width(), ref_crop.height());
+        new_c = new_crop(ref_crop.x() + ref_crop.width(), ref_crop.y(), ref_crop.width(), ref_crop.height());
+    stage.fire('click', {target: new_c}); // attach transformer
 }
 
 function heartbeat_cb() {
@@ -335,11 +337,15 @@ async function enter() {
     for (let name in mb.draft.fonts) {
         //let installed = document.fonts.check(`1em '${name}'`);
         //if (!installed) {
-            const font = new FontFace(name, mb.draft.fonts[name]);
-            await font.load();
-            document.fonts.add(font);
-            layer.batchDraw(); 
-            console.log('font install done:', name);
+            try {
+                const font = new FontFace(name, mb.draft.fonts[name]);
+                await font.load();
+                document.fonts.add(font);
+                layer.batchDraw();
+                console.log('font install done:', name);
+            } catch {
+                console.error('font install failed:', name);
+            }
         //}
     }
     

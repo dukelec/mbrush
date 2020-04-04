@@ -48,17 +48,24 @@ function tr_attach(obj) {
 }
 
 async function install_fonts() {
+    let ret_val = 0;
     for (let name in mb.draft.fonts) {
         // Workaround: Do not check if it is already installed, as the check always returns true for Safari.
         //let installed = document.fonts.check(`1em '${name}'`);
         //if (!installed) {
-            const font = new FontFace(name, mb.draft.fonts[name]);
-            await font.load();
-            document.fonts.add(font);
-            layer.batchDraw();
-            console.log('font install done:', name);
+            try {
+                const font = new FontFace(name, mb.draft.fonts[name]);
+                await font.load();
+                document.fonts.add(font);
+                layer.batchDraw();
+                console.log('font install done:', name);
+            } catch {
+                console.error('font install failed:', name);
+                ret_val--;
+            }
         //}
     }
+    return ret_val;
 }
 
 function text_modal_update_style() {
@@ -286,7 +293,11 @@ customElements.define('modal-fonts', class extends HTMLElement {
                     reader.onload = async function() {
                         mb.draft.fonts[name] = new Uint8Array(reader.result);
                         console.log('font add done:', name);
-                        await install_fonts();
+                        let ret = await install_fonts();
+                        if (ret < 0) {
+                            delete mb.draft.fonts[name];
+                            alert(L('Invalid font file!'));
+                        }
                         load_font_list();
                         //document.getElementById('txt_val').style=`font-family: '${name}', 'NSimSun';`;
                     }
