@@ -4,7 +4,7 @@ PrinCube Windows USB Driver
 
 Download the RNDIS Driver: <a href="mod-duo-rndis.zip">mod-duo-rndis.zip</a>, Extract the downloaded zip files.
 
-Copy from:
+This article is referenced from:
  - https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
  - https://forum.moddevices.com/t/rndis-driver-for-windows-10/299
 

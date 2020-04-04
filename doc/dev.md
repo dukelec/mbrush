@@ -10,7 +10,7 @@ PrinCube API Document
 
 ### UART Debug
 
- - Port order: GND TX RX
+ - Pin order: GND TX RX
  - Voltage: 3.3V
  - 3Mbps 8N1
  - User name: root
@@ -25,7 +25,7 @@ cmd=get_info
 ret: {"info": "mb: 000000000000000000000000, st: 0, i: 0, p: -1, bat: 80, dc: 0, iqc: 40, v: 4.0"}
 notes:
   mb: DEV_ID
-  st: 0: idle, 1: printing, 2: cleaning
+  st: 0: idle, 1: printing, 2: cleaning, 3: wait trigger (constant speed mode only)
   i: data index, start from 0
   p: progress
   bat: battery
@@ -60,9 +60,11 @@ Read and write config string:
 note:
 The parameter period_us is not used in mb.conf by default.
 If it is used and is not equal to 0,
-the sensor data will be replaced with a fixed printing speed.
+the sensor data will be replaced with a constant printing speed.
 period_us is the printing interval of each group,
 in microseconds, the range is [110, 0x7ffff].
+To improve the real-time performance:
+the first short press loads data to ram (st 3: wait trigger), press again to start printing.
 
 cmd=upgrade
 ret: {"status": "ok"}

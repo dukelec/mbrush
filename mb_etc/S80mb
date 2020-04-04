@@ -16,6 +16,7 @@ if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
     state="$(cat /sys/mb/state)"
     short="${state:4:8}"
     echo "ssid=PrinCube-$short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
+    sync
 fi
 
 echo "MB: cgi source"
@@ -54,13 +55,13 @@ psk="$(get_psk)"
 [ -z "$psk" ] && wifi_reset "psk empty"
 
 echo "MB: prepare wpa_tpl.conf"
-echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" -e "s/_FREQ_/$cgi_freq/g" > mb_etc/wpa_temp.conf
+echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" -e "s/_FREQ_/$cgi_freq/g" > /tmp/wpa_temp.conf
 
 echo "MB: ifconfig up"
 ifconfig wlan0 192.168.44.1
 ifconfig usb0 192.168.88.1 up
 echo "MB: wpa up"
-wpa_supplicant -B -i wlan0 -c mb_etc/wpa_temp.conf
+wpa_supplicant -B -i wlan0 -c /tmp/wpa_temp.conf
 echo "MB: httpd up"
 busybox httpd -h mb_ser -c httpd.conf # -f -p 80 -vvv
 echo "MB: ssl up"
