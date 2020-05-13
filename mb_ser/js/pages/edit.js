@@ -288,6 +288,8 @@ customElements.define('modal-fonts', class extends HTMLElement {
                     return;
                 var file = this.files[0];
                 var name = file.name.replace(/\.[^/.]+$/, "");
+                if (/^\d/.test(name)) // startswith number
+                    name = '_' + name;
                 if (name) {
                     var reader = new FileReader();
                     reader.onload = async function() {
