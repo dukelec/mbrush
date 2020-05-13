@@ -156,7 +156,7 @@ function dump_crop(direction) {
         alert(L('Please select one crop first.'));
         return;
     }
-    let ref_crop = tr[0]._node;
+    let ref_crop = tr[0]._nodes[0];
     ref_crop.draggable(false);
     tr.destroy();
     let new_c;
@@ -368,7 +368,7 @@ async function enter() {
     stage.on('click tap', function(e) {
         let tr_old = stage.find('Transformer');
         if (tr_old.length)
-            tr_old[0]._node.draggable(false);
+            tr_old[0]._nodes[0].draggable(false);
         tr_old.destroy();
         layer_crop.draw();
 
@@ -537,7 +537,7 @@ async function enter() {
         let tr = stage.find('Transformer');
         if (!tr.length)
             return;
-        let rect_crop = tr[0]._node;
+        let rect_crop = tr[0]._nodes[0];
         let img_crop = rect_crop.mb_aux.img;
         let text_crop = rect_crop.mb_aux.text;
         rect_crop.destroy();

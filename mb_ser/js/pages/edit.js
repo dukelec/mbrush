@@ -556,7 +556,7 @@ async function enter() {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        let node = trs[0]._node;
+        let node = trs[0]._nodes[0];
         node.opacity(opacity / 100);
         layer.batchDraw();
         console.log("set node opacity", opacity, node);
@@ -593,7 +593,7 @@ async function enter() {
 
         if (e.target == stage) {
             for (let t of trs_old)
-                t._node.draggable(false);
+                t._nodes[0].draggable(false);
             trs_old.destroy();
             layer.draw();
             return;
@@ -607,7 +607,7 @@ async function enter() {
             return;
         
         for (let t of trs_old) {
-            if (obj == t._node) {
+            if (obj == t._nodes[0]) {
                 if (obj.getClassName() == 'Text')
                     text_re_edit(obj);
                 return;
@@ -633,18 +633,18 @@ async function enter() {
             alert(L('At least select two items'));
             return;
         }
-        let x = trs[0]._node.x();
-        let y = trs[0]._node.y();
+        let x = trs[0]._nodes[0].x();
+        let y = trs[0]._nodes[0].y();
         let group = new Konva.Group({
             x: x,
             y: y,
             draggable: true
         });
         for (let t of trs) {
-            t._node.draggable(false);
-            t._node.moveTo(group);
-            t._node.x(t._node.x() - x);
-            t._node.y(t._node.y() - y);
+            t._nodes[0].draggable(false);
+            t._nodes[0].moveTo(group);
+            t._nodes[0].x(t._nodes[0].x() - x);
+            t._nodes[0].y(t._nodes[0].y() - y);
         }
         trs.destroy();
         layer.add(group);
@@ -654,11 +654,11 @@ async function enter() {
     
     document.getElementById('ungroup_btn').onclick = () => {
         let trs = stage.find('Transformer');
-        if (trs.length != 1 || trs[0]._node.getClassName() != 'Group') {
+        if (trs.length != 1 || trs[0]._nodes[0].getClassName() != 'Group') {
             alert(L('Not a group'));
             return;
         }
-        let group = trs[0]._node;
+        let group = trs[0]._nodes[0];
         let cs = [...group.children];
         for (let c of cs) {
             c.moveTo(group.parent);
@@ -730,7 +730,7 @@ async function enter() {
     document.getElementById('del_btn').onclick = () => {
         let trs = stage.find('Transformer');
         for (let t of trs)
-            t._node.destroy();
+            t._nodes[0].destroy();
         trs.destroy();
         layer.draw();
     };
@@ -741,7 +741,7 @@ async function enter() {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        let ref = trs[0]._node;
+        let ref = trs[0]._nodes[0];
         let clone = ref.clone();
         clone.x(ref.x() + 40);
         clone.y(ref.y() + 40);
@@ -756,28 +756,28 @@ async function enter() {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        trs[0]._node.moveUp();
+        trs[0]._nodes[0].moveUp();
         layer.draw();
     }
     document.getElementById('mv_down_btn').onclick = () => {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        trs[0]._node.moveDown();
+        trs[0]._nodes[0].moveDown();
         layer.draw();
     }
     document.getElementById('mv_top_btn').onclick = () => {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        trs[0]._node.moveToTop();
+        trs[0]._nodes[0].moveToTop();
         layer.draw();
     }
     document.getElementById('mv_bottom_btn').onclick = () => {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        trs[0]._node.moveToBottom();
+        trs[0]._nodes[0].moveToBottom();
         layer.draw();
     }
     
@@ -787,7 +787,7 @@ async function enter() {
         let trs = stage.find('Transformer');
         if (trs.length != 1)
             return;
-        let node = trs[0]._node;
+        let node = trs[0]._nodes[0];
         let ratio = (node.scaleX() + node.scaleY()) / 2;
         node.scaleX(ratio);
         node.scaleY(ratio);
