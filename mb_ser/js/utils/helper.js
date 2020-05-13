@@ -208,4 +208,15 @@ async function obj2blob2u8a(obj) {
     return ret;
 }
 
-export { read_file, load_img, date2num, sha1, cpy, Queue, download, fetch_timo, upload, obj2blob2u8a };
+function deep_merge(target, source) {
+    Object.entries(source).forEach(([key, value]) => {
+        if (value && typeof value === 'object') {
+            deep_merge(target[key] = target[key] || {}, value);
+            return;
+        }
+        target[key] = value;
+    });
+    return target;
+}
+
+export { read_file, load_img, date2num, sha1, cpy, Queue, download, fetch_timo, upload, obj2blob2u8a, deep_merge };

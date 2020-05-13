@@ -6,7 +6,7 @@
  */
 
 import { L }        from './utils/lang.js'
-import { fetch_timo, date2num } from './utils/helper.js'
+import { fetch_timo, date2num, deep_merge } from './utils/helper.js'
 import { Idb }      from './utils/idb.js';
 import { Home }     from './pages/home.js'
 import { Edit }     from './pages/edit.js'
@@ -36,6 +36,7 @@ window.mb = {
         c_width: 0, // 0: new, 1: old
         dpi_step: 2, // 1200 x (1200 / 1, 2, 4)
         show_inch: 0,
+        show_grid: 0,
         strength: 20,
         pos_cali: 0,
         space: -20,
@@ -87,6 +88,7 @@ window.addEventListener('load', async function() {
             await mb.db.set('prj', date2num(), prj);
         }
     }
+    mb.conf = deep_merge(JSON.parse(JSON.stringify(mb.def_conf)), mb.conf);
     router();
     init_sw();
 });

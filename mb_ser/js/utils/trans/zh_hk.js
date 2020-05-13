@@ -98,6 +98,7 @@ let trans_zh_hk = {
     'CMY': '青紅黃',
     'CYM': '青黃紅',
     'Display Unit': '顯示單位',
+    'Display Grid': '顯示網格',
     'Device Setting': '設備設置',
     'Drive Strength': '驅動強度',
     'Color Alignment': '顏色對齊',

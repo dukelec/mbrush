@@ -75,10 +75,39 @@ function new_crop(x, y, w, h) {
         align: 'right'
     });
     rect_crop.mb_aux.text = text_crop;
+    rect_crop.mb_aux.lines = [];
     layer_crop.add(text_crop);
     layer_crop.add(img_crop);
     layer_crop.add(rect_crop);
-    
+
+    function draw_lines() {
+        let div, i = 1;
+        if (mb.conf.show_inch)
+            div = rect_crop.height() / (0.5625 / (1/16));
+        else
+            div = rect_crop.height() / 14.2875;
+
+        while (true) {
+            if (div * i > rect_crop.height())
+                break;
+            let l = rect_crop.mb_aux.lines[i-1];
+            if (l) {
+                l.points([rect_crop.x(), rect_crop.y()+div*i, rect_crop.x()+rect_crop.width(), rect_crop.y()+div*i]);
+            } else {
+                l = new Konva.Line({
+                    points: [rect_crop.x(), rect_crop.y()+div*i, rect_crop.x()+rect_crop.width(), rect_crop.y()+div*i],
+                    stroke: 'black',
+                    strokeWidth: 0.2,
+                    dash: [5, 5],
+                    opacity: 0.8
+                });
+                layer_crop.add(l);
+                rect_crop.mb_aux.lines.push(l);
+            }
+            i++;
+        }
+    }
+
     let update_img_crop = function() {
         let img_obj = layer.toCanvas({
             x: rect_crop.x() * stage.scaleX() + stage.x(),
@@ -93,6 +122,8 @@ function new_crop(x, y, w, h) {
         text_crop.text(rect_text_str());
         text_crop.x(rect_crop.x() - text_crop.width() - 6);
         text_crop.y(rect_crop.y());
+        if (mb.conf.show_grid)
+            draw_lines();
         layer_crop.batchDraw();
     };
     rect_crop.mb_aux.update = update_img_crop;
@@ -552,6 +583,8 @@ async function enter() {
             rect_crop.destroy();
             img_crop.destroy();
             text_crop.destroy();
+            for (let l of rect_crop.mb_aux.lines) 
+                l.destroy();
         }
         trs.destroy();
         let cnt = 0;

@@ -99,6 +99,7 @@ let trans_zh_cn = {
     'CMY': '青红黄',
     'CYM': '青黄红',
     'Display Unit': '显示单位',
+    'Display Grid': '显示网格',
     'Device Setting': '设备设置',
     'Drive Strength': '驱动强度',
     'Color Alignment': '颜色对齐',
