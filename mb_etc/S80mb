@@ -1,14 +1,15 @@
 #! /bin/sh
 #
 
-echo "MB: $1"
-
-if [ "$1" != "start" ]; then
-    exit
-fi
+echo "MB: $0 $1"
+[ "$1" != "start" ] && exit
 
 cd /root
 echo "MB: enter /root"
+
+mv /dev/random /dev/random_bk
+ln -sf /dev/urandom /dev/random
+sync
 
 if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
     echo "MB: reset wifi config"

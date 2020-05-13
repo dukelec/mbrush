@@ -1,0 +1,1 @@
+rm -f /etc/init.d/S* # except S40network !
