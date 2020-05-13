@@ -44,7 +44,7 @@ function tr_attach(obj) {
         }
     });
     layer.add(tr);
-    tr.attachTo(obj);
+    tr.nodes([obj]);
 }
 
 async function install_fonts() {
@@ -640,6 +640,7 @@ async function enter() {
             y: y,
             draggable: true
         });
+        trs.sort((a, b) => a._nodes[0].zIndex() - b._nodes[0].zIndex());
         for (let t of trs) {
             t._nodes[0].draggable(false);
             t._nodes[0].moveTo(group);

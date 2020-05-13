@@ -151,14 +151,13 @@ function add_crop() {
 }
 
 function dump_crop(direction) {
-    let tr = stage.find('Transformer');
-    if (!tr.length) {
+    let trs = stage.find('Transformer');
+    if (!trs.length) {
         alert(L('Please select one crop first.'));
         return;
     }
-    let ref_crop = tr[0]._nodes[0];
-    ref_crop.draggable(false);
-    tr.destroy();
+    let tr = trs[0];
+    let ref_crop = tr._nodes[tr._nodes.length - 1];
     let new_c;
     if (direction == 'down')
         new_c = new_crop(ref_crop.x(), ref_crop.y() + ref_crop.height(), ref_crop.width(), ref_crop.height());
@@ -366,33 +365,43 @@ async function enter() {
     konva_responsive(stage, stage.width(), stage.height());
     
     stage.on('click tap', function(e) {
-        let tr_old = stage.find('Transformer');
-        if (tr_old.length)
-            tr_old[0]._nodes[0].draggable(false);
-        tr_old.destroy();
-        layer_crop.draw();
+        let trs = stage.find('Transformer');
+        let tr = trs.length ? trs[0] : null;
 
-        if (e.target == stage || e.target.parent != layer_crop)
+        if (e.target == stage || e.target.parent != layer_crop) {
+            if (tr)
+                for (let n of tr._nodes)
+                    n.draggable(false);
+            trs.destroy();
+            layer_crop.draw();
             return;
+        }
         if (e.target.getClassName() != 'Rect')
             return;
 
-        var tr = new Konva.Transformer({
-            rotateEnabled: false,
-            keepRatio: false,
-            anchorSize: 20,
-            borderEnabled: false,
-            centeredScaling: false,
-            anchorFill: '#88888880',
-            boundBoxFunc: function(oldBoundBox, newBoundBox) {
-                if (newBoundBox.width > 10 && newBoundBox.height > 10)
-                    return newBoundBox;
-                return oldBoundBox;
-            }
-        });
-        layer_crop.add(tr);
-        tr.attachTo(e.target);
+        if (!tr) {
+            tr = new Konva.Transformer({
+                rotateEnabled: false,
+                keepRatio: false,
+                anchorSize: 20,
+                borderEnabled: false,
+                centeredScaling: false,
+                anchorFill: '#88888880',
+                boundBoxFunc: function(oldBoundBox, newBoundBox) {
+                    if (newBoundBox.width > 10 && newBoundBox.height > 10)
+                        return newBoundBox;
+                    return oldBoundBox;
+                }
+            });
+            layer_crop.add(tr);
+        }
+
+        if (tr._nodes)
+            tr.nodes([...tr._nodes, e.target]);
+        else
+            tr.nodes([e.target]);
         e.target.draggable(true);
+        tr.moveToTop();
         layer_crop.draw();
     });
     
@@ -534,16 +543,17 @@ async function enter() {
     };
     
     document.getElementById('del_crop_btn').onclick = function() {
-        let tr = stage.find('Transformer');
-        if (!tr.length)
+        let trs = stage.find('Transformer');
+        if (!trs.length)
             return;
-        let rect_crop = tr[0]._nodes[0];
-        let img_crop = rect_crop.mb_aux.img;
-        let text_crop = rect_crop.mb_aux.text;
-        rect_crop.destroy();
-        img_crop.destroy();
-        text_crop.destroy();
-        tr.destroy();
+        for (let rect_crop of trs[0]._nodes) {
+            let img_crop = rect_crop.mb_aux.img;
+            let text_crop = rect_crop.mb_aux.text;
+            rect_crop.destroy();
+            img_crop.destroy();
+            text_crop.destroy();
+        }
+        trs.destroy();
         let cnt = 0;
         for (let i of layer_crop.find('.crop')) {
             i.mb_aux.idx = cnt++;
