@@ -8,7 +8,7 @@ cd /opt
 ubiattach /dev/ubi_ctrl -m 3
 mount -t ubifs ubi1:data /root
 
-if [ $? -ne 0 ] || [ ! -f /root/mb_etc/S80mb ] || [ -f /root/mb_conf/reset ]; then
+if [ $? -ne 0 ] || [ ! -f /root/mb_etc/S80mb ] || [ ! -d /root/mb_conf ] || [ -f /root/mb_conf/reset ]; then
     echo "MB: factory resetting ..."
     umount /root
     ubidetach -m 3

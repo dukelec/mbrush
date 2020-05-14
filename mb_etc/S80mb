@@ -29,6 +29,7 @@ function wifi_reset()
     rm -f mb_conf/wifi.conf
     sync
     [ ! -z "$1" ] && echo "MB: wifi_reset: $1"
+    sleep 4
     reboot
     exit
 }
