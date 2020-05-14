@@ -8,15 +8,16 @@ cd /opt
 ubiattach /dev/ubi_ctrl -m 3
 mount -t ubifs ubi1:data /root
 
-if [ $? -ne 0 ] || [ ! -f /root/mb_etc/S80mb ]; then
+if [ $? -ne 0 ] || [ ! -f /root/mb_etc/S80mb ] || [ -f /root/mb_conf/reset ]; then
     echo "MB: factory resetting ..."
     umount /root
     ubidetach -m 3
-    ubiformat /dev/mtd3
+    ubiformat -y /dev/mtd3
     ubiattach /dev/ubi_ctrl -m 3
     ubimkvol /dev/ubi1 -N data -m
     mount -t ubifs ubi1:data /root || { echo "MB: flash error"; exit; }
     busybox tar xf *-fw-*.tar -C /root --strip 1 --exclude */run.sh
+    echo "MB: restore kernel ..."
     flash_erase /dev/mtd1 0 32
     nandwrite -m -p /dev/mtd1 /root/uImage
     rm /root/uImage

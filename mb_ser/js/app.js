@@ -56,7 +56,7 @@ let pre = null;
 
 const router = async () => {
     dismiss_modal();
-    document.querySelector('ion-menu-controller').close();
+    document.querySelector('ion-menu').close();
     if (pre && pre.leave)
         await pre.leave();
     document.getElementById('app_style').innerHTML = '';

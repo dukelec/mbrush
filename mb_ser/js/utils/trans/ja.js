@@ -94,6 +94,7 @@ let trans_ja = {
     'CMY': 'CMY',
     'CYM': 'CYM',
     'Display Unit': '表示単位',
+    'Display Grid': '表示格子',
     'Device Setting': '機器設定',
     'Drive Strength': 'ドライブ強度',
     'Color Alignment': '色の調整',

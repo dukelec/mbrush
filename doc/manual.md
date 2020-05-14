@@ -91,7 +91,7 @@ Notes:
  - In the print state, click the button to return to the ready state. If it is in the middle of multiple-line printing, the next line will be printed when you re-press the button again (return to first line if press and hold the button instead);
 
  - Press and hold the button, then turn on the power switch to enter the programming mode;
- - After turning on the power switch, press and hold the button within 5 seconds until the white lights flash on both sides, the WiFi name and password will be restored to the default setting (Default password: 12345678);
+ - After turning on the power switch, press and hold the button within 5 seconds until the white lights on both sides flash, which will restore the factory settings;
 
  - When the battery is low, the middle white light flashes;
  - The charging indicator is next to the USB port (Type-C). Charging: Yellow | Fully Charged: Green

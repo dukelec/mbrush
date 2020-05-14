@@ -10,7 +10,7 @@ cgi_init
 echo "cmd: $cgi_cmd" >&2
 
 if [ "$cgi_cmd" == "get_info" ]; then
-    echo '{"info": "mb: 000000000000000000000000, st: 0, i: 0, p: -1, bat: 80, dc: 0, iqc: 40, v: 4.0"}'
+    echo '{"info": "mb: 000000000000000000000000, st: 0, i: 0, p: -1, bat: 80, dc: 0, iqc: 40, v: 4.0/s0"}'
     
 elif [ "$cgi_cmd" == "rm_upload" ]; then
     rm -rf ../upload/*

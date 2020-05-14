@@ -1,1 +1,8 @@
 rm -f /etc/init.d/S* # except S40network !
+
+cp fstab inittab /etc/
+cp init.d/* /etc/init.d/
+
+cp S70mb /opt/
+echo "s2" > /opt/sys_ver
+cp *-fw-*.tar /opt/

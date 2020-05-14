@@ -1,8 +1,0 @@
-#!/bin/bash
-
-while read line; do
-    file="${line#/js/libs/ionic/}"
-    echo -e "$line \t\t $file"
-    cp "ionic_bk/$file" "ionic/$file"
-    
-done <<< "$(cat $1)"

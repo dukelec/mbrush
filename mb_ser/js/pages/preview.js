@@ -99,7 +99,7 @@ function new_crop(x, y, w, h) {
                     stroke: 'black',
                     strokeWidth: 0.2,
                     dash: [5, 5],
-                    opacity: 0.8
+                    opacity: 0.5
                 });
                 layer_crop.add(l);
                 rect_crop.mb_aux.lines.push(l);

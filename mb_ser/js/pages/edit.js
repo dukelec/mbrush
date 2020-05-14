@@ -442,7 +442,7 @@ async function enter() {
         <ion-icon name="images"></ion-icon> ${L('Add Image')}
     </ion-button>
     <ion-button id="add_txt_btn">
-        <ion-icon name="text"></ion-icon> ${L('Add Text')}
+        <ion-icon name="chatbox-ellipses-outline"></ion-icon> ${L('Add Text')}
     </ion-button>
     <ion-button id="user_font_btn">
         <strong>F</strong> &nbsp; ${L('User Fonts')}
@@ -463,16 +463,16 @@ async function enter() {
 <ion-item>
     <ion-label></ion-label>
     <ion-button id="mv_up_btn">
-        <ion-icon name="arrow-dropup"></ion-icon> ${L('Move up')}
+        <ion-icon name="arrow-up"></ion-icon> ${L('Move up')}
     </ion-button>
     <ion-button id="mv_down_btn">
-        <ion-icon name="arrow-dropdown"></ion-icon> ${L('Down')}
+        <ion-icon name="arrow-down"></ion-icon> ${L('Down')}
     </ion-button>
     <ion-button id="mv_top_btn">
-        <ion-icon name="arrow-dropup-circle"></ion-icon> ${L('Top')}
+        <ion-icon name="arrow-up-circle"></ion-icon> ${L('Top')}
     </ion-button>
     <ion-button id="mv_bottom_btn">
-        <ion-icon name="arrow-dropdown-circle"></ion-icon> ${L('Bottom')}
+        <ion-icon name="arrow-down-circle"></ion-icon> ${L('Bottom')}
     </ion-button>
 </ion-item>
 <ion-item>

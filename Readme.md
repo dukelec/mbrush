@@ -16,6 +16,8 @@ Print anything, anywhere, anytime.
 Execute `./release_fw.sh` under `tools/` directory to generate a firmware upgrade tarball.
 
 ```
-github_mb/tools $ ./release_fw.sh [brand_name]
+github_mb/tools $ ./release_fw.sh
+or:
+github_mb/tools $ ./release_fw.sh "brand_name"
 ```
 

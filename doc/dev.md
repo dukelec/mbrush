@@ -22,7 +22,7 @@ PrinCube API Document
 
 ```
 cmd=get_info
-ret: {"info": "mb: 000000000000000000000000, st: 0, i: 0, p: -1, bat: 80, dc: 0, iqc: 40, v: 4.0"}
+ret: {"info": "mb: 000000000000000000000000, st: 0, i: 0, p: -1, bat: 80, dc: 0, iqc: 40, v: 4.0/s0"}
 notes:
   mb: DEV_ID
   st: 0: idle, 1: printing, 2: cleaning, 3: wait trigger (constant speed mode only)
@@ -31,7 +31,7 @@ notes:
   bat: battery
   dc: 0: not charge, 1: charging
   iqc: sensor IQC
-  v: firmware version
+  v: firmware version / rootfs version
 
 cmd=rm_upload
 ret: {"status": "ok"}
