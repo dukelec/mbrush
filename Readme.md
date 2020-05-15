@@ -12,9 +12,14 @@ Print anything, anywhere, anytime.
  - Japanese Manual: <a href="doc/manual_ja.md">doc/manual_ja.md</a>
  - Development API: <a href="doc/dev.md">doc/dev.md</a>
 
-## Build
-Execute `./release_fw.sh` under `tools/` directory to generate a firmware upgrade tarball.
+## Test
+Open `http://localhost:8000` in your browser after you run it:
+```
+github_mb $ busybox httpd -h mb_ser -c httpd.conf -f -p 8000 -vv
+```
 
+## Build
+Execute `./release_fw.sh` to generate a tarball for the firmware update.
 ```
 github_mb/tools $ ./release_fw.sh
 or:
