@@ -9,6 +9,16 @@ import { L } from '../utils/lang.js'
 import { konva2d, d2konva } from '../utils/konva_conv.js';
 import { cpy, read_file, date2num, download } from '../utils/helper.js';
 
+function fix_prj_fonts_type(prj) {
+    if (Array.isArray(prj.fonts)) {
+        console.log('Fix project fonts type, array -> dict');
+        let temp = {};
+        for (let name in prj.fonts)
+            temp[name] = prj.fonts[name];
+        prj.fonts = temp;
+    }
+}
+
 async function init_projects() {
     document.getElementById('projects').innerHTML = '';
     let prj_keys = await mb.db.keys('prj');
@@ -51,6 +61,7 @@ async function present_action() {
         icon: 'print',
         handler: async () => {
             mb.draft = await mb.db.get('prj', mb.cur_prj);
+            fix_prj_fonts_type(mb.draft);
             location.hash = "#/preview";
         }
     }, {
@@ -58,6 +69,7 @@ async function present_action() {
         icon: 'create',
         handler: async () => {
             mb.draft = await mb.db.get('prj', mb.cur_prj);
+            fix_prj_fonts_type(mb.draft);
             location.hash = "#/edit";
         }
     }, {
@@ -65,6 +77,7 @@ async function present_action() {
         icon: 'copy',
         handler: async () => {
             let cur = await mb.db.get('prj', mb.cur_prj);
+            fix_prj_fonts_type(cur);
             let new_k = date2num();
             await mb.db.set('prj', new_k, cur);
             await init_projects();
@@ -84,6 +97,7 @@ async function present_action() {
                 return;
             }
             cur.secret = false;
+            fix_prj_fonts_type(cur);
             const dat = msgpack.encode(cur);
             download(dat, `${mb.cur_prj}.mbp`);
         }
@@ -93,6 +107,7 @@ async function present_action() {
         handler: async () => {
             let cur = await mb.db.get('prj', mb.cur_prj);
             cur.secret = true;
+            fix_prj_fonts_type(cur);
             const dat = msgpack.encode(cur);
             download(dat, `${mb.cur_prj}.mbp`);
         }
@@ -163,7 +178,7 @@ let Home = {
         
         document.getElementById("prj_new_btn").onclick = async function() {
             mb.cur_prj = null;
-            mb.draft = { 'files': {}, 'sub': [], 'fonts': [] };
+            mb.draft = { 'files': {}, 'sub': [], 'fonts': {} };
             location.hash = "#/edit";
         };
         
