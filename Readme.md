@@ -13,13 +13,13 @@ Print anything, anywhere, anytime.
  - Development API: <a href="doc/dev.md">doc/dev.md</a>
 
 ## Test
-Open `http://localhost:8000` in your browser after you run it:
+After running the following command, open the URL with your browser: `http://localhost:8000`.
 ```
 github_mb $ busybox httpd -h mb_ser -c httpd.conf -f -p 8000 -vv
 ```
 
 ## Build
-Execute `./release_fw.sh` to generate a tarball for the firmware update.
+Run the command `./release_fw.sh` to generate a tar package that can be used for firmware upgrades.
 ```
 github_mb/tools $ ./release_fw.sh
 or:
