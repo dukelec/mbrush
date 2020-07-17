@@ -28,7 +28,7 @@ let trans_zh_hk = {
     "Can't export secret project as normal.": '保密項目不可以普通導出',
     'OK': '確定',
     'Format error': '格式錯誤',
-    'Import successed': '導入成功',
+    'Import succeeded': '導入成功',
 
     // edit
     'Add Image': '添加圖片',
@@ -62,7 +62,7 @@ let trans_zh_hk = {
     'Shadow': '陰影',
     'Blur': '模糊',
     'Invalid font file!': '無效字形文件！',
-    'Save successed': '保存成功',
+    'Save succeeded': '保存成功',
     'At least select two items': '最少需要選中兩項',
     'Not a group': '不是一個組合',
     'Enter text here...': '在此輸入文字...',
@@ -85,7 +85,7 @@ let trans_zh_hk = {
     'Upload done, sync failed.': '上傳完成，同步出錯',
     'Convert': '轉換',
     'Send': '發送',
-    'Successed': '成功',
+    'succeeded': '成功',
 
     // setting
     'Global Density': '全局浓度',
@@ -127,14 +127,14 @@ let trans_zh_hk = {
     'Read conf from device error': '讀取 conf 出錯',
     'Write conf to device error': '寫 conf 出錯',
     'Write app_conf to device error': '寫 app_conf 出錯',
-    'Write to device successed': '寫入成功',
+    'Write to device succeeded': '寫入成功',
     'Read wifi conf from device error': '讀取 Wi-Fi 配置出錯',
     'SSID is empty!': 'SSID 不能爲空！',
     'Passwd at least 8 char!': '密碼最短 8 位！',
     'Write wifi conf to device error': '寫 Wi-Fi 配置出錯',
-    'Write to device successed, reboot...': '寫入成功，重啓...',
+    'Write to device succeeded, reboot...': '寫入成功，重啓...',
     'Please select file first': '請先選擇文件',
-    'Upgrade successed, reboot...': '升級成功，重啓...',
+    'Upgrade succeeded, reboot...': '升級成功，重啓...',
     'Upgrade failed': '升級失敗',
     'Upload': '上傳',
 

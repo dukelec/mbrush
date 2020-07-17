@@ -200,7 +200,7 @@ let Home = {
                     }
                     await mb.db.set('prj', date2num(), prj);
                     await init_projects();
-                    alert(L('Import successed'));
+                    alert(L('Import succeeded'));
                 }
             };
             input.click();

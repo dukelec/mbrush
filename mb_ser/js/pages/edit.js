@@ -585,7 +585,7 @@ async function enter() {
             console.log(`save update as: ${mb.cur_prj}`);
         }
         await mb.db.set('prj', mb.cur_prj, mb.draft);
-        alert(L('Save successed'));
+        alert(L('Save succeeded'));
     };
     
     // group & ungroup

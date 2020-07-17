@@ -25,7 +25,7 @@ let trans_ja = {
     "Can't export secret project as normal.": '保護されたプロジェクトを通常版としてはエクスポートできません',
     'OK': 'OK',
     'Format error': '形式エラー',
-    'Import successed': 'インポート完了しました',
+    'Import succeeded': 'インポート完了しました',
 
     // edit
     'Add Image': '画像を追加',
@@ -58,7 +58,7 @@ let trans_ja = {
     'Color': '色',
     'Shadow': '影',
     'Blur': 'ぼかし',
-    'Save successed': '保存しました',
+    'Save succeeded': '保存しました',
     'At least select two items': '2つ以上のアイテムを選んでください',
     'Not a group': 'グループではありません',
     'Enter text here...': 'ここに文字を入力...',
@@ -81,7 +81,7 @@ let trans_ja = {
     'Upload done, sync failed.': 'アップロード完了、動機に失敗しました',
     'Convert': '変換',
     'Send': '送信',
-    'Successed': '成功しました',
+    'succeeded': '成功しました',
 
     // setting
     'Global Density': '濃度',
@@ -123,14 +123,14 @@ let trans_ja = {
     'Read conf from device error': '機器からの conf の読み込みエラー',
     'Write conf to device error': '機器への conf の書き込みエラー',
     'Write app_conf to device error': '機器への app_conf の書き込みエラー',
-    'Write to device successed': '機器へ書き込みました',
+    'Write to device succeeded': '機器へ書き込みました',
     'Read wifi conf from device error': '機器からの Wi-Fi 設定の読み込みエラー',
     'SSID is empty!': 'SSID が空です！',
     'Passwd at least 8 char!': 'パスワードは最低8文字です！',
     'Write wifi conf to device error': '機器への Wi-Fi 設定の書き込みエラー',
-    'Write to device successed, reboot...': '書き込みました。再起動します...',
+    'Write to device succeeded, reboot...': '書き込みました。再起動します...',
     'Please select file first': 'ファイルを選んでください',
-    'Upgrade successed, reboot...': '更新しました。再起動します...',
+    'Upgrade succeeded, reboot...': '更新しました。再起動します...',
     'Upgrade failed': '更新に失敗しました',
     'Upload': 'アップロード',
 

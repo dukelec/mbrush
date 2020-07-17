@@ -22,7 +22,7 @@ let trans_ko = {
     "Can't export secret project as normal.": '보호된 프로젝트를 정상적으로 내보낼 수 없습니다',
     'OK': '확인',
     'Format error': '포맷 오류',
-    'Import successed': '가져오기 완료',
+    'Import succeeded': '가져오기 완료',
 
     // edit
     'Add Image': '이미지 추가',
@@ -55,7 +55,7 @@ let trans_ko = {
     'Color': '색깔',
     'Shadow': '그림자',
     'Blur': '흐림',
-    'Save successed': '저장 성공',
+    'Save succeeded': '저장 성공',
     'At least select two items': '최소 두 항목을 선택하세요',
     'Not a group': '그룹이 아닙니다',
     'Enter text here...': '여기에 텍스트를 입력하십시오...',
@@ -78,7 +78,7 @@ let trans_ko = {
     'Upload done, sync failed.': '업로드 완료, 동기화 실패',
     'Convert': '변환',
     'Send': '보내기',
-    'Successed': '성공',
+    'succeeded': '성공',
 
     // setting
     'Global Density': '농도',
@@ -120,14 +120,14 @@ let trans_ko = {
     'Read conf from device error': '기기에서 conf 로드 오류',
     'Write conf to device error': '기기에서 conf 쓰기 오류',
     'Write app_conf to device error': '기기에서 app_conf 쓰기 오류',
-    'Write to device successed': '장치에 쓰기 성공',
+    'Write to device succeeded': '장치에 쓰기 성공',
     'Read wifi conf from device error': '기기에서 Wi-Fi 설정 로드 오류',
     'SSID is empty!': 'SSID가 비어 있습니다!',
     'Passwd at least 8 char!': '비밀번호는 최소8자 입니다!',
     'Write wifi conf to device error': '기기에 Wi-Fi 설정 쓰기 오류',
-    'Write to device successed, reboot...': '장치에 쓰기 성공, 다시 시작합니다...',
+    'Write to device succeeded, reboot...': '장치에 쓰기 성공, 다시 시작합니다...',
     'Please select file first': '파일을 선택하세요',
-    'Upgrade successed, reboot...': '업데이트했습니다, 다시 시작합니다...',
+    'Upgrade succeeded, reboot...': '업데이트했습니다, 다시 시작합니다...',
     'Upgrade failed': '업그레이드 실패',
     'Upload': '업로드',
 

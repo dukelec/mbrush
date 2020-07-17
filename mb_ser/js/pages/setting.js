@@ -132,7 +132,7 @@ async function conf_to_dev() {
         return;
     }
     
-    alert(L('Write to device successed'));
+    alert(L('Write to device succeeded'));
 }
 
 
@@ -177,7 +177,7 @@ async function wifi_to_dev() {
     }
     
     await fetch_timo('/cgi-bin/cmd?cmd=reboot', {}, 3000);
-    alert(L('Write to device successed, reboot...'));
+    alert(L('Write to device succeeded, reboot...'));
 }
 
 function heartbeat_cb() {
@@ -480,7 +480,7 @@ let Setting = {
             
             let ret = await fetch_timo('/cgi-bin/cmd?cmd=upgrade', {}, 3000);
             if (ret && ret.status == 'ok')
-                alert(L('Upgrade successed, reboot...'));
+                alert(L('Upgrade succeeded, reboot...'));
             else
                 alert(`${L('Upgrade failed')}: ${ret.status}`);
         };

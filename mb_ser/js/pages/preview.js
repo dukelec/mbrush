@@ -459,7 +459,7 @@ async function enter() {
             console.log(`save update as: ${mb.cur_prj}`);
         }
         await mb.db.set('prj', mb.cur_prj, mb.draft);
-        alert(L('Save successed'));
+        alert(L('Save succeeded'));
     };
     
     async function do_conv() {
@@ -557,7 +557,7 @@ async function enter() {
             alert(L('Upload done, sync failed.'));
             return;
         }
-        document.getElementById('nav_sta').innerHTML = L('Successed');
+        document.getElementById('nav_sta').innerHTML = L('succeeded');
     };
     document.getElementById('wr2dev_btn').onclick = async function() {
         if (conv_busy) {
