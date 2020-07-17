@@ -111,18 +111,18 @@ async function dev_get_info() {
         mb.dev_info = info;
         let voltage = Number(info.bat);
         if (voltage >= 75)
-            bat_img_src = "img/bat_4.svg";
+            bat_img_src = "img/drk/bat_4.svg";
         else if (voltage >= 50)
-            bat_img_src = "img/bat_3.svg";
+            bat_img_src = "img/drk/bat_3.svg";
         else if (voltage >= 25)
-            bat_img_src = "img/bat_2.svg";
+            bat_img_src = "img/drk/bat_2.svg";
         else
-            bat_img_src = "img/bat_1.svg";
+            bat_img_src = "img/drk/bat_1.svg";
         
         let event = new Event('heartbeat');
         document.getElementById('heartbeat_elem').dispatchEvent(event);
     } else {
-        bat_img_src = "img/offline.svg";
+        bat_img_src = "img/drk/offline.svg";
     }
     
     if (last_bat_img != bat_img_src) {
