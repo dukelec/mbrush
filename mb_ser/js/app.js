@@ -18,6 +18,8 @@ import { Setting }  from './pages/setting.js'
 let app_ver = "_APPVER_";
 let first_install = false;
 
+let BatPath = "img/drk/";
+
 window.mb = {
     app_ver: app_ver,
     db: null,
@@ -94,10 +96,10 @@ window.addEventListener('load', async function() {
 });
 
 
-let last_bat_img = 'img/offline.svg';
+let last_bat_img = BatPath+'offline.svg';
 let offline_img = null;
 
-fetch('img/offline.svg').then(function(response) {
+fetch(BatPath+'offline.svg').then(function(response) {
     return response.blob();
 }).then(function(myBlob) {
     offline_img = URL.createObjectURL(myBlob);
@@ -111,23 +113,23 @@ async function dev_get_info() {
         mb.dev_info = info;
         let voltage = Number(info.bat);
         if (voltage >= 75)
-            bat_img_src = "img/drk/bat_4.svg";
+            bat_img_src = BatPath+"bat_4.svg";
         else if (voltage >= 50)
-            bat_img_src = "img/drk/bat_3.svg";
+            bat_img_src = BatPath+"bat_3.svg";
         else if (voltage >= 25)
-            bat_img_src = "img/drk/bat_2.svg";
+            bat_img_src = BatPath+"bat_2.svg";
         else
-            bat_img_src = "img/drk/bat_1.svg";
+            bat_img_src = BatPath+"bat_1.svg";
         
         let event = new Event('heartbeat');
         document.getElementById('heartbeat_elem').dispatchEvent(event);
     } else {
-        bat_img_src = "img/drk/offline.svg";
+        bat_img_src = BatPath+"offline.svg";
     }
     
     if (last_bat_img != bat_img_src) {
         console.log(`dev state: ${last_bat_img} -> ${bat_img_src}`);
-        if (bat_img_src == "img/offline.svg")
+        if (bat_img_src == BatPath+"offline.svg")
             document.getElementById('nav_con').src = offline_img;
         else
             document.getElementById('nav_con').src = bat_img_src;

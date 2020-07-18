@@ -193,6 +193,18 @@ let Setting = {
 
 <ion-list>
     <ion-list-header>
+        ${L('Theme')} & DPI
+    </ion-list-header>
+    <ion-item>
+        <ion-label><small>${L('Dark Theme')}</small></ion-label>
+        <ion-button onclick="ToggleTheme()">
+            </ion-icon> ${L('Toggle Theme')}
+        </ion-button>
+    </ion-item>
+</ion-list>
+
+<ion-list>
+    <ion-list-header>
         ${L('Density')} & DPI
     </ion-list-header>
     
