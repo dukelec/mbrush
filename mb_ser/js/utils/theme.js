@@ -16,7 +16,7 @@ function ToggleTheme(){
     else { document.getElementById('TopBar').color="dark"; BatPath="img/drk/";}
 
     for (let i=0;i<sheets.length;i++){
-        if (sheets[i].href && sheets[i].href.endsWith("main.css")){
+        if (sheets[i].href && sheets[i].href.endsWith("drk_theme.css")){
             sheets[i].disabled=!Dark;
         }
     }

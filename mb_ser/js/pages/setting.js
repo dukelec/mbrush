@@ -210,7 +210,7 @@ let Setting = {
     
     <ion-item>
         <ion-label><small>${L('Global Density').replace(' ', '<br>')}</small></ion-label>
-        <ion-range id="density" min="1" max="100" color="secondary">
+        <ion-range id="density" min="1" max="100">
             <ion-label slot="end" id="density_v"></ion-label>
         </ion-range>
     </ion-item>
