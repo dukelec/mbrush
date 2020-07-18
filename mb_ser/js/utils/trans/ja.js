@@ -81,7 +81,7 @@ let trans_ja = {
     'Upload done, sync failed.': 'アップロード完了、動機に失敗しました',
     'Convert': '変換',
     'Send': '送信',
-    'succeeded': '成功しました',
+    'Upload succeeded': '成功しました',
 
     // setting
     'Global Density': '濃度',

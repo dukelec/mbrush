@@ -85,7 +85,7 @@ let trans_zh_hk = {
     'Upload done, sync failed.': '上傳完成，同步出錯',
     'Convert': '轉換',
     'Send': '發送',
-    'succeeded': '成功',
+    'Upload succeeded': '成功',
 
     // setting
     'Global Density': '全局浓度',

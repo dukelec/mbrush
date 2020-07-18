@@ -23,6 +23,10 @@ ion-toggle{
     --background-checked: #3282b8;
 }
 
+ion-checkbox{
+    --border-color: #eeeeee;
+}
+
 ion-range{
     --bar-background: #0f4c75;
     --bar-background-active: #3282b8;
@@ -31,6 +35,8 @@ ion-range{
 
 ion-item{
     --border-color: #474747;
+    --background-hover: #0f4c75;
+    --color-hover: #eeeeee;
 }
 
 .button-solid{

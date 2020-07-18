@@ -316,19 +316,19 @@ let Setting = {
     </ion-list-header>
     <ion-item>
         <ion-label><small>${L('Drive Strength').replace(' ', '<br>')}</small></ion-label>
-        <ion-range id="strength" min="0" max="30" value="20" color="secondary">
+        <ion-range id="strength" min="0" max="30" value="20">
             <ion-label slot="end" id="strength_v"></ion-label>
         </ion-range>
     </ion-item>
     <ion-item>
         <ion-label><small>${L('Color Alignment').replace(' ', '<br>')}</small></ion-label>
-        <ion-range id="pos_cali" min="-40" max="40" value="0" color="secondary">
+        <ion-range id="pos_cali" min="-40" max="40" value="0">
             <ion-label slot="end" id="pos_cali_v"></ion-label>
         </ion-range>
     </ion-item>
     <ion-item>
         <ion-label><small>${L('Leading Space').replace(' ', '<br>')}</small></ion-label>
-        <ion-range id="space_n" min="0" max="800" value="20" color="secondary">
+        <ion-range id="space_n" min="0" max="800" value="20">
             <ion-label slot="end" id="space_n_v"></ion-label>
         </ion-range>
     </ion-item>
