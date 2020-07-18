@@ -78,7 +78,7 @@ let trans_ko = {
     'Upload done, sync failed.': '업로드 완료, 동기화 실패',
     'Convert': '변환',
     'Send': '보내기',
-    'succeeded': '성공',
+    'Upload succeeded': '성공',
 
     // setting
     'Global Density': '농도',

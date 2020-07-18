@@ -86,7 +86,7 @@ let trans_zh_cn = {
     'Upload done, sync failed.': '上传完成，同步出错',
     'Convert': '转换',
     'Send': '发送',
-    'succeeded': '成功',
+    'Upload succeeded': '成功',
 
     // setting
     'Global Density': '全局浓度',

@@ -557,7 +557,7 @@ async function enter() {
             alert(L('Upload done, sync failed.'));
             return;
         }
-        document.getElementById('nav_sta').innerHTML = L('succeeded');
+        document.getElementById('nav_sta').innerHTML = L('Upload succeeded');
     };
     document.getElementById('wr2dev_btn').onclick = async function() {
         if (conv_busy) {
