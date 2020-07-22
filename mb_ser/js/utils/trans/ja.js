@@ -65,7 +65,6 @@ let trans_ja = {
 
     // crop
     'Crop': 'クロップ',
-    'New': '新規',
     'Dup..': '複製',
     'Del': '削除',
     'Re-Edit': '再編集',

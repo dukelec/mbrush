@@ -70,7 +70,6 @@ let trans_zh_cn = {
 
     // crop
     'Crop': '裁选',
-    'New': '新建',
     'Dup..': '重复',
     'Del': '删除',
     'Re-Edit': '回到编辑',

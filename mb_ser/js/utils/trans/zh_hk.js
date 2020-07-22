@@ -69,7 +69,6 @@ let trans_zh_hk = {
 
     // crop
     'Crop': '裁選',
-    'New': '新建',
     'Dup..': '重複',
     'Del': '刪除',
     'Re-Edit': '回到編輯',
