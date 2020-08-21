@@ -26,7 +26,9 @@ version="$(cat ../mb_ser/version)"
 version_app="${version%%_*}"
 
 echo "version: $version, APP: $version_app"
-find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version_app/g" '{}' \;
+echo "please remember to change version string in js files to $version_app, find them by 'grep -nr _APPVER_ mb_ser/'"
+echo "please remember to update 'cache_files' in 'sw.js' by 'tools/gen_sw.sh' outputs"
+#find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version_app/g" '{}' \;
 rm -rf mbrush-fw/mb_ser/upload/*
 mv mbrush-fw/mb_ser/demo/*.mbd mbrush-fw/mb_ser/upload/
 
