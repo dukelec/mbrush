@@ -78,6 +78,10 @@ ret: shell command outputs
 note: disabled for safety of online simulation server
 ```
 
+```
+E.g.: http://192.168.44.1/cgi-bin/cmd?cmd=get_info
+```
+
 ### /cgi-bin/upload
 
 Upload file to /upload/  
