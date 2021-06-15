@@ -113,3 +113,6 @@ ret:
  - Run `./build.sh node` (Before this step, you can modify the default parameters in `mbc-head-node.js`.)
  - Usage `./mbc-node.js image.png x.mbd` (`x` is number. NodeJS needs to be installed.)
 
+##### C version:
+  <a href="../tools/mbc_c_ver">tools/mbc_c_ver</a>
+
