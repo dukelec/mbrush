@@ -78,9 +78,10 @@ ret: shell command outputs
 note: disabled for safety of online simulation server
 ```
 
-```
-E.g.: http://192.168.44.1/cgi-bin/cmd?cmd=get_info
-```
+E.g.: `http://192.168.44.1/cgi-bin/cmd?cmd=get_info`
+
+Multi-line printing demo, constant speed mode by `period_us`:
+https://youtu.be/r6bBqGQhlzU
 
 ### /cgi-bin/upload
 
