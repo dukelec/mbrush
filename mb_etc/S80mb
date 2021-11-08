@@ -16,7 +16,7 @@ if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
     rm -rf mb_conf/reset
     state="$(cat /sys/mb/state)"
     short="${state:4:8}"
-    echo "ssid=PrinCube-$short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
+    echo "ssid=PrinCube $short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
     sync
 fi
 

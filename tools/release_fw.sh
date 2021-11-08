@@ -43,7 +43,7 @@ else
     echo "brand: $brand"
     find mbrush-fw/ -type f \( -name "*.json" -o -name "*.html" -o -name "*.conf" -o -name "S80mb" \) \
                     -exec sed -i "s/PrinCube/$brand/g" '{}' \;
-    tar cf $brand-fw-$version.tar mbrush-fw/
+    tar cf "$brand-fw-$version.tar" mbrush-fw/
 fi
 
 rm -rf mbrush-fw/
