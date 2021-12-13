@@ -94,10 +94,10 @@ window.addEventListener('load', async function() {
 });
 
 
-let last_bat_img = 'img/offline.svg';
+let last_bat_img = BatPath+'/offline.svg';
 let offline_img = null;
 
-fetch('img/offline.svg').then(function(response) {
+fetch('img/drk/offline.svg').then(function(response) {
     return response.blob();
 }).then(function(myBlob) {
     offline_img = URL.createObjectURL(myBlob);
@@ -111,26 +111,30 @@ async function dev_get_info() {
         mb.dev_info = info;
         let voltage = Number(info.bat);
         if (voltage >= 75)
-            bat_img_src = "img/bat_4.svg";
+            bat_img_src = BatPath+"bat_4.svg";
         else if (voltage >= 50)
-            bat_img_src = "img/bat_3.svg";
+            bat_img_src = BatPath+"bat_3.svg";
         else if (voltage >= 25)
-            bat_img_src = "img/bat_2.svg";
+            bat_img_src = BatPath+"bat_2.svg";
         else
-            bat_img_src = "img/bat_1.svg";
+            bat_img_src = BatPath+"bat_1.svg";
         
         let event = new Event('heartbeat');
         document.getElementById('heartbeat_elem').dispatchEvent(event);
     } else {
-        bat_img_src = "img/offline.svg";
+        bat_img_src = BatPath+"offline.svg";
     }
+
+    let nav_con = document.getElementById('nav_con');
     
     if (last_bat_img != bat_img_src) {
         console.log(`dev state: ${last_bat_img} -> ${bat_img_src}`);
-        if (bat_img_src == "img/offline.svg")
-            document.getElementById('nav_con').src = offline_img;
+        if (bat_img_src == BatPath+"offline.svg")
+            nav_con.src = offline_img;
         else
-            document.getElementById('nav_con').src = bat_img_src;
+            nav_con.src = bat_img_src;
+
+        nav_con.parentElement.innerHTML=nav_con.parentElement.innerHTML;
         last_bat_img = bat_img_src;
     }
 }

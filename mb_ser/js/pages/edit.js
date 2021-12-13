@@ -412,7 +412,7 @@ customElements.define('modal-text', class extends HTMLElement {
             <ion-icon size="small" slot="start" name="color-fill"></ion-icon><br/>
             <small>${L('Opacity')}</small>
         </ion-label>
-        <ion-range id="shadow_opacity" min="1" max="255" value="255" color="secondary">
+        <ion-range id="shadow_opacity" min="1" max="255" value="255">
             <ion-label slot="end" id="shadow_opacity_v">100</ion-label>
         </ion-range>
     </ion-item>
@@ -499,7 +499,7 @@ async function enter() {
         <ion-icon size="small" slot="start" name="color-fill"></ion-icon><br/>
         <small>${L('Opacity')}</small>
     </ion-label>
-    <ion-range id="opacity" min="1" max="100" value="100" color="secondary">
+    <ion-range id="opacity" min="1" max="100" value="100">
         <ion-label slot="end" id="opacity_v">100</ion-label>
     </ion-range>
 </ion-item>

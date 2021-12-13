@@ -282,7 +282,7 @@ async function enter() {
         <ion-icon size="small" slot="start" name="color-fill"></ion-icon><br/>
         <small>${L('Density')}</small>
     </ion-label>
-    <ion-range id="density" min="1" max="100" color="secondary">
+    <ion-range id="density" min="1" max="100">
         <ion-label slot="end" id="density_v"></ion-label>
     </ion-range>
 </ion-item>
@@ -291,7 +291,7 @@ async function enter() {
         <ion-icon size="small" slot="start" name="sunny"></ion-icon><br/>
         <small>${L('Brightness')}</small>
     </ion-label>
-    <ion-range id="brightness" min="0" max="200" color="secondary">
+    <ion-range id="brightness" min="0" max="200">
         <ion-label slot="end" id="brightness_v"></ion-label>
     </ion-range>
 </ion-item>
@@ -300,7 +300,7 @@ async function enter() {
         <ion-icon size="small" slot="start" name="color-palette"></ion-icon><br/>
         <small>${L('Saturation')}</small>
     </ion-label>
-    <ion-range id="saturation" min="0" max="500" color="secondary">
+    <ion-range id="saturation" min="0" max="500">
         <ion-label slot="end" id="saturation_v"></ion-label>
     </ion-range>
 </ion-item>

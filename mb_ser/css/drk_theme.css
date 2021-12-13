@@ -1,0 +1,62 @@
+:root {
+    --ion-color-secondary: #0f4c75;
+    --ion-color-secondary-rgb: 0,102,0;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255,255,255;
+    --ion-color-secondary-shade: #1b262c;
+    --ion-color-secondary-tint: #0f4c75;
+    --ion-background-color: #1b262c;
+}
+
+ion-segment-button{
+    --background-hover: #3282b8;
+    --background-focused: #3282b8;
+    --color-checked: #3282b8;
+    --indicator-color: #3282b8;
+}
+
+ion-toggle{
+    --handle-background: #3282b8;
+    --handle-background-checked: #3282b8;
+
+    --background: #0f4c75;
+    --background-checked: #3282b8;
+}
+
+ion-checkbox{
+    --border-color: #eeeeee;
+}
+
+ion-range{
+    --bar-background: #0f4c75;
+    --bar-background-active: #3282b8;
+    --knob-background: #3282b8;
+}
+
+ion-item{
+    --border-color: #474747;
+    --background-hover: #0f4c75;
+    --color-hover: #eeeeee;
+}
+
+.button-solid{
+    --background: #3282b8;
+}
+
+.alert-radio-label.sc-ion-alert-md{
+    color: #eeeeee;
+    border-color: azure;
+}
+
+[aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md{
+    color: #eeeeee;
+    border-color: #222831;
+}
+
+.alert-title.sc-ion-alert-md{
+    color: #eeeeee;
+}
+
+.hydrated{
+    color: #eeeeee;
+}
