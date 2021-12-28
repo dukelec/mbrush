@@ -15,8 +15,8 @@ if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
     echo "MB: reset wifi config"
     rm -rf mb_conf/reset
     state="$(cat /sys/mb/state)"
-    short="${state:4:8}"
-    echo "ssid=PrinCube $short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
+    short="${state:4:4}"
+    echo "ssid=_BRAND_ $short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
     sync
 fi
 

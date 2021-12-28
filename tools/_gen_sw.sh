@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "$(dirname "$0")/../mb_ser"
+cd "$(dirname "$0")/mbrush-fw/mb_ser"
 
 files="$(find ./ -not -path '*/\.*' -type f)"
 

@@ -2,7 +2,12 @@
 cd "$(dirname "$0")"
 
 brand="$1"
-[ "$brand" == "" ] && brand="PrinCube"
+if [ "$brand" == "" ]; then
+    echo "Usage: $0 [BRAND-NAME]"
+    echo "For PC simulation: $0 PC"
+    echo "(Please remember to update version string in mb_ser/version first)"
+    exit -1
+fi
 
 rm -rf mbrush-fw/*
 mkdir -p mbrush-fw
@@ -26,26 +31,33 @@ version="$(cat ../mb_ser/version)"
 version_app="${version%%_*}"
 
 echo "version: $version, APP: $version_app"
-echo "please remember to change version string in js files to $version_app, find them by 'grep -nr _APPVER_ mb_ser/'"
-echo "please remember to update 'cache_files' in 'sw.js' by 'tools/gen_sw.sh' outputs"
-#find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version_app/g" '{}' \;
+find mbrush-fw/ -type f -name "*.js" -exec sed -i "s/_APPVER_/$version_app/g" '{}' \;
 rm -rf mbrush-fw/mb_ser/upload/*
 mv mbrush-fw/mb_ser/demo/*.mbd mbrush-fw/mb_ser/upload/
 
-if [ "$brand" == "PrinCube" ]; then
-    echo "brand: $brand"
-    tar cf $brand-fw-$version.tar mbrush-fw/
-elif [ "$brand" == "PC" ]; then
-    echo "brand: PC simulate"
+if [ "$brand" == "PC" ]; then
+    echo "brand: PC simulation"
     rm mbrush-fw/uImage mbrush-fw/run.sh
-    tar cf pc-sim-$version.tar mbrush-fw/
+    outfile="pc-sim-$version.tar"
 else
     echo "brand: $brand"
     find mbrush-fw/ -type f \( -name "*.json" -o -name "*.html" -o -name "*.conf" -o -name "S80mb" \) \
-                    -exec sed -i "s/PrinCube/$brand/g" '{}' \;
-    tar cf "$brand-fw-$version.tar" mbrush-fw/
+                    -exec sed -i "s/_BRAND_/$brand/g" '{}' \;
+    outfile="$brand-fw-$version.tar"
 fi
 
+echo "computing hash values ..."
+./_gen_sw.sh > hashlist.txt
+sed -i "/_HASHLIST_/ r hashlist.txt" mbrush-fw/mb_ser/sw.js
+rm -f hashlist.txt
+
+echo "compressing files with gzip ..."
+gzip -r mbrush-fw/mb_ser/css mbrush-fw/mb_ser/js mbrush-fw/mb_ser/img
+gzip mbrush-fw/mb_ser/index.html mbrush-fw/mb_ser/sw.js
+
+echo "$brand" > mbrush-fw/mb_ser/brand
+
+tar cf "$outfile" mbrush-fw/
 rm -rf mbrush-fw/
 echo "done."
 

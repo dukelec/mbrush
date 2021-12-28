@@ -15,7 +15,7 @@ import { Setting }  from './pages/setting.js'
 
 //Konva.pixelRatio = 1;
 
-let app_ver = "4.33"; // _APPVER_
+let app_ver = "_APPVER_";
 let first_install = false;
 
 window.mb = {
