@@ -19,6 +19,8 @@ int main(void)
     const char *filedata = req->getstr(req, "file", false);
     int filelength = req->getint(req, "file.length");
     const char *filename = req->getstr(req, "file.filename", false);
+    
+    printf("Access-Control-Allow-Origin: *\n");
     qcgires_setcontenttype(req, "application/json");
     
     //fprintf(stderr, "filename: %s, pos %d\n", filename, pos);
