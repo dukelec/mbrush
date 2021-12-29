@@ -30,7 +30,6 @@ window.mb = {
     def_conf: {
         mb_app_ver: app_ver,
         density: 80,
-        cali: {c:255, m:255, y:255},
         invert: 0,
         c_order: 0, // 0: cmy, 1: cym
         c_width: 0, // 0: new, 1: old

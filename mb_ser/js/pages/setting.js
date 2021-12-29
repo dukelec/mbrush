@@ -17,11 +17,6 @@ let block_ui_event = false;
 async function save_conf() {
     mb.conf.mb_app_ver = mb.app_ver;
     mb.conf.density = Number(document.getElementById('density').value);
-    mb.conf.cali = {
-        c: Number(document.getElementById('c_cali').value),
-        m: Number(document.getElementById('m_cali').value),
-        y: Number(document.getElementById('y_cali').value)
-    };
     mb.conf.invert = document.getElementById('invert_en').value == '1' ? 1 : 0;
     mb.conf.c_order = document.getElementById('c_order').value == '1' ? 1 : 0;
     mb.conf.c_width = document.getElementById('c_width').value == '1' ? 1 : 0;
@@ -42,12 +37,6 @@ function update_ui() {
     block_ui_event = true;
     document.getElementById('density').value = mb.conf.density;
     document.getElementById('density_v').innerText = mb.conf.density;
-    document.getElementById('c_cali').value = mb.conf.cali.c;
-    document.getElementById('m_cali').value = mb.conf.cali.m;
-    document.getElementById('y_cali').value = mb.conf.cali.y;
-    document.getElementById('c_cali_v').innerText = mb.conf.cali.c;
-    document.getElementById('m_cali_v').innerText = mb.conf.cali.m;
-    document.getElementById('y_cali_v').innerText = mb.conf.cali.y;
     document.getElementById('invert_en').value = mb.conf.invert;
     document.getElementById('c_order').value = mb.conf.c_order;
     document.getElementById('c_width').value = mb.conf.c_width;
@@ -74,11 +63,6 @@ async function conf_from_dev() {
     if (ret && ret.app_conf) {
         let conf = JSON.parse('{"' + ret.app_conf.replace(/=/g, '": "').replace(/&/g, '", "') + '"}');
         mb.conf.density = Number(conf.density);
-        mb.conf.cali = {
-            c: Number(conf.c_cali),
-            m: Number(conf.m_cali),
-            y: Number(conf.y_cali)
-        };
         mb.conf.invert = Number(conf.invert);
         mb.conf.c_order = Number(conf.c_order);
         mb.conf.c_width = Number(conf.c_width);
@@ -109,7 +93,7 @@ async function conf_to_dev() {
     let val = `space=${mb.conf.space}&pos_cali=${mb.conf.pos_cali}`;
     val += `&buzzer=${mb.conf.buzzer}&strength=${mb.conf.strength}`;
     
-    let val_app = `density=${mb.conf.density}&c_cali=${mb.conf.cali.c}&m_cali=${mb.conf.cali.m}&y_cali=${mb.conf.cali.y}`;
+    let val_app = `density=${mb.conf.density}`;
     val_app += `&invert=${mb.conf.invert}&c_order=${mb.conf.c_order}&c_width=${mb.conf.c_width}&dpi_step=${mb.conf.dpi_step}`;
     
     let ret = await fetch_timo('/cgi-bin/cmd?cmd=set_conf', {
@@ -276,30 +260,6 @@ let Setting = {
 
 <ion-list>
     <ion-list-header>
-        ${L('Color Calibration')}
-    </ion-list-header>
-    <ion-item>
-        <ion-label>${L('Cyan')}</ion-label>
-        <ion-range id="c_cali" min="1" max="255" color="primary">
-            <ion-label slot="end" id="c_cali_v"></ion-label>
-        </ion-range>
-    </ion-item>
-    <ion-item>
-        <ion-label>${L('Magenta')}</ion-label>
-        <ion-range id="m_cali" min="1" max="255" color="danger">
-            <ion-label slot="end" id="m_cali_v"></ion-label>
-        </ion-range>
-    </ion-item>
-    <ion-item>
-        <ion-label>${L('Yellow')}</ion-label>
-        <ion-range id="y_cali" min="1" max="255" color="warning">
-            <ion-label slot="end" id="y_cali_v"></ion-label>
-        </ion-range>
-    </ion-item>
-</ion-list>
-
-<ion-list>
-    <ion-list-header>
         ${L('Device Setting')}
     </ion-list-header>
     <ion-item>
@@ -448,9 +408,6 @@ let Setting = {
         };
         update_ui();
         document.getElementById('density').addEventListener('ionChange', save_update_ui);
-        document.getElementById('c_cali').addEventListener('ionChange', save_update_ui);
-        document.getElementById('m_cali').addEventListener('ionChange', save_update_ui);
-        document.getElementById('y_cali').addEventListener('ionChange', save_update_ui);
         document.getElementById('invert_en').addEventListener('ionChange', save_update_ui);
         document.getElementById('c_order').addEventListener('ionChange', save_update_ui);
         document.getElementById('c_width').addEventListener('ionChange', save_update_ui);

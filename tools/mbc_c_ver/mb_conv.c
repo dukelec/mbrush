@@ -88,7 +88,8 @@ int main(int argc, char **argv)
     FILE *rgb_file = fopen("tmp.rgb", "rb");
     fstat(fileno(rgb_file), &st);
     img_width = st.st_size / (3 * 684);
-    printf("mbc width: %d\n", img_width);
+    printf("mbc width: %d, invert: %d, is_cym: %d, is_old: %d, dpi_step: %d\n",
+            img_width, invert, is_cym, is_old, dpi_step);
     
     if (is_old) {
         for (int i = 0; i < 4; i++) {
@@ -125,13 +126,13 @@ int main(int argc, char **argv)
         for (int p = 4; p < 180-5; p++) { // ignore the nozzles that are not real
             for (int i = 0; i < 4; i++) {
                 // buf pos: rgb_buf + 3 * (p * 4 + i)
-                ch_c[i][l * 180 + p] = (*buf_p++) != 0xff;
+                ch_c[i][l * 180 + p] = (*buf_p++) < 0x80;
                 if (is_cym) {
-                    ch_y[i][l * 180 + p] = (*buf_p++) != 0xff;
-                    ch_m[i][l * 180 + p] = (*buf_p++) != 0xff;
+                    ch_y[i][l * 180 + p] = (*buf_p++) < 0x80;
+                    ch_m[i][l * 180 + p] = (*buf_p++) < 0x80;
                 } else {
-                    ch_m[i][l * 180 + p] = (*buf_p++) != 0xff;
-                    ch_y[i][l * 180 + p] = (*buf_p++) != 0xff;
+                    ch_m[i][l * 180 + p] = (*buf_p++) < 0x80;
+                    ch_y[i][l * 180 + p] = (*buf_p++) < 0x80;
                 }
             }
         }

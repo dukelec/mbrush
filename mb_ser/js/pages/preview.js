@@ -35,11 +35,11 @@ function update_ui() {
 
 function check_value() {
     if (!(mb.draft.density > 0 && mb.draft.density <= 100))
-        mb.draft.density = 80;
+        mb.draft.density = 60;
     if (!(mb.draft.brightness >= 0 && mb.draft.brightness <= 200))
-        mb.draft.brightness = 100;
+        mb.draft.brightness = 105;
     if (!(mb.draft.saturation >= 0 && mb.draft.saturation <= 500))
-        mb.draft.saturation = 100;
+        mb.draft.saturation = 140;
 }
 
 
@@ -513,7 +513,6 @@ async function enter() {
             //download(i.mb_aux.png684, 'test.png'); // debug
             i.mb_aux.mb_dat = await mbc.conv(i.mb_aux.png684, mb.draft.brightness, mb.draft.saturation,
                     Math.round(mb.draft.density * mb.conf.density / 100),
-                    {c: mb.conf.cali.c, m: mb.conf.cali.m, y: mb.conf.cali.y},
                     mb.conf.invert, mb.conf.c_order, mb.conf.c_width, mb.conf.dpi_step, (p) => {
                 document.getElementById('nav_sta').innerHTML = `${L('Convert')} #${cnt+1}: ${p}`;
             });

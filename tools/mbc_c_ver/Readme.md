@@ -10,7 +10,7 @@ mbc_c_ver $ gcc -o mbc mb_conv.c
 
 ```
 convert ori.png -fill white -resize 50x100% -modulate 100 -modulate 100,100 \
-  -colorize 0 -geometry x684 -bordercolor none -alpha remove \
+  -colorize 40 -geometry x684 -bordercolor none -alpha remove \
   -dither FloydSteinberg -remap map.bmp -rotate 90 tmp.rgb  # or tmp.bmp for debug
 ```
 
