@@ -54,7 +54,7 @@ elif [ "$cgi_cmd" == "upgrade" ]; then
     cd ../upload/
     rm -rf mbrush-fw
     tar xf mbrush-fw.tar || { echo '{"status": "err: tar file broken"}'; exit 1; }
-    ./mbrush-fw/run.sh || { echo "{\"status\": \"err: $?\"}"; exit 1; }
+    ./mbrush-fw/run.sh &> /root/ota.log || { echo "{\"status\": \"err: $?\"}"; exit 1; }
     echo '{"status": "ok"}'
     
 elif [ "$cgi_cmd" == "pos_dbg" ]; then

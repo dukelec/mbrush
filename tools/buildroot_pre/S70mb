@@ -12,10 +12,21 @@ if [ $? -ne 0 ] || [ ! -f /root/mb_etc/S80mb ] || [ ! -d /root/mb_conf ] || [ -f
     umount /root
     ubidetach -m 3
     echo "MB: restore kernel ..."
-    busybox tar xf *-fw-*.tar mbrush-fw/uImage -C /tmp --strip 1
-    flash_erase /dev/mtd1 0 32
-    nandwrite -m -p /dev/mtd1 /tmp/uImage
-    rm /tmp/uImage
+    state="$(cat /sys/mb/state)"
+    cur_ver="${state#*v: }"
+    cur_ver="${cur_ver%/*}"
+    busybox tar xf *-fw-*.tar mbrush-fw/mb_ser/version -C /tmp --strip 1
+    tgt_ver="$(cat /tmp/mb_ser/version)"
+    tgt_ver="${tgt_ver#*_}"
+    if [ "$cur_ver" != "$tgt_ver" ]; then
+        echo "MB: kernel version: $cur_ver -> $tgt_ver ..."
+        busybox tar xf *-fw-*.tar mbrush-fw/uImage -C /tmp --strip 1
+        flash_erase /dev/mtd1 0 32
+        nandwrite -m -p /dev/mtd1 /tmp/uImage
+        rm /tmp/uImage
+    else
+        echo "MB: skip same kernel version: $cur_ver == $tgt_ver"
+    fi
     echo "MB: restore rootfs ..."
     ubiformat -y /dev/mtd3
     ubiattach /dev/ubi_ctrl -m 3
@@ -23,6 +34,11 @@ if [ $? -ne 0 ] || [ ! -f /root/mb_etc/S80mb ] || [ ! -d /root/mb_conf ] || [ -f
     mount -t ubifs ubi1:data /root || { echo "MB: flash error"; exit; }
     busybox tar xf *-fw-*.tar -C /root --strip 1 --exclude */run.sh --exclude */uImage
     sync
+    if [ "$cur_ver" != "$tgt_ver" ]; then
+        echo "MB: reboot to new kernel ..."
+        reboot
+        exit
+    fi
 fi
 
 echo "MB: start app ..."

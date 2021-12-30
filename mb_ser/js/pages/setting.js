@@ -435,11 +435,11 @@ let Setting = {
                 document.getElementById('nav_sta').innerHTML = `${L('Upload')}: ${p}`;
             });
             
-            let ret = await fetch_timo('/cgi-bin/cmd?cmd=upgrade', {}, 3000);
+            let ret = await fetch_timo('/cgi-bin/cmd?cmd=upgrade', {}, 15000);
             if (ret && ret.status == 'ok')
                 alert(L('Upgrade succeeded, reboot...'));
             else
-                alert(`${L('Upgrade failed')}: ${ret.status}`);
+                alert(`${L('Upgrade failed')}: ${ret}`);
         };
         
         document.getElementById('heartbeat_elem').addEventListener('heartbeat', heartbeat_cb);

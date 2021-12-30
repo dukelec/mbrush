@@ -4,5 +4,5 @@ cp fstab inittab /etc/
 cp init.d/* /etc/init.d/
 
 cp S70mb /opt/
-echo "s2" > /opt/sys_ver
+echo "s3" > /opt/sys_ver
 cp *-fw-*.tar /opt/
