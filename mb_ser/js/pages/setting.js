@@ -439,7 +439,7 @@ let Setting = {
             if (ret && ret.status == 'ok')
                 alert(L('Upgrade succeeded, reboot...'));
             else
-                alert(`${L('Upgrade failed')}: ${ret}`);
+                alert(`${L('Upgrade failed')}: ${JSON.stringify(ret)}`);
         };
         
         document.getElementById('heartbeat_elem').addEventListener('heartbeat', heartbeat_cb);
