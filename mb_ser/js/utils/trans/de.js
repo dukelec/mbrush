@@ -22,7 +22,7 @@ let trans_de = {
     'Cancel': 'Abbrechen',
 
     'Alert': 'Warnung',
-    "Can't export secret project as normal.": 'Geheimes Projekt kann nicht regulär exportiert werden!',
+    "Can't export secret project as normal.": 'Geheime Projekte können nicht regulär exportiert werden!',
     'OK': 'OK',
     'Format error': 'Formatfehler!',
     'Import succeeded': 'Import erfolgreich.',
@@ -104,7 +104,7 @@ let trans_de = {
     'SSID': 'SSID',
     'Password': 'Kennwort',
     'Channel': 'Kanal',
-    'Not allowed in the US': 'Außerhalb der USA untersagt',
+    'Not allowed in the US': 'Nicht innerhalb der USA zulässig',
     'Japan only': 'Nur Japan',
     'Read Dev': 'Abrufen',
     'Write Dev': 'Schreiben',
