@@ -121,3 +121,21 @@ ret:
 ##### C version:
   <a href="../tools/mbc_c_ver">tools/mbc_c_ver</a>
 
+
+## Additional API interfaces
+
+These interfaces are not used by the current APP, but some users may be used for their own development.
+
+These interfaces correspond to the following files added under the `/sys/mb/` path:
+
+ - `key_evt`: Report short and long press events, corresponding to 1 and 2 respectively, and 0 for no events.
+ - `key_raw`: Report key value: a value of 0 or 1.
+ - `led`: Write integer to control the light, bit0 bit1 bit2 corresponds to 3 ways light.
+ - `buzzer`: Write frequency, 0 for off sound.
+ - `idx`: Modify the index value of the selected print data file.
+ - `key_en`: The default is 1. After writing 0, the button no longer triggers printing. When printing is triggered via the relevant api, the led and buzzer also need to be controlled by the user.
+ - `slow_evt`: A non-zero event means there is an insufficient print speed, which means the user is moving too fast.
+
+The `key_evt`, `key_raw`, `slow_evt` and the original `state` file now support event notification, the user space program can refer to the [poll_test.c](poll_test.c) file. 
+For example, after entering the following command into the serial port, try to print once: `./poll_test /sys/mb/state &`
+
