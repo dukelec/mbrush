@@ -64,13 +64,10 @@ elif [ "$cgi_cmd" == "pos_dbg" ]; then
     echo '{"status": "ok"}'
     
 elif [ "$cgi_cmd" == "wifi_cali" ]; then
-    echo 0 > /sys/class/esp_boot/normode
-    echo 1 > /sys/class/esp_boot/atemode
-    echo 1 > /sys/class/esp_boot/normode
-    sleep 0.8
     wifi_ch=${cgi_val:=7}
-    ./eagle_test_ate ate wifiscwout 1 $wifi_ch 0 > /dev/null
+    echo "$wifi_ch" > /root/mb_conf/wifi_cali
     echo '{"status": "ok"}'
+    nohup sh -c "sleep 1; reboot" > /dev/null &
     
 elif [ "$cgi_cmd" == "reboot" ]; then
     sync
