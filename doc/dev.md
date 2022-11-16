@@ -102,7 +102,6 @@ args:
   brightness: 0~200, default 100
   saturation: 0~500, default 100
   density: 1~100, default 60
-  cal.c,m,y: 1~255, default 255
   invert: print direction: 0: left to right, 1: right to left
   c_order: 0: CMY, 1: CYM. default 0
   c_width: cartridge chip width: 0: 4.4mm, 1: 4.9mm. default 0
@@ -114,12 +113,7 @@ ret:
 
 #### Headless conversion
 
- - Goto `/js/workers/mbc/`
- - Run `./build.sh node` (Before this step, you can modify the default parameters in `mbc-head-node.js`.)
- - Usage `./mbc-node.js image.png x.mbd` (`x` is number. NodeJS needs to be installed.)
-
-##### C version:
-  <a href="../tools/mbc_c_ver">tools/mbc_c_ver</a>
+<a href="../tools/mbc_c_ver">tools/mbc_c_ver</a>
 
 
 ## Additional API interfaces
