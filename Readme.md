@@ -1,4 +1,4 @@
-PrinCube APP
+MBrush (PrinCube) APP
 ======
 Print anything, anywhere, anytime.
 

@@ -1,8 +1,8 @@
-rm -f /etc/init.d/S* # except S40network !
+rm -f /etc/init.d/S* # except S40network S40bluetooth and S30dbus !
 
 cp fstab inittab /etc/
 cp init.d/* /etc/init.d/
 
 cp S70mb /opt/
-echo "s3" > /opt/sys_ver
+echo "s4" > /opt/sys_ver
 cp *-fw-*.tar /opt/

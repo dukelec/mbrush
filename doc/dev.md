@@ -1,4 +1,4 @@
-PrinCube API Document
+MBrush (PrinCube) API Document
 ==============
 
 ## Network Interface
@@ -15,6 +15,11 @@ PrinCube API Document
  - 3Mbps 8N1
  - User name: root
  - Password: no password
+
+### Telnet Debug
+```
+$ busybox telnet 192.168.44.1
+```
 
 ## API Interfaces
 
@@ -88,8 +93,8 @@ https://youtu.be/r6bBqGQhlzU
 Upload file to /upload/  
 
 Shell command example: 
- - `curl -F "pos=0" -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`, or: 
- - `curl -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`  
+ - `curl -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`, or: 
+ - `curl -F "pos=0" -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`  
 
 For javascript code, refer `upload` function in `/js/utils/helper.js`
 

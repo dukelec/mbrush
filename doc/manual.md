@@ -1,4 +1,4 @@
-PrinCube Manual
+MBrush (PrinCube) Manual
 ======
 
 <img src="princube.svg">  

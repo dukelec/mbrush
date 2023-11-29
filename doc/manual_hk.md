@@ -1,4 +1,4 @@
-PrinCube 操作說明
+MBrush (PrinCube) 操作說明
 ======
 
 <img src="princube.svg">  

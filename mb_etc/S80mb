@@ -3,7 +3,7 @@
 
 echo "MB: $0 $1"
 [ "$1" != "start" ] && exit
-devmem 0x10010380 32 0x3f # pull up wifi sdio
+devmem 0x10010384 32 0x3f # pull up wifi sdio
 
 cd /root
 echo "MB: enter /root"
@@ -16,7 +16,8 @@ if [ -f mb_conf/reset ] || [ ! -f mb_conf/wifi.conf ]; then
     echo "MB: reset wifi config"
     rm -rf mb_conf/reset
     state="$(cat /sys/mb/state)"
-    short="${state:4:4}"
+    short="${state#*: }"
+    short="${short:0:4}"
     echo "ssid=_BRAND_ $short&passwd=12345678&freq=2462" > mb_conf/wifi.conf
     sync
 fi
@@ -92,6 +93,11 @@ echo "MB: ipv6 up"
 ip addr add "fd44::1/64" dev wlan0
 ip addr add "fd88::1/64" dev usb0
 radvd -C mb_etc/radvd.conf # -d5 -n
+
+echo "MB: telnetd up"
+mkdir /dev/pts
+mount -t devpts none /dev/pts
+busybox telnetd
 
 echo 4 > /proc/sysrq-trigger
 echo "MB: done"
