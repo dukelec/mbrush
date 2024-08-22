@@ -88,37 +88,26 @@ E.g.: `http://192.168.44.1/cgi-bin/cmd?cmd=get_info`
 Multi-line printing demo, constant speed mode by `period_us`:
 https://youtu.be/r6bBqGQhlzU
 
+E.g.:  
+`http://192.168.88.1/cgi-bin/cmd?cmd=set_conf&conf=space%3D-200%26pos_cali%3D0%26buzzer%3D1%26strength%3D20%26period_us%3D741`  
+Writes config `space=-200&pos_cali=0&buzzer=1&strength=20&period_us=741` to device.  
+The CONFIGS should in URL-encoded formats.
+
+
 ### /cgi-bin/upload
 
 Upload file to /upload/  
 
 Shell command example: 
  - `curl -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`, or: 
- - `curl -F "pos=0" -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`  
+ - `curl -F "pos=0" -F "file=@0.mbd" http://192.168.44.1/cgi-bin/upload`, or: 
+ - `curl -F "file=@xxx.mbd;filename=0.mbd" http://192.168.44.1/cgi-bin/upload`  
 
 For javascript code, refer `upload` function in `/js/utils/helper.js`
 
-### Data Convert
+### Image Convert
 
-Refer function `mbc.conv` in `/js/workers/mbc.js`
-```
-args:
-  img_dat: input png image, in type: Uint8Array
-  brightness: 0~200, default 100
-  saturation: 0~500, default 100
-  density: 1~100, default 60
-  invert: print direction: 0: left to right, 1: right to left
-  c_order: 0: CMY, 1: CYM. default 0
-  c_width: cartridge chip width: 0: 4.4mm, 1: 4.9mm. default 0
-  dpi_step: dpi setting: 1: 1200x1200, 2: 1200x600, 4: 1200x300
-  st_cb: progress status callback function
-ret:
-  .mbd file data, in type: Uint8Array
-```
-
-#### Headless conversion
-
-<a href="../tools/mbc_c_ver">tools/mbc_c_ver</a>
+Please refer to: `tools/image_convert/`
 
 
 ## Additional API interfaces

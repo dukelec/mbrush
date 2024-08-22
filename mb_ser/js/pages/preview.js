@@ -9,7 +9,7 @@ import { L } from '../utils/lang.js'
 import { konva2d, d2konva } from '../utils/konva_conv.js';
 import { konva_zoom, konva_responsive } from '../utils/konva_helper.js';
 import { date2num, cpy, download, fetch_timo, upload, obj2blob2u8a } from '../utils/helper.js';
-import { mbc } from '../workers/mbc.js';
+import { dpc } from '../workers/dpc.js';
 
 let stage, layer, layer_bgr, layer_crop;
 let conv_busy = false;
@@ -506,12 +506,12 @@ async function enter() {
                 alert(L('Get crop data error.'));
                 return;
             }
-            if (!mbc.ready) {
+            if (!dpc.ready) {
                 alert(L('Loading, please try later.'));
                 return;
             }
             //download(i.mb_aux.png684, 'test.png'); // debug
-            i.mb_aux.mb_dat = await mbc.conv(i.mb_aux.png684, mb.draft.brightness, mb.draft.saturation,
+            i.mb_aux.mb_dat = await dpc.conv(i.mb_aux.png684, mb.draft.brightness, mb.draft.saturation,
                     Math.round(mb.draft.density * mb.conf.density / 100),
                     mb.conf.invert, mb.conf.c_order, mb.conf.c_width, mb.conf.dpi_step, (p) => {
                 document.getElementById('nav_sta').innerHTML = `${L('Convert')} #${cnt+1}: ${p}`;

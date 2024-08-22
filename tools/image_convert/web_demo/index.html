@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MBrush Picture Convert Demo</title>
+</head>
+
+<body>
+
+cmd line options: (-h for help) <input type="text" size="70" id="options" value="in.png --cb 110 --cs 105 --cd 50 -1"></input><br>
+input png file: <input id="input_file_c" type="file"><br>
+<button id="convert_btn">convert</button><br><br>
+Notes: Please open the console debug window to view more information.
+
+</body>
+
+
+<script type="module">
+
+import Module from './dpconv.js';
+
+let overlay = {
+    print: text => {
+        console.log('DP:', text);
+    },
+    printErr: text => {
+        console.error("DP error:", text);
+    },
+    quit: status => {
+        console.log("DP quit:", status);
+    },
+    setStatus: text => {
+      console.log(`DP status: ${text}`);
+    }
+};
+
+async function read_file(file) {
+    return await new Promise((resolve, reject) => {
+        let reader = new FileReader();
+
+        reader.onload = () => {
+            resolve(new Uint8Array(reader.result));
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+    })
+}
+
+function download_url(data, fileName) {
+    var a;
+    a = document.createElement('a');
+    a.href = data;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    a.click();
+    a.remove();
+};
+
+function download(data, fileName='dat.bin', mimeType='application/octet-stream') {
+    var blob, url;
+    blob = new Blob([data], {type: mimeType});
+    url = window.URL.createObjectURL(blob);
+    download_url(url, fileName);
+    setTimeout(function() { return window.URL.revokeObjectURL(url); }, 1000);
+};
+
+window.addEventListener('load', async function() {
+    console.log("window loaded");
+    
+    let dpconv = await Module(overlay);
+    console.log("DP init ready");
+    
+    document.getElementById('convert_btn').onclick = async () => {
+        let input = document.getElementById('input_file_c');
+        if (!input.files || !input.files.length) {
+            alert('Please select in.png first');
+            return;
+        }
+        let c_data = await read_file(input.files[0]);
+        
+        dpconv.FS.writeFile('in.png', c_data);
+        
+        let arg_str = document.getElementById('options').value;
+        console.log(`args: ${arg_str}`);
+        dpconv.callMain(arg_str.split(' '));
+        
+        let rpt_dat = dpconv.FS.readFile('output/report.json');
+        let rpt = new TextDecoder().decode(rpt_dat); 
+        alert(`report:\n ${rpt}`);
+        
+        let mb_dat = dpconv.FS.readFile('output/0.mbd');
+        console.log(`download 0.mbd, len: ${mb_dat.length}`);
+        download(mb_dat, '0.mbd');
+        
+        // you could download more files here
+    };
+});
+
+</script>
+</html>

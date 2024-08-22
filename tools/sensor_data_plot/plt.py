@@ -7,7 +7,6 @@ import struct
 import _thread
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_interaction import figure_pz
 
 
 if len(sys.argv) <= 1:
@@ -43,7 +42,7 @@ for i in range(DEEP):
 #print(td_array)
 print("t_array len", len(t_array))
 
-fig = figure_pz() #plt.figure()
+fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
 
 plt.setp(ax.plot(t_array, x_array, 'r.-'), alpha=0.2) # red
