@@ -7,6 +7,31 @@
 
 import { load_img, sha1, cpy } from './helper.js';
 
+
+async function update_item(kobj) {
+    if (kobj.getClassName() == 'Image') {
+        
+    } else if (kobj.getClassName() == 'Text') {
+        kobj.text(Function("return `" + kobj.name() + "`;")());
+    }
+}
+
+async function update_group(kobj) {
+    for (let i of kobj) {
+        //console.log(i.getClassName());
+        if (i.getClassName() == 'Group') {
+            await update_group(i.children);
+        } else {
+            await update_item(i);
+        }
+    }
+}
+
+async function konva_update(kobj) {
+    await update_group(kobj.children);
+}
+
+
 async function d_add_item(kobj, dobj, files) {
     if (kobj.getClassName() == 'Image') {
         dobj['type'] = 'img';
@@ -22,6 +47,7 @@ async function d_add_item(kobj, dobj, files) {
     } else if (kobj.getClassName() == 'Text') {
         dobj['type'] = 'text';
         cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'text', 'align', 'rotation', 'opacity'], {
+            'name': 'text_src',
             'fill': 'color',
             'fontFamily': 'font_family',
             'fontSize': 'font_size',
@@ -80,7 +106,10 @@ async function k_add_item(kobj, dobj, files) {
 
     } else if (dobj.type == 'text') {
         let a = {};
+        if (!('text_src' in dobj.attrs))
+            dobj.attrs.text_src = dobj.attrs.text;
         cpy(a, dobj.attrs, ['x', 'y', 'text', 'align', 'rotation', 'opacity'], {
+            'text_src': 'name',
             'color': 'fill',
             'font_family': 'fontFamily',
             'font_size': 'fontSize',
@@ -93,6 +122,7 @@ async function k_add_item(kobj, dobj, files) {
             'shadow_y': 'shadowOffsetY',
             'shadow_opacity': 'shadowOpacity'
         });
+        a.text = Function("return `" + a.text + "`;")();
         let t = new Konva.Text(a);
         kobj.add(t);
     
@@ -123,4 +153,4 @@ async function d2konva(kobj, dobj) {
 }
 
 
-export { konva2d, d2konva };
+export { konva_update, konva2d, d2konva };

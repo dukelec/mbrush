@@ -6,7 +6,7 @@
  */
 
 import { L } from '../utils/lang.js'
-import { konva2d, d2konva } from '../utils/konva_conv.js';
+import { konva_update, konva2d, d2konva } from '../utils/konva_conv.js';
 import { konva_zoom, konva_responsive } from '../utils/konva_helper.js';
 import { date2num, cpy, download, fetch_timo, upload, obj2blob2u8a } from '../utils/helper.js';
 import { dpc } from '../workers/dpc.js';
@@ -14,6 +14,7 @@ import { dpc } from '../workers/dpc.js';
 let stage, layer, layer_bgr, layer_crop;
 let conv_busy = false;
 let crop_busy = false;
+let update_timer;
 
 
 async function save_ui() {
@@ -582,7 +583,7 @@ async function enter() {
             rect_crop.destroy();
             img_crop.destroy();
             text_crop.destroy();
-            for (let l of rect_crop.mb_aux.lines) 
+            for (let l of rect_crop.mb_aux.lines)
                 l.destroy();
         }
         trs.destroy();
@@ -594,10 +595,12 @@ async function enter() {
         layer_crop.draw();
     };
     document.getElementById('heartbeat_elem').addEventListener('heartbeat', heartbeat_cb);
+    update_timer = setInterval(async () => { await konva_update(layer); layer.draw(); }, 1000);
 }
 
 async function leave() {
     document.getElementById('heartbeat_elem').removeEventListener('heartbeat', heartbeat_cb);
+    clearInterval(update_timer);
 }
 
 let Preview = {

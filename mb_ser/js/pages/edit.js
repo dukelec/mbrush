@@ -7,12 +7,13 @@
 
 import { L } from '../utils/lang.js'
 import { load_img, cpy, obj2blob2u8a, date2num } from '../utils/helper.js';
-import { konva2d, d2konva } from '../utils/konva_conv.js';
+import { konva_update, konva2d, d2konva } from '../utils/konva_conv.js';
 import { konva_zoom, konva_responsive } from '../utils/konva_helper.js';
 
 let stage;
 let layer;
 let cur_text = null;
+let update_timer;
 
 function tr_attach(obj) {
     var tr = new Konva.Transformer({
@@ -136,7 +137,7 @@ function text_modal_edit_init(text) {
     } else {
         document.getElementById('shadow_en').checked = false;
     }
-    document.getElementById('txt_val').value = text.text();
+    document.getElementById('txt_val').value = text.name();
     text_modal_update_style();
 }
 
@@ -180,7 +181,8 @@ function text_modal_init() {
         if (!txt_e.value.length)
             return;
         let a = {
-            'text': txt_e.value,
+            'text':  Function("return `" + txt_e.value + "`;")(),
+            'name': txt_e.value,
             'fill': document.getElementById('txt_color').value,
             'fontFamily': font_sel.value == font_sel2.value ? font_sel.value : [font_sel.value, font_sel2.value],
             'fontSize': 32 * Number(document.getElementById('font_size').value),
@@ -198,6 +200,7 @@ function text_modal_init() {
         }
         if (cur_text) {
             cur_text.text(a.text);
+            cur_text.name(a.name);
             cur_text.fill(a.fill);
             cur_text.fontFamily(a.fontFamily);
             cur_text.fontSize(a.fontSize);
@@ -797,10 +800,12 @@ async function enter() {
         layer.draw();
     }
     
+    update_timer = setInterval(async () => { await konva_update(layer); layer.draw(); }, 1000);
 }
 
 let Edit = {
-    enter: enter
+    enter: enter,
+    leave: () => { clearInterval(update_timer); }
 }
 
 export { Edit };
