@@ -85,9 +85,6 @@ let trans_de = {
     // setting
     'Global Density': 'Globale Dichte',
     'Color Calibration': 'Farbkalibration',
-    'Cyan': 'Cyan',
-    'Magenta': 'Magenta',
-    'Yellow': 'Gelb',
     'Direction': 'Richtung',
     'Cartridge Type': 'Druckerpatronen-Typ',
     'CMY': 'CMY',

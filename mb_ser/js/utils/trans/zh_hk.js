@@ -32,7 +32,9 @@ let trans_zh_hk = {
 
     // edit
     'Add Image': '添加圖片',
-    'Add Text': '添加文字',
+    'Add': '添加',
+    'Text': '文字',
+    'Image': '圖片',
     'User Fonts': '用戶字形',
     'Ratio 1:1': '比例 1:1',
     'Delete Item': '刪除選中',
@@ -42,6 +44,8 @@ let trans_zh_hk = {
     'Bottom': '置底',
     'Group': '組合',
     'Ungroup': '拆散',
+    'Print Counter': '打印計數',
+    'Counter': '計數',
     'Save': '保存',
     'Print Preview': '打印預覽',
     'Opacity': '透明度',
@@ -89,9 +93,6 @@ let trans_zh_hk = {
     // setting
     'Global Density': '全局浓度',
     'Color Calibration': '色彩校準',
-    'Cyan': '青色',
-    'Magenta': '品紅',
-    'Yellow': '黃色',
     'Direction': '方向',
     'Cartridge Type': '墨盒類型',
     'CMY': '青紅黃',

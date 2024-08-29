@@ -357,6 +357,11 @@ async function enter() {
     stage.add(layer_bgr);
     stage.add(layer_crop);
     
+    if (!('counter' in mb.draft))
+        mb.draft.counter = 0;
+    window.cnt = mb.draft.counter;
+    window.date = new Date();
+    
     await d2konva(layer, mb.draft);
     function save_update_ui() {
         save_ui();
@@ -565,6 +570,10 @@ async function enter() {
             return;
         }
         document.getElementById('nav_sta').innerHTML = L('Upload succeeded');
+        mb.draft.counter++;
+        update_ui();
+        if (mb.cur_prj)
+            await mb.db.set('prj', mb.cur_prj, mb.draft);
     };
     document.getElementById('wr2dev_btn').onclick = async function() {
         if (conv_busy) {
@@ -574,10 +583,6 @@ async function enter() {
         conv_busy = true;
         try {
             await do_conv();
-            mb.draft.counter++;
-            update_ui();
-            if (mb.cur_prj)
-                await mb.db.set('prj', mb.cur_prj, mb.draft);
         } catch (e) {
             console.log('conv catch', e);
         }

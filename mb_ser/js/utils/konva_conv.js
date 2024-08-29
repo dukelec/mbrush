@@ -15,7 +15,7 @@ async function update_item(kobj) {
         try {
             text_result = Function("return `" + kobj.attrs.text_src + "`;")();
         } catch {
-            text_result = L('[Format Error]');
+            text_result = kobj.attrs.text_src;
         }
     }
     

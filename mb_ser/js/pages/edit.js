@@ -195,7 +195,7 @@ function text_modal_init() {
         try {
             text_result = Function("return `" + txt_e.value + "`;")();
         } catch {
-            text_result = L('[Format Error]');
+            text_result = txt_e.value;
         }
         let a = {
             'text':  text_result,
@@ -603,8 +603,12 @@ async function enter() {
 
     layer = new Konva.Layer();
     stage.add(layer);
-    window.date = new Date();
+    
+    if (!('counter' in mb.draft))
+        mb.draft.counter = 0;
     window.cnt = mb.draft.counter;
+    window.date = new Date();
+    
     await d2konva(layer, mb.draft);
     layer.draw();
     

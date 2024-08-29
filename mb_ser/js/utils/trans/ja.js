@@ -85,9 +85,6 @@ let trans_ja = {
     // setting
     'Global Density': '濃度',
     'Color Calibration': '色のキャリブレーション',
-    'Cyan': 'シアン',
-    'Magenta': 'マゼンタ',
-    'Yellow': 'イエロー',
     'Direction': '向き',
     'Cartridge Type': 'カートリッジの種類',
     'CMY': 'CMY',

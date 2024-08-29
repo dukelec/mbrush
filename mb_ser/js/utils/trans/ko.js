@@ -82,9 +82,6 @@ let trans_ko = {
     // setting
     'Global Density': '농도',
     'Color Calibration': '색 보정',
-    'Cyan': '청록',
-    'Magenta': '마젠타',
-    'Yellow': '노랑',
     'Direction': '방향',
     'Cartridge Type': '카트리지 유형',
     'CMY': 'CMY',

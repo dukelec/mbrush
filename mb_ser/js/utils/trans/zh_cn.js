@@ -33,7 +33,9 @@ let trans_zh_cn = {
 
     // edit
     'Add Image': '添加图片',
-    'Add Text': '添加文字',
+    'Add': '添加',
+    'Text': '文字',
+    'Image': '图片',
     'User Fonts': '用户字形',
     'Ratio 1:1': '比例 1:1',
     'Delete Item': '删除选中',
@@ -43,6 +45,8 @@ let trans_zh_cn = {
     'Bottom': '置底',
     'Group': '组合',
     'Ungroup': '拆散',
+    'Print Counter': '打印计数',
+    'Counter': '计数',
     'Save': '保存',
     'Print Preview': '打印预览',
     'Opacity': '透明度',
@@ -90,9 +94,6 @@ let trans_zh_cn = {
     // setting
     'Global Density': '全局浓度',
     'Color Calibration': '色彩校準',
-    'Cyan': '青色',
-    'Magenta': '品红',
-    'Yellow': '黄色',
     'Direction': '方向',
     'Cartridge Type': '墨盒类型',
     'CMY': '青红黄',
