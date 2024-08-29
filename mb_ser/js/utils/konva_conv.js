@@ -9,10 +9,26 @@ import { load_img, sha1, cpy } from './helper.js';
 
 
 async function update_item(kobj) {
-    if (kobj.getClassName() == 'Image') {
-        
+    if (kobj.getClassName() == 'Image' && kobj.attrs.text_src && kobj.attrs.text_src != '') {
+        let text = Function("return `" + kobj.attrs.text_src + "`;")()
+        let qrcode = new QRCode({
+            content: text,
+            padding: 1,
+            width: 256,
+            height: 256,
+            color: kobj.attrs.qr_color,
+            background: "#ffffff", // "#ffffff00"
+            ecl: "M"
+        });
+        let svg = qrcode.svg();
+        const svg_blob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
+        const url = URL.createObjectURL(svg_blob);
+        let img = new Image();
+        let ret = await load_img(img, url);
+        //console.log('update svg url:', url);
+        kobj.image(img);
     } else if (kobj.getClassName() == 'Text') {
-        kobj.text(Function("return `" + kobj.name() + "`;")());
+        kobj.text(Function("return `" + kobj.attrs.text_src + "`;")());
     }
 }
 
@@ -35,7 +51,17 @@ async function konva_update(kobj) {
 async function d_add_item(kobj, dobj, files) {
     if (kobj.getClassName() == 'Image') {
         dobj['type'] = 'img';
-        cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'rotation', 'opacity'], {'width': 'w', 'height': 'h', 'scaleX': 'scale_x', 'scaleY': 'scale_y'});
+        cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'rotation', 'opacity', 'text_src', 'qr_color'], {
+            'width': 'w',
+            'height': 'h',
+            'scaleX': 'scale_x',
+            'scaleY': 'scale_y',
+            'shadowBlur': 'shadow_blur',
+            'shadowColor': 'shadow_color',
+            'shadowOffsetX': 'shadow_x',
+            'shadowOffsetY': 'shadow_y',
+            'shadowOpacity': 'shadow_opacity'
+        });
         const img = await fetch(kobj.attrs.image.src);
         const img_blob = await img.blob();
         const img_buf = await new Response(img_blob).arrayBuffer();
@@ -46,8 +72,7 @@ async function d_add_item(kobj, dobj, files) {
         dobj['attrs']['hash'] = hash;
     } else if (kobj.getClassName() == 'Text') {
         dobj['type'] = 'text';
-        cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'text', 'align', 'rotation', 'opacity'], {
-            'name': 'text_src',
+        cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'text', 'align', 'rotation', 'opacity', 'text_src'], {
             'fill': 'color',
             'fontFamily': 'font_family',
             'fontSize': 'font_size',
@@ -100,7 +125,17 @@ async function k_add_item(kobj, dobj, files) {
         if (ret != 0)
             return;
         let a = {image: img};
-        cpy(a, dobj.attrs, ['x', 'y', 'rotation', 'opacity'], {'w': 'width', 'h': 'height', 'scale_x': 'scaleX', 'scale_y': 'scaleY'});
+        cpy(a, dobj.attrs, ['x', 'y', 'rotation', 'opacity', 'text_src', 'qr_color'], {
+            'w': 'width',
+            'h': 'height',
+            'scale_x': 'scaleX',
+            'scale_y': 'scaleY',
+            'shadow_blur': 'shadowBlur',
+            'shadow_color': 'shadowColor',
+            'shadow_x': 'shadowOffsetX',
+            'shadow_y': 'shadowOffsetY',
+            'shadow_opacity': 'shadowOpacity'
+        });
         let p = new Konva.Image(a);
         kobj.add(p);
 
@@ -108,8 +143,7 @@ async function k_add_item(kobj, dobj, files) {
         let a = {};
         if (!('text_src' in dobj.attrs))
             dobj.attrs.text_src = dobj.attrs.text;
-        cpy(a, dobj.attrs, ['x', 'y', 'text', 'align', 'rotation', 'opacity'], {
-            'text_src': 'name',
+        cpy(a, dobj.attrs, ['x', 'y', 'text', 'align', 'rotation', 'opacity', 'text_src'], {
             'color': 'fill',
             'font_family': 'fontFamily',
             'font_size': 'fontSize',

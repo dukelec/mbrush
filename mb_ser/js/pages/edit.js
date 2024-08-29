@@ -12,7 +12,8 @@ import { konva_zoom, konva_responsive } from '../utils/konva_helper.js';
 
 let stage;
 let layer;
-let cur_text = null;
+let cur_obj = null;
+let cur_obj_t = null;
 let update_timer;
 
 function tr_attach(obj) {
@@ -114,34 +115,45 @@ function text_modal_update_style() {
     console.log('set shadow:', `${shadow_x_e.value}px ${shadow_y_e.value}px ${shadow_blur_e.value}px ${shadow_color_e.value}${opacity}`);
 }
 
-function text_modal_edit_init(text) {
-    let font = text.fontFamily();
-    if (Array.isArray(font)) {
-        document.getElementById('font_sel').value = font[0];
-        document.getElementById('font_sel2').value = font[1];
-    } else {
-        document.getElementById('font_sel').value = font;
-        document.getElementById('font_sel2').value = font;
+function text_modal_edit_init(obj) {
+    if (obj.getClassName() == 'Text') {
+        let font = obj.fontFamily();
+        if (Array.isArray(font)) {
+            document.getElementById('font_sel').value = font[0];
+            document.getElementById('font_sel2').value = font[1];
+        } else {
+            document.getElementById('font_sel').value = font;
+            document.getElementById('font_sel2').value = font;
+        }
+        document.getElementById('font_size').value = Number(obj.fontSize()) / 32;
+        document.getElementById('font_style').value = obj.fontStyle();
+        document.getElementById('txt_align_sel').value = obj.align();
     }
-    document.getElementById('font_size').value = Number(text.fontSize()) / 32;
-    document.getElementById('font_style').value = text.fontStyle();
-    document.getElementById('txt_align_sel').value = text.align();
-    document.getElementById('txt_color').value = text.fill();
-    if (text.shadowColor()) {
+    if (obj.shadowColor()) {
         document.getElementById('shadow_en').checked = true;
-        document.getElementById('shadow_x').value = text.shadowOffsetX();
-        document.getElementById('shadow_y').value = text.shadowOffsetY();
-        document.getElementById('shadow_blur').value = text.shadowBlur();
-        document.getElementById('shadow_opacity').value = text.shadowOpacity() * 255;
-        document.getElementById('shadow_color').value = text.shadowColor();
+        document.getElementById('shadow_x').value = obj.shadowOffsetX();
+        document.getElementById('shadow_y').value = obj.shadowOffsetY();
+        document.getElementById('shadow_blur').value = obj.shadowBlur();
+        document.getElementById('shadow_opacity').value = obj.shadowOpacity() * 255;
+        document.getElementById('shadow_color').value = obj.shadowColor();
     } else {
         document.getElementById('shadow_en').checked = false;
     }
-    document.getElementById('txt_val').value = text.name();
+    document.getElementById('txt_color').value = obj.getClassName() == 'Text' ? obj.fill() : obj.attrs.qr_color;
+    document.getElementById('txt_val').value = obj.attrs.text_src;
     text_modal_update_style();
 }
 
 function text_modal_init() {
+    if (cur_obj_t != 'Text') {
+        for (let e of document.getElementsByClassName("text_only"))
+            e.hidden = true;
+    }
+    if (cur_obj_t == 'Image') {
+        for (let e of document.getElementsByClassName("text_qr_only"))
+            e.hidden = true;
+    }
+    
     let font_sel = document.getElementById('font_sel');
     let font_sel2 = document.getElementById('font_sel2');
     let shadow_en_e = document.getElementById('shadow_en');
@@ -159,7 +171,6 @@ function text_modal_init() {
     }
     
     for (let name in mb.draft.fonts) {
-        
         let html_sel = `<option value="${name}" style="font-family: '${name}'">${name}</option>`;
         font_sel.insertAdjacentHTML('beforeend', html_sel);
         font_sel2.insertAdjacentHTML('beforeend', html_sel);
@@ -178,11 +189,10 @@ function text_modal_init() {
     document.getElementById('txt_modal_save').onclick = async function () {
         dismiss_modal();
         let txt_e = document.getElementById('txt_val');
-        if (!txt_e.value.length)
+        if ((cur_obj_t == 'Text' || cur_obj_t == 'QR Code') && !txt_e.value.length)
             return;
         let a = {
             'text':  Function("return `" + txt_e.value + "`;")(),
-            'name': txt_e.value,
             'fill': document.getElementById('txt_color').value,
             'fontFamily': font_sel.value == font_sel2.value ? font_sel.value : [font_sel.value, font_sel2.value],
             'fontSize': 32 * Number(document.getElementById('font_size').value),
@@ -198,30 +208,61 @@ function text_modal_init() {
             a.shadowOffsetX = Number(shadow_x_e.value);
             a.shadowOffsetY = Number(shadow_y_e.value);
         }
-        if (cur_text) {
-            cur_text.text(a.text);
-            cur_text.name(a.name);
-            cur_text.fill(a.fill);
-            cur_text.fontFamily(a.fontFamily);
-            cur_text.fontSize(a.fontSize);
-            cur_text.align(a.align);
-            cur_text.fontStyle(a.fontStyle);
-            cur_text.shadowColor(shadow_en_e.checked ? a.shadowColor : null);
-            cur_text.shadowBlur(shadow_en_e.checked ? a.shadowBlur : null);
-            cur_text.shadowOpacity(shadow_en_e.checked ? a.shadowOpacity : null);
-            cur_text.shadowOffsetX(shadow_en_e.checked ? a.shadowOffsetX : null);
-            cur_text.shadowOffsetY(shadow_en_e.checked ? a.shadowOffsetY : null);
+        let img = null;
+        if ((cur_obj_t == 'Image' && txt_e.value != '') || cur_obj_t == 'QR Code') {
+            let qrcode = new QRCode({
+                content: a.text,
+                padding: 1,
+                width: 256,
+                height: 256,
+                color: a.fill,
+                background: "#ffffff",
+                ecl: "M"
+            });
+            let svg = qrcode.svg();
+            const svg_blob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
+            const url = URL.createObjectURL(svg_blob);
+            img = new Image();
+            let ret = await load_img(img, url);
+            console.log('svg url:', url);
+        }
+        if (cur_obj) {
+            if (cur_obj_t == 'Text') {
+                cur_obj.attrs.text_src = txt_e.value;
+                cur_obj.text(a.text);
+                cur_obj.fontFamily(a.fontFamily);
+                cur_obj.fontSize(a.fontSize);
+                cur_obj.align(a.align);
+                cur_obj.fontStyle(a.fontStyle);
+                cur_obj.fill(a.fill);
+            } else if (img) {
+                cur_obj.attrs.text_src = txt_e.value;
+                cur_obj.attrs.qr_color = a.fill;
+                cur_obj.image(img);
+            }
+            cur_obj.shadowColor(shadow_en_e.checked ? a.shadowColor : null);
+            cur_obj.shadowBlur(shadow_en_e.checked ? a.shadowBlur : null);
+            cur_obj.shadowOpacity(shadow_en_e.checked ? a.shadowOpacity : null);
+            cur_obj.shadowOffsetX(shadow_en_e.checked ? a.shadowOffsetX : null);
+            cur_obj.shadowOffsetY(shadow_en_e.checked ? a.shadowOffsetY : null);
         } else {
-            let t = new Konva.Text(a);
-            layer.add(t);
+            let new_obj = null;
+            if (cur_obj_t == 'Text') {
+                new_obj = new Konva.Text(a);
+            } else {
+                new_obj = new Konva.Image({image: img, x: 50, y: 50});
+                new_obj.attrs.qr_color = a.fill;
+            }
+            new_obj.attrs.text_src = txt_e.value;
+            layer.add(new_obj);
         }
         layer.draw();
-        cur_text = null;
-        console.log('insert txt');
+        cur_obj = null;
+        console.log('insert obj');
     };
     
-    if (cur_text)
-        text_modal_edit_init(cur_text);
+    if (cur_obj)
+        text_modal_edit_init(cur_obj);
 }
 
 let page_style = `
@@ -319,7 +360,7 @@ customElements.define('modal-text', class extends HTMLElement {
         this.innerHTML = `
 <ion-header>
     <ion-toolbar>
-        <ion-title>${L('Add Text')}</ion-title>
+        <ion-title>${L('Add')} ${L(cur_obj_t)}</ion-title>
         <ion-buttons slot="primary">
             <ion-button onClick="dismiss_modal();">
                 <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -329,7 +370,7 @@ customElements.define('modal-text', class extends HTMLElement {
 </ion-header>
 <ion-content class="ion-padding">
 
-    <ion-item>
+    <ion-item class="text_only">
         <ion-grid>
             <ion-row>
                 <ion-col>
@@ -348,10 +389,10 @@ customElements.define('modal-text', class extends HTMLElement {
         </ion-grid>
     </ion-item>
     
-    <ion-item>
+    <ion-item class="text_qr_only">
     <ion-grid>
         <ion-row>
-            <ion-col>
+            <ion-col class="text_only">
                 <ion-label>${L('Size')}</ion-label>
                 <select id="font_size">
                     <option value="1">x1</option>
@@ -359,7 +400,7 @@ customElements.define('modal-text', class extends HTMLElement {
                     <option value="2">x2</option>
                 </select>
             </ion-col>
-            <ion-col>
+            <ion-col class="text_only">
                 <ion-label>${L('Style')}</ion-label>
                 <select id="font_style">
                     <option value="normal">${L('Normal')}</option>
@@ -367,7 +408,7 @@ customElements.define('modal-text', class extends HTMLElement {
                     <option value="italic">${L('Italic')}</option>
                 </select>
             </ion-col>
-            <ion-col>
+            <ion-col class="text_only">
                 <ion-label>${L('Align')}</ion-label>
                 <select id="txt_align_sel">
                     <option value="left">${L('Left')}</option>
@@ -420,7 +461,7 @@ customElements.define('modal-text', class extends HTMLElement {
         </ion-range>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="text_qr_only">
         <ion-textarea rows="6" id="txt_val" placeholder="${L('Enter text here...')}"></ion-textarea>
     </ion-item>
 
@@ -446,6 +487,9 @@ async function enter() {
     </ion-button>
     <ion-button id="add_txt_btn">
         <ion-icon name="chatbox-ellipses-outline"></ion-icon> ${L('Add Text')}
+    </ion-button>
+    <ion-button id="add_qr_btn">
+        <ion-icon name="qr-code-outline"></ion-icon> ${L('QR Code')}
     </ion-button>
     <ion-button id="user_font_btn">
         <strong>F</strong> &nbsp; ${L('User Fonts')}
@@ -613,7 +657,7 @@ async function enter() {
         
         for (let t of trs_old) {
             if (obj == t._nodes[0]) {
-                if (obj.getClassName() == 'Text')
+                if (obj.getClassName() == 'Text' || obj.getClassName() == 'Image')
                     text_re_edit(obj);
                 return;
             }
@@ -707,7 +751,17 @@ async function enter() {
     };
     
     document.getElementById("add_txt_btn").onclick = async function() {
-        cur_text = null;
+        cur_obj = null;
+        cur_obj_t = 'Text';
+        const modalElement = document.createElement('ion-modal');
+        modalElement.component = 'modal-text';
+        document.body.appendChild(modalElement);
+        return modalElement.present();
+    };
+    
+    document.getElementById("add_qr_btn").onclick = async function() {
+        cur_obj = null;
+        cur_obj_t = 'QR Code';
         const modalElement = document.createElement('ion-modal');
         modalElement.component = 'modal-text';
         document.body.appendChild(modalElement);
@@ -715,7 +769,10 @@ async function enter() {
     };
     
     function text_re_edit(obj) {
-        cur_text = obj;
+        cur_obj = obj;
+        cur_obj_t = obj.getClassName();
+        if (obj.attrs.text_src && obj.attrs.text_src != '' && cur_obj_t == 'Image')
+            cur_obj_t = 'QR Code';
         const modalElement = document.createElement('ion-modal');
         modalElement.component = 'modal-text';
         document.body.appendChild(modalElement);

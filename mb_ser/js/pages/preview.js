@@ -595,7 +595,12 @@ async function enter() {
         layer_crop.draw();
     };
     document.getElementById('heartbeat_elem').addEventListener('heartbeat', heartbeat_cb);
-    update_timer = setInterval(async () => { await konva_update(layer); layer.draw(); }, 1000);
+    update_timer = setInterval(async () => {
+        await konva_update(layer);
+        layer.draw();
+        for (let i of layer_crop.find('.crop'))
+            i.mb_aux.update();
+    }, 1000);
 }
 
 async function leave() {
