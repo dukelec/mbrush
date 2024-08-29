@@ -22,6 +22,7 @@ async function save_ui() {
     mb.draft.density = Number(document.getElementById('density').value);
     mb.draft.brightness = Number(document.getElementById('brightness').value);
     mb.draft.saturation = Number(document.getElementById('saturation').value);
+    mb.draft.counter = Number(document.getElementById('print_cnt').value);
 }
 
 function update_ui() {
@@ -32,6 +33,7 @@ function update_ui() {
     document.getElementById('brightness_v').innerText = mb.draft.brightness;
     document.getElementById('saturation').value = mb.draft.saturation;
     document.getElementById('saturation_v').innerText = mb.draft.saturation;
+    document.getElementById('print_cnt').value = mb.draft.counter;
 }
 
 function check_value() {
@@ -262,6 +264,8 @@ async function enter() {
 
 <ion-item>
     <ion-label></ion-label>
+    ${L('Counter')}:
+    <ion-input type="number" id="print_cnt" value="0"></ion-input>
     <ion-button id="save_btn">
         <ion-icon name="save"></ion-icon> ${L('Save')}
     </ion-button>
@@ -364,6 +368,7 @@ async function enter() {
     document.getElementById('density').addEventListener('ionChange', save_update_ui);
     document.getElementById('brightness').addEventListener('ionChange', save_update_ui);
     document.getElementById('saturation').addEventListener('ionChange', save_update_ui);
+    document.getElementById('print_cnt').addEventListener('ionChange', save_update_ui);
     
     for (let name in mb.draft.fonts) {
         //let installed = document.fonts.check(`1em '${name}'`);
@@ -452,7 +457,8 @@ async function enter() {
             pixelRatio: 240 / stage.width()
         });
         mb.draft.thumbnail = await obj2blob2u8a(thumbnail);
-        mb.draft.version = 'MBrush v0.0';
+        mb.draft.version = 'MBrush v0.1';
+        mb.draft.counter = Number(document.getElementById('print_cnt').value);
         if (!mb.cur_prj) {
             mb.cur_prj = date2num();
             console.log(`save new as: ${mb.cur_prj}`);
@@ -567,6 +573,10 @@ async function enter() {
         conv_busy = true;
         try {
             await do_conv();
+            mb.draft.counter++;
+            update_ui();
+            if (mb.cur_prj)
+                await mb.db.set('prj', mb.cur_prj, mb.draft);
         } catch (e) {
             console.log('conv catch', e);
         }

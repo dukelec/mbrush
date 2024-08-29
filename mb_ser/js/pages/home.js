@@ -178,7 +178,7 @@ let Home = {
         
         document.getElementById("prj_new_btn").onclick = async function() {
             mb.cur_prj = null;
-            mb.draft = { 'files': {}, 'sub': [], 'fonts': {} };
+            mb.draft = { 'files': {}, 'sub': [], 'fonts': {}, counter: 0 };
             location.hash = "#/edit";
         };
         

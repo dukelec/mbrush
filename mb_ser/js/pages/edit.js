@@ -486,7 +486,7 @@ async function enter() {
         <ion-icon name="images"></ion-icon> ${L('Add Image')}
     </ion-button>
     <ion-button id="add_txt_btn">
-        <ion-icon name="chatbox-ellipses-outline"></ion-icon> ${L('Add Text')}
+        <ion-icon name="chatbox-ellipses-outline"></ion-icon> ${L('Text')}
     </ion-button>
     <ion-button id="add_qr_btn">
         <ion-icon name="qr-code-outline"></ion-icon> ${L('QR Code')}
@@ -533,6 +533,8 @@ async function enter() {
 </ion-item>
 <ion-item>
     <ion-label></ion-label>
+    ${L('Print Counter')}:
+    <ion-input type="number" id="print_cnt" value="0"></ion-input>
     <ion-button id="save_prj_btn">
         <ion-icon name="save"></ion-icon> ${L('Save')}
     </ion-button>
@@ -611,6 +613,11 @@ async function enter() {
         console.log("set node opacity", opacity, node);
     });
     
+    document.getElementById('print_cnt').addEventListener('ionChange', function() {
+        mb.draft.counter = Number(document.getElementById('print_cnt').value);
+    });
+    document.getElementById('print_cnt').value = mb.draft.counter;
+    
     // preview & save
     
     document.getElementById('preview_btn').onclick = async () => {
@@ -624,7 +631,8 @@ async function enter() {
         cpy(mb.draft, d, ['files', 'sub']);
         let thumbnail = stage.toCanvas({ pixelRatio: 240 / stage.width() });
         mb.draft.thumbnail = await obj2blob2u8a(thumbnail);
-        mb.draft.version = 'MBrush v0.0';
+        mb.draft.version = 'MBrush v0.1';
+        mb.draft.counter = Number(document.getElementById('print_cnt').value);
         if (!mb.cur_prj) {
             mb.cur_prj = date2num();
             console.log(`save new as: ${mb.cur_prj}`);
