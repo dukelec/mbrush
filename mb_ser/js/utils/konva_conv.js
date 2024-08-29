@@ -6,13 +6,28 @@
  */
 
 import { load_img, sha1, cpy } from './helper.js';
+import { L } from '../utils/lang.js'
 
 
 async function update_item(kobj) {
-    if (kobj.getClassName() == 'Image' && kobj.attrs.text_src && kobj.attrs.text_src != '') {
-        let text = Function("return `" + kobj.attrs.text_src + "`;")()
+    let text_result = '';
+    if (kobj.attrs.text_src && kobj.attrs.text_src != '') {
+        try {
+            text_result = Function("return `" + kobj.attrs.text_src + "`;")();
+        } catch {
+            text_result = L('[Format Error]');
+        }
+    }
+    
+    if (kobj.getClassName() == 'Image' && text_result != '') {
+        if (kobj.attrs.text_result) {
+            if (text_result == kobj.attrs.text_result)
+                return;
+        }
+        kobj.attrs.text_result = text_result;
+        
         let qrcode = new QRCode({
-            content: text,
+            content: text_result,
             padding: 1,
             width: 256,
             height: 256,
@@ -28,7 +43,7 @@ async function update_item(kobj) {
         //console.log('update svg url:', url);
         kobj.image(img);
     } else if (kobj.getClassName() == 'Text') {
-        kobj.text(Function("return `" + kobj.attrs.text_src + "`;")());
+        kobj.text(text_result);
     }
 }
 

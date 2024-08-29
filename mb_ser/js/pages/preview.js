@@ -23,6 +23,7 @@ async function save_ui() {
     mb.draft.brightness = Number(document.getElementById('brightness').value);
     mb.draft.saturation = Number(document.getElementById('saturation').value);
     mb.draft.counter = Number(document.getElementById('print_cnt').value);
+    window.cnt = mb.draft.counter;
 }
 
 function update_ui() {
@@ -34,6 +35,7 @@ function update_ui() {
     document.getElementById('saturation').value = mb.draft.saturation;
     document.getElementById('saturation_v').innerText = mb.draft.saturation;
     document.getElementById('print_cnt').value = mb.draft.counter;
+    window.cnt = mb.draft.counter;
 }
 
 function check_value() {
@@ -458,7 +460,6 @@ async function enter() {
         });
         mb.draft.thumbnail = await obj2blob2u8a(thumbnail);
         mb.draft.version = 'MBrush v0.1';
-        mb.draft.counter = Number(document.getElementById('print_cnt').value);
         if (!mb.cur_prj) {
             mb.cur_prj = date2num();
             console.log(`save new as: ${mb.cur_prj}`);
@@ -606,6 +607,7 @@ async function enter() {
     };
     document.getElementById('heartbeat_elem').addEventListener('heartbeat', heartbeat_cb);
     update_timer = setInterval(async () => {
+        window.date = new Date();
         await konva_update(layer);
         layer.draw();
         for (let i of layer_crop.find('.crop'))

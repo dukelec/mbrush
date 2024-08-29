@@ -191,8 +191,14 @@ function text_modal_init() {
         let txt_e = document.getElementById('txt_val');
         if ((cur_obj_t == 'Text' || cur_obj_t == 'QR Code') && !txt_e.value.length)
             return;
+        let text_result;
+        try {
+            text_result = Function("return `" + txt_e.value + "`;")();
+        } catch {
+            text_result = L('[Format Error]');
+        }
         let a = {
-            'text':  Function("return `" + txt_e.value + "`;")(),
+            'text':  text_result,
             'fill': document.getElementById('txt_color').value,
             'fontFamily': font_sel.value == font_sel2.value ? font_sel.value : [font_sel.value, font_sel2.value],
             'fontSize': 32 * Number(document.getElementById('font_size').value),
@@ -252,6 +258,11 @@ function text_modal_init() {
             } else {
                 new_obj = new Konva.Image({image: img, x: 50, y: 50});
                 new_obj.attrs.qr_color = a.fill;
+                new_obj.shadowColor(shadow_en_e.checked ? a.shadowColor : null);
+                new_obj.shadowBlur(shadow_en_e.checked ? a.shadowBlur : null);
+                new_obj.shadowOpacity(shadow_en_e.checked ? a.shadowOpacity : null);
+                new_obj.shadowOffsetX(shadow_en_e.checked ? a.shadowOffsetX : null);
+                new_obj.shadowOffsetY(shadow_en_e.checked ? a.shadowOffsetY : null);
             }
             new_obj.attrs.text_src = txt_e.value;
             layer.add(new_obj);
@@ -592,6 +603,8 @@ async function enter() {
 
     layer = new Konva.Layer();
     stage.add(layer);
+    window.date = new Date();
+    window.cnt = mb.draft.counter;
     await d2konva(layer, mb.draft);
     layer.draw();
     
@@ -615,6 +628,7 @@ async function enter() {
     
     document.getElementById('print_cnt').addEventListener('ionChange', function() {
         mb.draft.counter = Number(document.getElementById('print_cnt').value);
+        window.cnt = mb.draft.counter;
     });
     document.getElementById('print_cnt').value = mb.draft.counter;
     
@@ -865,7 +879,11 @@ async function enter() {
         layer.draw();
     }
     
-    update_timer = setInterval(async () => { await konva_update(layer); layer.draw(); }, 1000);
+    update_timer = setInterval(async () => {
+        window.date = new Date();
+        await konva_update(layer);
+        layer.draw();
+    }, 1000);
 }
 
 let Edit = {
