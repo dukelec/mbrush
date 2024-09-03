@@ -464,7 +464,7 @@ async function enter() {
             pixelRatio: 240 / stage.width()
         });
         mb.draft.thumbnail = await obj2blob2u8a(thumbnail);
-        mb.draft.version = 'MBrush v0.1';
+        mb.draft.version = 'MBrush v0.2';
         if (!mb.cur_prj) {
             mb.cur_prj = date2num();
             console.log(`save new as: ${mb.cur_prj}`);

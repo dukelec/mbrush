@@ -8,6 +8,58 @@
 import { L } from './lang.js'
 import { sha1 as sha1_sw } from '../libs/sha1.js';
 
+
+async function gen_code_img(type, text, color, more={}) {
+    let svg = `<?xml version="1.0" standalone="no"?>
+<svg width="200" height="100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <text style="font-size:26.6667px" x="20.449118" y="59.492199">
+     <tspan style="fill:#000000">Code Error</tspan>
+  </text>
+</svg>`;
+    try {
+        if (type == 'qr code') {
+            let args = {
+                content: text,
+                padding: 1,
+                width: 256,
+                height: 256,
+                color: color,
+                background: "#ffffff",
+                ecl: "M"
+            };
+            let qrcode = new QRCode({...args, ...more});
+            svg = qrcode.svg();
+        } else if (type == 'data matrix') {
+            let args = {
+                msg : text,
+                dim : 256,
+                rct : 0,
+                pad : 1,
+                pal : [color, "#ffffff"],
+                vrb : 0
+            };
+            svg = DATAMatrix({...args, ...more}).outerHTML;
+        } else if (type.startsWith('bar ')) {
+            let sub_type = type.slice(4);
+            let svg_node = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            let args = {
+                format: sub_type,
+                lineColor: color
+            };
+            JsBarcode(svg_node, text, {...args, ...more}).render();
+            svg = svg_node.outerHTML;
+        }
+    } catch (err) {
+        console.warn('gen_code_img error:', err);
+    }
+    
+    const svg_blob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(svg_blob);
+    let img = new Image();
+    await load_img(img, url);
+    return img;
+}
+
 async function read_file(file) {
     return await new Promise((resolve, reject) => {
         let reader = new FileReader();
@@ -219,4 +271,4 @@ function deep_merge(target, source) {
     return target;
 }
 
-export { read_file, load_img, date2num, sha1, cpy, Queue, download, fetch_timo, upload, obj2blob2u8a, deep_merge };
+export { gen_code_img, read_file, load_img, date2num, sha1, cpy, Queue, download, fetch_timo, upload, obj2blob2u8a, deep_merge };

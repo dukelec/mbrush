@@ -6,7 +6,7 @@
  */
 
 import { L } from '../utils/lang.js'
-import { load_img, cpy, obj2blob2u8a, date2num } from '../utils/helper.js';
+import { gen_code_img, load_img, cpy, obj2blob2u8a, date2num } from '../utils/helper.js';
 import { konva_update, konva2d, d2konva } from '../utils/konva_conv.js';
 import { konva_zoom, konva_responsive } from '../utils/konva_helper.js';
 
@@ -139,7 +139,8 @@ function text_modal_edit_init(obj) {
     } else {
         document.getElementById('shadow_en').checked = false;
     }
-    document.getElementById('txt_color').value = obj.getClassName() == 'Text' ? obj.fill() : obj.attrs.qr_color;
+    document.getElementById('code_type').value = obj.attrs.code_type;
+    document.getElementById('txt_color').value = obj.getClassName() == 'Text' ? obj.fill() : obj.attrs.code_color;
     document.getElementById('txt_val').value = obj.attrs.text_src;
     text_modal_update_style();
 }
@@ -148,9 +149,12 @@ function text_modal_init() {
     if (cur_obj_t != 'Text') {
         for (let e of document.getElementsByClassName("text_only"))
             e.hidden = true;
+    } else {
+        for (let e of document.getElementsByClassName("code_only"))
+            e.hidden = true;
     }
     if (cur_obj_t == 'Image') {
-        for (let e of document.getElementsByClassName("text_qr_only"))
+        for (let e of document.getElementsByClassName("text_code_only"))
             e.hidden = true;
     }
     
@@ -189,7 +193,7 @@ function text_modal_init() {
     document.getElementById('txt_modal_save').onclick = async function () {
         dismiss_modal();
         let txt_e = document.getElementById('txt_val');
-        if ((cur_obj_t == 'Text' || cur_obj_t == 'QR Code') && !txt_e.value.length)
+        if ((cur_obj_t == 'Text' || cur_obj_t == 'Code') && !txt_e.value.length)
             return;
         let text_result;
         try {
@@ -215,22 +219,10 @@ function text_modal_init() {
             a.shadowOffsetY = Number(shadow_y_e.value);
         }
         let img = null;
-        if ((cur_obj_t == 'Image' && txt_e.value != '') || cur_obj_t == 'QR Code') {
-            let qrcode = new QRCode({
-                content: a.text,
-                padding: 1,
-                width: 256,
-                height: 256,
-                color: a.fill,
-                background: "#ffffff",
-                ecl: "M"
-            });
-            let svg = qrcode.svg();
-            const svg_blob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
-            const url = URL.createObjectURL(svg_blob);
-            img = new Image();
-            let ret = await load_img(img, url);
-            console.log('svg url:', url);
+        let code_type = document.getElementById('code_type').value;
+        if ((cur_obj_t == 'Image' && txt_e.value != '') || cur_obj_t == 'Code') {
+            img = await gen_code_img(code_type, a.text, a.fill, typeof(code_cfg) !== 'undefined' ? code_cfg : {});
+            console.log('svg url:', img.src);
         }
         if (cur_obj) {
             if (cur_obj_t == 'Text') {
@@ -243,7 +235,8 @@ function text_modal_init() {
                 cur_obj.fill(a.fill);
             } else if (img) {
                 cur_obj.attrs.text_src = txt_e.value;
-                cur_obj.attrs.qr_color = a.fill;
+                cur_obj.attrs.code_color = a.fill;
+                cur_obj.attrs.code_type = code_type;
                 cur_obj.image(img);
             }
             cur_obj.shadowColor(shadow_en_e.checked ? a.shadowColor : null);
@@ -257,7 +250,8 @@ function text_modal_init() {
                 new_obj = new Konva.Text(a);
             } else {
                 new_obj = new Konva.Image({image: img, x: 50, y: 50});
-                new_obj.attrs.qr_color = a.fill;
+                new_obj.attrs.code_color = a.fill;
+                new_obj.attrs.code_type = code_type;
                 new_obj.shadowColor(shadow_en_e.checked ? a.shadowColor : null);
                 new_obj.shadowBlur(shadow_en_e.checked ? a.shadowBlur : null);
                 new_obj.shadowOpacity(shadow_en_e.checked ? a.shadowOpacity : null);
@@ -400,7 +394,7 @@ customElements.define('modal-text', class extends HTMLElement {
         </ion-grid>
     </ion-item>
     
-    <ion-item class="text_qr_only">
+    <ion-item class="text_code_only">
     <ion-grid>
         <ion-row>
             <ion-col class="text_only">
@@ -425,6 +419,28 @@ customElements.define('modal-text', class extends HTMLElement {
                     <option value="left">${L('Left')}</option>
                     <option value="center">${L('Center')}</option>
                     <option value="right">${L('Right')}</option>
+                </select>
+            </ion-col>
+            <ion-col class="code_only">
+                <ion-label>${L('Type')}</ion-label>
+                <select id="code_type">
+                    <option value="qr code">${L('QR Code')}</option>
+                    <option value="data matrix">${L('Data Matrix')}</option>
+                    <option value="bar code128">${L('Bar - CODE128')}</option>
+                    <option value="bar ean2">${L('Bar - EAN2')}</option>
+                    <option value="bar ean5">${L('Bar - EAN5')}</option>
+                    <option value="bar ean8">${L('Bar - EAN8')}</option>
+                    <option value="bar ean13">${L('Bar - EAN13')}</option>
+                    <option value="bar upc">${L('Bar - UPC')}</option>
+                    <option value="bar code39">${L('Bar - CODE39')}</option>
+                    <option value="bar itf14">${L('Bar - ITF14')}</option>
+                    <option value="bar msi">${L('Bar - MSI')}</option>
+                    <option value="bar msi10">${L('Bar - MSI10')}</option>
+                    <option value="bar msi11">${L('Bar - MSI11')}</option>
+                    <option value="bar msi1010">${L('Bar - MSI1010')}</option>
+                    <option value="bar msi1110">${L('Bar - MSI1110')}</option>
+                    <option value="bar pharmacode">${L('Bar - Pharmacode')}</option>
+                    <option value="bar codabar">${L('Bar - Codabar')}</option>
                 </select>
             </ion-col>
             <ion-col>
@@ -472,7 +488,7 @@ customElements.define('modal-text', class extends HTMLElement {
         </ion-range>
     </ion-item>
 
-    <ion-item class="text_qr_only">
+    <ion-item class="text_code_only">
         <ion-textarea rows="6" id="txt_val" placeholder="${L('Enter text here...')}"></ion-textarea>
     </ion-item>
 
@@ -499,8 +515,8 @@ async function enter() {
     <ion-button id="add_txt_btn">
         <ion-icon name="chatbox-ellipses-outline"></ion-icon> ${L('Text')}
     </ion-button>
-    <ion-button id="add_qr_btn">
-        <ion-icon name="qr-code-outline"></ion-icon> ${L('QR Code')}
+    <ion-button id="add_code_btn">
+        <ion-icon name="qr-code-outline"></ion-icon> ${L('Code')}
     </ion-button>
     <ion-button id="user_font_btn">
         <strong>F</strong> &nbsp; ${L('User Fonts')}
@@ -649,7 +665,7 @@ async function enter() {
         cpy(mb.draft, d, ['files', 'sub']);
         let thumbnail = stage.toCanvas({ pixelRatio: 240 / stage.width() });
         mb.draft.thumbnail = await obj2blob2u8a(thumbnail);
-        mb.draft.version = 'MBrush v0.1';
+        mb.draft.version = 'MBrush v0.2';
         mb.draft.counter = Number(document.getElementById('print_cnt').value);
         if (!mb.cur_prj) {
             mb.cur_prj = date2num();
@@ -785,9 +801,9 @@ async function enter() {
         return modalElement.present();
     };
     
-    document.getElementById("add_qr_btn").onclick = async function() {
+    document.getElementById("add_code_btn").onclick = async function() {
         cur_obj = null;
-        cur_obj_t = 'QR Code';
+        cur_obj_t = 'Code';
         const modalElement = document.createElement('ion-modal');
         modalElement.component = 'modal-text';
         document.body.appendChild(modalElement);
@@ -798,7 +814,7 @@ async function enter() {
         cur_obj = obj;
         cur_obj_t = obj.getClassName();
         if (obj.attrs.text_src && obj.attrs.text_src != '' && cur_obj_t == 'Image')
-            cur_obj_t = 'QR Code';
+            cur_obj_t = 'Code';
         const modalElement = document.createElement('ion-modal');
         modalElement.component = 'modal-text';
         document.body.appendChild(modalElement);

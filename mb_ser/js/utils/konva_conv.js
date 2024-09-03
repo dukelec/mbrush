@@ -5,7 +5,7 @@
  * Author: Duke Fong <d@d-l.io>
  */
 
-import { load_img, sha1, cpy } from './helper.js';
+import { gen_code_img, load_img, sha1, cpy } from './helper.js';
 import { L } from '../utils/lang.js'
 
 
@@ -25,22 +25,9 @@ async function update_item(kobj) {
                 return;
         }
         kobj.attrs.text_result = text_result;
-        
-        let qrcode = new QRCode({
-            content: text_result,
-            padding: 1,
-            width: 256,
-            height: 256,
-            color: kobj.attrs.qr_color,
-            background: "#ffffff", // "#ffffff00"
-            ecl: "M"
-        });
-        let svg = qrcode.svg();
-        const svg_blob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
-        const url = URL.createObjectURL(svg_blob);
-        let img = new Image();
-        let ret = await load_img(img, url);
-        //console.log('update svg url:', url);
+        let img = await gen_code_img(kobj.attrs.code_type, text_result, kobj.attrs.code_color,
+                                     typeof(code_cfg) !== 'undefined' ? code_cfg : {});
+        //console.log('update svg url:', img.src);
         kobj.image(img);
     } else if (kobj.getClassName() == 'Text') {
         kobj.text(text_result);
@@ -66,7 +53,7 @@ async function konva_update(kobj) {
 async function d_add_item(kobj, dobj, files) {
     if (kobj.getClassName() == 'Image') {
         dobj['type'] = 'img';
-        cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'rotation', 'opacity', 'text_src', 'qr_color'], {
+        cpy(dobj['attrs'], kobj.attrs, ['x', 'y', 'rotation', 'opacity', 'text_src', 'code_color', 'code_type'], {
             'width': 'w',
             'height': 'h',
             'scaleX': 'scale_x',
@@ -140,7 +127,7 @@ async function k_add_item(kobj, dobj, files) {
         if (ret != 0)
             return;
         let a = {image: img};
-        cpy(a, dobj.attrs, ['x', 'y', 'rotation', 'opacity', 'text_src', 'qr_color'], {
+        cpy(a, dobj.attrs, ['x', 'y', 'rotation', 'opacity', 'text_src', 'code_color', 'code_type'], {
             'w': 'width',
             'h': 'height',
             'scale_x': 'scaleX',
