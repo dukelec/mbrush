@@ -25,8 +25,7 @@ async function update_item(kobj) {
                 return;
         }
         kobj.attrs.text_result = text_result;
-        let img = await gen_code_img(kobj.attrs.code_type, text_result, kobj.attrs.code_color,
-                                     typeof(code_cfg) !== 'undefined' ? code_cfg : {});
+        let img = await gen_code_img(kobj.attrs.code_type, text_result, kobj.attrs.code_color, code_cfg);
         //console.log('update svg url:', img.src);
         kobj.image(img);
     } else if (kobj.getClassName() == 'Text') {

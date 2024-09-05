@@ -361,6 +361,7 @@ async function enter() {
         mb.draft.counter = 0;
     window.cnt = mb.draft.counter;
     window.date = new Date();
+    window.code_cfg = {};
     
     await d2konva(layer, mb.draft);
     function save_update_ui() {

@@ -221,7 +221,7 @@ function text_modal_init() {
         let img = null;
         let code_type = document.getElementById('code_type').value;
         if ((cur_obj_t == 'Image' && txt_e.value != '') || cur_obj_t == 'Code') {
-            img = await gen_code_img(code_type, a.text, a.fill, typeof(code_cfg) !== 'undefined' ? code_cfg : {});
+            img = await gen_code_img(code_type, a.text, a.fill, code_cfg);
             console.log('svg url:', img.src);
         }
         if (cur_obj) {
@@ -624,6 +624,7 @@ async function enter() {
         mb.draft.counter = 0;
     window.cnt = mb.draft.counter;
     window.date = new Date();
+    window.code_cfg = {};
     
     await d2konva(layer, mb.draft);
     layer.draw();
