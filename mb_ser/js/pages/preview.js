@@ -202,6 +202,123 @@ function dump_crop(direction) {
     stage.fire('click', {target: new_c}); // attach transformer
 }
 
+
+async function _do_conv() {
+    document.getElementById('nav_sta').innerHTML = L('Start');
+    save_ui();
+    let ret, cnt = 0;
+    let pad_len, pad_begin = false, pad_end = false;
+    let pad_px = mb.conf.c_width == 0 ? 134 : 150;
+    let offset = 0;
+    let crops = layer_crop.find('.crop');
+    for (let i of crops) {
+        let a = {
+            x: i.x() * stage.scaleX() + stage.x(),
+            y: i.y() * stage.scaleY() + stage.y(),
+            width: i.width() * stage.scaleX(),
+            height: i.height() * stage.scaleY(),
+            pixelRatio: Math.min(684 / (i.height() * stage.scaleY()), 20)
+        };
+        let ratio_max = Math.sqrt(1600 * 1600 / (a.width * a.height));
+        let ratio_684 = 684 / a.height;
+        a.pixelRatio = Math.min(ratio_max, ratio_684);
+        console.log(`ratio max: ${ratio_max}, to 684: ${ratio_684}`, a);
+        console.log(`size: ${a.width * a.pixelRatio}, ${a.height * a.pixelRatio}`);
+        if (mb.draft.combine) {
+            pad_len = pad_px * a.height / 684;
+            pad_begin = true, pad_end = true;
+            if (i == crops[0])
+                pad_begin = false;
+            if (i == crops[crops.length-1])
+                pad_end = false;
+            if (pad_begin) {
+                a.x -= pad_len;
+                a.width += pad_len;
+            }
+            if (pad_end) {
+                a.width += pad_len;
+            }
+            console.log(`pad len ${pad_len}, begin ${pad_begin}, end ${pad_end}`);
+        }
+        
+        let c_obj = layer.toCanvas(a);
+        i.mb_aux.png684 = await obj2blob2u8a(c_obj);
+        if (!i.mb_aux.png684.length) {
+            alert(L('Get crop data error.'));
+            return;
+        }
+        if (!dpc.ready) {
+            alert(L('Loading, please try later.'));
+            return;
+        }
+        //download(i.mb_aux.png684, 'test.png'); // debug
+        i.mb_aux.mb_dat = await dpc.conv(i.mb_aux.png684, mb.draft.brightness, mb.draft.saturation,
+                Math.round(mb.draft.density * mb.conf.density / 100),
+                mb.conf.invert, mb.conf.c_order, mb.conf.c_width, mb.conf.dpi_step, (p) => {
+            document.getElementById('nav_sta').innerHTML = `${L('Convert')} #${cnt+1}: ${p}`;
+        });
+        if (!i.mb_aux.mb_dat) {
+            console.warn('conv return null');
+            return;
+        }
+        
+        if (cnt == 0) {
+            ret = await fetch_timo('/cgi-bin/cmd?cmd=rm_upload', {}, 3000);
+            if (!ret || ret.status != 'ok') {
+                alert(L('Upload prepare failed.'));
+                return;
+            }
+        }
+        
+        let filename, dat;
+        if (mb.draft.combine) {
+            filename = '0.mbd';
+            dat = cnt ? i.mb_aux.mb_dat.slice(16) : i.mb_aux.mb_dat;
+            if (pad_begin)
+                dat = dat.slice(Math.trunc(pad_px/mb.conf.dpi_step)*272*1.5);
+            if (pad_end)
+                dat = dat.slice(0, dat.length - Math.trunc(pad_px/mb.conf.dpi_step)*272*1.5);
+        } else {
+            filename = `${cnt}.mbd`;
+            dat = i.mb_aux.mb_dat;
+            offset = 0;
+        }
+        console.log(`upload ${filename}, cnt ${cnt}, offset ${offset}`);
+        ret = await upload('/cgi-bin/upload', dat, filename, (p) => {
+            document.getElementById('nav_sta').innerHTML = `${L('Send')} #${cnt+1}: ${p}`;
+        }, offset);
+        if (ret)
+            return;
+        offset += dat.length;
+        cnt++;
+    }
+    ret = await fetch_timo('/cgi-bin/cmd?cmd=sync', {}, 3000);
+    if (!ret || ret.status != 'ok') {
+        alert(L('Upload done, sync failed.'));
+        return;
+    }
+    document.getElementById('nav_sta').innerHTML = L('Upload succeeded');
+    mb.draft.counter++;
+    update_ui();
+    if (mb.cur_prj)
+        await mb.db.set('prj', mb.cur_prj, mb.draft);
+};
+
+async function do_conv() {
+    if (conv_busy) {
+        console.log('conv is busy');
+        return;
+    }
+    conv_busy = true;
+    try {
+        await _do_conv();
+    } catch (e) {
+        console.log('conv catch', e);
+    }
+    conv_busy = false;
+};
+
+
 function heartbeat_cb() {
     let cur = -1;
     if (mb.dev_info.st == '1')
@@ -216,6 +333,12 @@ function heartbeat_cb() {
         }
     }
     layer_crop.batchDraw();
+    
+    if (mb.dev_info.st == '0' && document.getElementById('wr2dev_btn').color == 'warning') {
+        cur = Number(mb.dev_info.i);
+        if (!conv_busy && cur >= layer_crop.find('.crop').length)
+            do_conv();
+    }
 }
 
 
@@ -275,7 +398,7 @@ async function enter() {
         <ion-icon name="create"></ion-icon> ${L('Re-Edit')}
     </ion-button>
     <ion-button id="wr2dev_btn">
-        <ion-icon name="print"></ion-icon> ${L('Print')}
+        <ion-icon name="print"></ion-icon> <span id="wr2dev_str">${L('Print')}</span>
     </ion-button>
 </ion-item>
 
@@ -476,118 +599,17 @@ async function enter() {
         alert(L('Save succeeded'));
     };
     
-    async function do_conv() {
-        document.getElementById('nav_sta').innerHTML = L('Start');
-        save_ui();
-        let ret, cnt = 0;
-        let pad_len, pad_begin = false, pad_end = false;
-        let pad_px = mb.conf.c_width == 0 ? 134 : 150;
-        let offset = 0;
-        let crops = layer_crop.find('.crop');
-        for (let i of crops) {
-            let a = {
-                x: i.x() * stage.scaleX() + stage.x(),
-                y: i.y() * stage.scaleY() + stage.y(),
-                width: i.width() * stage.scaleX(),
-                height: i.height() * stage.scaleY(),
-                pixelRatio: Math.min(684 / (i.height() * stage.scaleY()), 20)
-            };
-            let ratio_max = Math.sqrt(1600 * 1600 / (a.width * a.height));
-            let ratio_684 = 684 / a.height;
-            a.pixelRatio = Math.min(ratio_max, ratio_684);
-            console.log(`ratio max: ${ratio_max}, to 684: ${ratio_684}`, a);
-            console.log(`size: ${a.width * a.pixelRatio}, ${a.height * a.pixelRatio}`);
-            if (mb.draft.combine) {
-                pad_len = pad_px * a.height / 684;
-                pad_begin = true, pad_end = true;
-                if (i == crops[0])
-                    pad_begin = false;
-                if (i == crops[crops.length-1])
-                    pad_end = false;
-                if (pad_begin) {
-                    a.x -= pad_len;
-                    a.width += pad_len;
-                }
-                if (pad_end) {
-                    a.width += pad_len;
-                }
-                console.log(`pad len ${pad_len}, begin ${pad_begin}, end ${pad_end}`);
-            }
-            
-            let c_obj = layer.toCanvas(a);
-            i.mb_aux.png684 = await obj2blob2u8a(c_obj);
-            if (!i.mb_aux.png684.length) {
-                alert(L('Get crop data error.'));
-                return;
-            }
-            if (!dpc.ready) {
-                alert(L('Loading, please try later.'));
-                return;
-            }
-            //download(i.mb_aux.png684, 'test.png'); // debug
-            i.mb_aux.mb_dat = await dpc.conv(i.mb_aux.png684, mb.draft.brightness, mb.draft.saturation,
-                    Math.round(mb.draft.density * mb.conf.density / 100),
-                    mb.conf.invert, mb.conf.c_order, mb.conf.c_width, mb.conf.dpi_step, (p) => {
-                document.getElementById('nav_sta').innerHTML = `${L('Convert')} #${cnt+1}: ${p}`;
-            });
-            if (!i.mb_aux.mb_dat) {
-                console.warn('conv return null');
-                return;
-            }
-            
-            if (cnt == 0) {
-                ret = await fetch_timo('/cgi-bin/cmd?cmd=rm_upload', {}, 3000);
-                if (!ret || ret.status != 'ok') {
-                    alert(L('Upload prepare failed.'));
-                    return;
-                }
-            }
-            
-            let filename, dat;
-            if (mb.draft.combine) {
-                filename = '0.mbd';
-                dat = cnt ? i.mb_aux.mb_dat.slice(16) : i.mb_aux.mb_dat;
-                if (pad_begin)
-                    dat = dat.slice(Math.trunc(pad_px/mb.conf.dpi_step)*272*1.5);
-                if (pad_end)
-                    dat = dat.slice(0, dat.length - Math.trunc(pad_px/mb.conf.dpi_step)*272*1.5);
-            } else {
-                filename = `${cnt}.mbd`;
-                dat = i.mb_aux.mb_dat;
-                offset = 0;
-            }
-            console.log(`upload ${filename}, cnt ${cnt}, offset ${offset}`);
-            ret = await upload('/cgi-bin/upload', dat, filename, (p) => {
-                document.getElementById('nav_sta').innerHTML = `${L('Send')} #${cnt+1}: ${p}`;
-            }, offset);
-            if (ret)
-                return;
-            offset += dat.length;
-            cnt++;
-        }
-        ret = await fetch_timo('/cgi-bin/cmd?cmd=sync', {}, 3000);
-        if (!ret || ret.status != 'ok') {
-            alert(L('Upload done, sync failed.'));
-            return;
-        }
-        document.getElementById('nav_sta').innerHTML = L('Upload succeeded');
-        mb.draft.counter++;
-        update_ui();
-        if (mb.cur_prj)
-            await mb.db.set('prj', mb.cur_prj, mb.draft);
-    };
     document.getElementById('wr2dev_btn').onclick = async function() {
-        if (conv_busy) {
-            console.log('conv is busy');
+        if (document.getElementById('wr2dev_btn').color == 'warning') {
+            document.getElementById('wr2dev_btn').color = '';
+            document.getElementById('wr2dev_str').innerText = L('Print');
             return;
         }
-        conv_busy = true;
-        try {
-            await do_conv();
-        } catch (e) {
-            console.log('conv catch', e);
+        if (mb.conf.loop_print) {
+            document.getElementById('wr2dev_btn').color = 'warning';
+            document.getElementById('wr2dev_str').innerText = L('Stop');
         }
-        conv_busy = false;
+        await do_conv();
     };
     
     document.getElementById('del_crop_btn').onclick = function() {

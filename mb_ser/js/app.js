@@ -36,6 +36,7 @@ window.mb = {
         dpi_step: 2, // 1200 x (1200 / 1, 2, 4)
         show_inch: 0,
         show_grid: 0,
+        loop_print: 0,
         strength: 20,
         pos_cali: 0,
         space: -20,
@@ -132,9 +133,9 @@ async function dev_get_info() {
             document.getElementById('nav_con').src = bat_img_src;
         last_bat_img = bat_img_src;
     }
+    setTimeout(dev_get_info, 500);
 }
 dev_get_info();
-setInterval(dev_get_info, 2000);
 
 function init_sw() {
     console.log('init_sw...');

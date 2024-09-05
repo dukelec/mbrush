@@ -22,6 +22,7 @@ async function save_conf() {
     mb.conf.c_width = document.getElementById('c_width').value == '1' ? 1 : 0;
     mb.conf.show_inch = document.getElementById('show_inch_en').value == '1' ? 1 : 0;
     mb.conf.show_grid = document.getElementById('show_grid_en').checked ? 1 : 0;
+    mb.conf.loop_print = document.getElementById('loop_print_en').checked ? 1 : 0;
     mb.conf.strength = Number(document.getElementById('strength').value);
     mb.conf.pos_cali = Number(document.getElementById('pos_cali').value);
     mb.conf.space = -Number(document.getElementById('space_n').value);
@@ -42,6 +43,7 @@ function update_ui() {
     document.getElementById('c_width').value = mb.conf.c_width;
     document.getElementById('show_inch_en').value = mb.conf.show_inch;
     document.getElementById('show_grid_en').checked = mb.conf.show_grid;
+    document.getElementById('loop_print_en').checked = mb.conf.loop_print;
     document.getElementById('strength').value = mb.conf.strength;
     document.getElementById('strength_v').innerText = mb.conf.strength;
     document.getElementById('pos_cali').value = mb.conf.pos_cali;
@@ -230,6 +232,10 @@ let Setting = {
         <ion-label><small>${L('Display Grid')}</small></ion-label>
         <ion-toggle slot="end" id="show_grid_en" value="pepperoni" checked></ion-toggle>
     </ion-item>
+    <ion-item>
+        <ion-label><small>${L('Loop Print')}</small></ion-label>
+        <ion-toggle slot="end" id="loop_print_en" value="pepperoni"></ion-toggle>
+    </ion-item>
 </ion-list>
 
 <ion-list>
@@ -413,6 +419,7 @@ let Setting = {
         document.getElementById('c_width').addEventListener('ionChange', save_update_ui);
         document.getElementById('show_inch_en').addEventListener('ionChange', save_update_ui);
         document.getElementById('show_grid_en').addEventListener('ionChange', save_update_ui);
+        document.getElementById('loop_print_en').addEventListener('ionChange', save_update_ui);
         document.getElementById('strength').addEventListener('ionChange', save_update_ui);
         document.getElementById('pos_cali').addEventListener('ionChange', save_update_ui);
         document.getElementById('space_n').addEventListener('ionChange', save_update_ui);
