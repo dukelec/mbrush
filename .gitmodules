@@ -1,0 +1,3 @@
+[submodule "pycdnet"]
+	path = cli_tools/serial_send_file/pycdnet
+	url = ../pycdnet

@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="494.72601"
+   height="209.50999"
+   viewBox="-5 -5 494.72601 209.50999"
+   version="1.1"
+   xml:space="preserve"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+   id="svg68"
+   sodipodi:docname="typec_pinout.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:serif="http://www.serif.com/"><defs
+   id="defs68"><inkscape:path-effect
+     effect="bspline"
+     id="path-effect3"
+     is_visible="true"
+     lpeversion="1.3"
+     weight="33.333333"
+     steps="2"
+     helper_size="0"
+     apply_no_weight="true"
+     apply_with_weight="true"
+     only_selected="false"
+     uniform="false" /><inkscape:path-effect
+     effect="bspline"
+     id="path-effect2"
+     is_visible="true"
+     lpeversion="1.3"
+     weight="33.333333"
+     steps="2"
+     helper_size="0"
+     apply_no_weight="true"
+     apply_with_weight="true"
+     only_selected="false"
+     uniform="false" /><inkscape:path-effect
+     effect="fillet_chamfer"
+     id="path-effect1"
+     is_visible="true"
+     lpeversion="1"
+     nodesatellites_param="F,0,0,1,0,5,0,1 @ F,0,0,1,0,5.0000001,0,1 @ F,0,0,1,0,4.9999996,0,1 @ F,0,0,1,0,4.9999984,0,1"
+     radius="0"
+     unit="px"
+     method="auto"
+     mode="F"
+     chamfer_steps="1"
+     flexible="false"
+     use_knot_distance="true"
+     apply_no_radius="true"
+     apply_with_radius="true"
+     only_selected="false"
+     hide_knots="false" /><inkscape:path-effect
+     effect="fillet_chamfer"
+     id="path-effect1-3"
+     is_visible="true"
+     lpeversion="1"
+     nodesatellites_param="F,0,0,1,0,3.0000003,0,1 @ F,0,0,1,0,2.9999997,0,1 @ F,0,0,1,0,2.9999997,0,1 @ F,0,0,1,0,3.0000003,0,1"
+     radius="0"
+     unit="px"
+     method="auto"
+     mode="F"
+     chamfer_steps="1"
+     flexible="false"
+     use_knot_distance="true"
+     apply_no_radius="true"
+     apply_with_radius="true"
+     only_selected="false"
+     hide_knots="false" /><marker
+     style="overflow:visible"
+     id="Triangle-3"
+     refX="0"
+     refY="0"
+     orient="auto-start-reverse"
+     inkscape:stockid="Triangle arrow"
+     markerWidth="1"
+     markerHeight="1"
+     viewBox="0 0 1 1"
+     inkscape:isstock="true"
+     inkscape:collect="always"
+     preserveAspectRatio="xMidYMid"><path
+       transform="scale(0.5)"
+       style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+       d="M 5.77,0 -2.88,5 V -5 Z"
+       id="path135-5" /></marker><inkscape:path-effect
+     effect="bspline"
+     id="path-effect2-6"
+     is_visible="true"
+     lpeversion="1.3"
+     weight="33.333333"
+     steps="2"
+     helper_size="0"
+     apply_no_weight="true"
+     apply_with_weight="true"
+     only_selected="false"
+     uniform="false" /></defs><sodipodi:namedview
+   id="namedview68"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="2.8719992"
+   inkscape:cx="390.66863"
+   inkscape:cy="93.662977"
+   inkscape:window-width="1565"
+   inkscape:window-height="1058"
+   inkscape:window-x="690"
+   inkscape:window-y="22"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg68"
+   showgrid="false"><inkscape:grid
+     id="grid1"
+     units="px"
+     originx="0"
+     originy="0"
+     spacingx="0.99999999"
+     spacingy="0.99999998"
+     empcolor="#0000ff"
+     empopacity="0.25098039"
+     color="#0000ff"
+     opacity="0.1254902"
+     empspacing="5"
+     enabled="true"
+     visible="false" /></sodipodi:namedview>
+    
+    <g
+   transform="matrix(1.9909705,0,0,1.9909705,242.37476,99.09603)"
+   id="g68">
+        <g
+   transform="translate(-66.437,-31.8898)"
+   id="g67">
+            <g
+   id="Full-Featured-Type-C-receptacle"
+   serif:id="Full-Featured Type‑C receptacle"
+   transform="translate(-0.531496,-0.944882)">
+                <g
+   id="Funnel---enclosure"
+   serif:id="Funnel &amp; enclosure"
+   transform="translate(-11.8701,-11.4567)">
+                    <g
+   id="Funnel">
+                        <path
+   d="m 128.091,44.291 c 0,8.344 -6.775,15.118 -15.119,15.118 H 44.705 c -8.344,0 -15.118,-6.774 -15.118,-15.118 0,-8.344 6.774,-15.118 15.118,-15.118 h 68.267 c 8.344,0 15.119,6.774 15.119,15.118 z"
+   id="path41" />
+                        <path
+   d="m 132.815,44.291 c 0,10.952 -8.891,19.843 -19.843,19.843 H 44.705 c -10.952,0 -19.843,-8.891 -19.843,-19.843 0,-10.951 8.891,-19.842 19.843,-19.842 h 68.267 c 10.952,0 19.843,8.891 19.843,19.842 z m -4.724,0 c 0,-8.344 -6.775,-15.118 -15.119,-15.118 H 44.705 c -8.344,0 -15.118,6.774 -15.118,15.118 0,8.344 6.774,15.118 15.118,15.118 h 68.267 c 8.344,0 15.119,-6.774 15.119,-15.118 z"
+   style="fill:#777c85"
+   id="path42" />
+                    </g>
+                </g>
+                <g
+   id="Back-structure--including-earth-contact-"
+   serif:id="Back structure (including earth contact)"
+   transform="translate(-11.8701,-11.4567)">
+                    <path
+   d="m 118.346,41.929 v 4.725 c 0,2.607 -2.116,4.724 -4.724,4.724 H 44.055 c -2.607,0 -4.724,-2.117 -4.724,-4.724 v -4.725 c 0,-2.607 2.117,-4.724 4.724,-4.724 h 69.567 c 2.608,0 4.724,2.117 4.724,4.724 z"
+   style="fill:#313131"
+   id="path43" />
+                </g>
+                <g
+   id="Shield-contacts"
+   serif:id="Shield contacts">
+                </g>
+                <g
+   id="Tongue"
+   transform="translate(-11.8701,-11.4567)">
+                    <g
+   id="Insulator1"
+   serif:id="Insulator">
+                        <rect
+   id="Bevel3"
+   serif:id="Bevel"
+   x="39.331001"
+   y="40.748001"
+   width="79.015999"
+   height="7.0869999"
+   style="fill:#595959" />
+                        <g
+   id="Facing1"
+   serif:id="Facing"
+   transform="matrix(2.71976,0,0,1.17107,-73.7328,-5.19908)">
+                            <rect
+   x="42.874001"
+   y="40.748001"
+   width="26.447001"
+   height="3.026"
+   style="fill:#5e5e5e"
+   id="rect43" />
+                        </g>
+                        <path
+   id="Mask-for-rounded-corners"
+   serif:id="Mask for rounded corners"
+   d="m 118.5,41.929 v 4.725 c 0,2.692 -2.186,4.877 -4.878,4.877 H 44.055 c -2.692,0 -4.878,-2.185 -4.878,-4.877 v -4.725 c 0,-2.692 2.186,-4.878 4.878,-4.878 h 69.567 c 2.692,0 4.878,2.186 4.878,4.878 z m -0.154,0 c 0,-2.607 -2.116,-4.724 -4.724,-4.724 H 44.055 c -2.607,0 -4.724,2.117 -4.724,4.724 v 4.725 c 0,2.607 2.117,4.724 4.724,4.724 h 69.567 c 2.608,0 4.724,-2.117 4.724,-4.724 z" />
+                    </g>
+                    <g
+   id="Signal-contacts1"
+   serif:id="Signal contacts">
+                        <g
+   id="CC"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="B5--CC2--CC--Vconn-"
+   serif:id="B5, CC2 (CC, Vconn)"
+   transform="matrix(1.43519,0,0,1,-47.3549,0)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect44" />
+                            </g>
+                            <g
+   id="A5--CC1--CC--Vconn-"
+   serif:id="A5, CC1 (CC, Vconn)"
+   transform="matrix(-1.43519,0,0,-1,205.032,88.5827)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect45" />
+                            </g>
+                        </g>
+                        <g
+   id="Legacy-data1"
+   serif:id="Legacy data"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="Position-2"
+   serif:id="Position 2">
+                                <g
+   id="B7--Dn2--D-----"
+   serif:id="B7, Dn2 (D−, ∅)"
+   transform="matrix(1.43519,0,0,1,-35.5439,0)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect46" />
+                                </g>
+                                <g
+   id="B6--Dp2--D-----"
+   serif:id="B6, Dp2 (D+, ∅)"
+   transform="matrix(1.43519,0,0,1,-41.4494,0)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect47" />
+                                </g>
+                            </g>
+                            <g
+   id="Position-1"
+   serif:id="Position 1">
+                                <g
+   id="A7--Dn1--D-----"
+   serif:id="A7, Dn1 (D−, ∅)"
+   transform="matrix(-1.43519,0,0,-1,193.221,88.5827)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect48" />
+                                </g>
+                                <g
+   id="A6--Dp1--D-----"
+   serif:id="A6, Dp1 (D+, ∅)"
+   transform="matrix(-1.43519,0,0,-1,199.127,88.5827)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect49" />
+                                </g>
+                            </g>
+                        </g>
+                        <g
+   id="SBU1"
+   serif:id="SBU"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="B8--SBU2--SBU1--SBU2-1"
+   serif:id="B8, SBU2 (SBU1, SBU2)"
+   transform="matrix(1.43519,0,0,1,-29.6384,0)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect50" />
+                            </g>
+                            <g
+   id="A8--SBU1--SBU1--SBU2-1"
+   serif:id="A8, SBU1 (SBU1, SBU2)"
+   transform="matrix(-1.43519,0,0,-1,187.316,88.5827)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect51" />
+                            </g>
+                        </g>
+                        <g
+   id="Data-channel-2"
+   serif:id="Data channel 2"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="RX2--RX1--RX2-1"
+   serif:id="RX2 (RX1, RX2)">
+                                <g
+   id="A10--RXn2--RX1---RX2--"
+   serif:id="A10, RXn2 (RX1−, RX2−)"
+   transform="matrix(-1.43519,0,0,-1,175.505,88.5827)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect52" />
+                                </g>
+                                <g
+   id="A11--RXp2--RX1---RX2--"
+   serif:id="A11, RXp2 (RX1+, RX2+)"
+   transform="matrix(-1.43519,0,0,-1,169.599,88.5827)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect53" />
+                                </g>
+                            </g>
+                            <g
+   id="TX2--TX1--TX2-1"
+   serif:id="TX2 (TX1, TX2)">
+                                <g
+   id="B3--TXn2--TX1---TX2--"
+   serif:id="B3, TXn2 (TX1−, TX2−)"
+   transform="matrix(1.43519,0,0,1,-59.1659,0)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect54" />
+                                </g>
+                                <g
+   id="B2--TXp2--TX1---TX2--"
+   serif:id="B2, TXp2 (TX1+, TX2+)"
+   transform="matrix(1.43519,0,0,1,-65.0715,0)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect55" />
+                                </g>
+                            </g>
+                        </g>
+                        <g
+   id="Data-channel-1"
+   serif:id="Data channel 1"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="RX1--RX1--RX2-1"
+   serif:id="RX1 (RX1, RX2)">
+                                <g
+   id="B10--RXn1--RX1---RX2--"
+   serif:id="B10, RXn1 (RX1−, RX2−)"
+   transform="matrix(1.43519,0,0,1,-17.8274,0)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect56" />
+                                </g>
+                                <g
+   id="B11--RXp1--RX1---RX2--"
+   serif:id="B11, RXp1 (RX1+, RX2+)"
+   transform="matrix(1.43519,0,0,1,-11.9218,0)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect57" />
+                                </g>
+                            </g>
+                            <g
+   id="TX1--TX1--TX2-1"
+   serif:id="TX1 (TX1, TX2)">
+                                <g
+   id="A3--TXn1--TX1---TX2--"
+   serif:id="A3, TXn1 (TX1−, TX2−)"
+   transform="matrix(-1.43519,0,0,-1,216.843,88.5827)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect58" />
+                                </g>
+                                <g
+   id="A2--TXp1--TX1---TX2--"
+   serif:id="A2, TXp1 (TX1+, TX2+)"
+   transform="matrix(-1.43519,0,0,-1,222.749,88.5827)">
+                                    <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#c2a200"
+   id="rect59" />
+                                </g>
+                            </g>
+                        </g>
+                        <g
+   id="Vbus1"
+   serif:id="Vbus"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="B9--Vbus1"
+   serif:id="B9, Vbus"
+   transform="matrix(1.43519,0,0,1,-23.7329,0)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#d6b300"
+   id="rect60" />
+                            </g>
+                            <g
+   id="B4--Vbus1"
+   serif:id="B4, Vbus"
+   transform="matrix(1.43519,0,0,1,-53.2604,0)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#d6b300"
+   id="rect61" />
+                            </g>
+                            <g
+   id="A9--Vbus1"
+   serif:id="A9, Vbus"
+   transform="matrix(-1.43519,0,0,-1,181.41,88.5827)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#d6b300"
+   id="rect62" />
+                            </g>
+                            <g
+   id="A4--Vbus1"
+   serif:id="A4, Vbus"
+   transform="matrix(-1.43519,0,0,-1,210.938,88.5827)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#d6b300"
+   id="rect63" />
+                            </g>
+                        </g>
+                        <g
+   id="Ground1"
+   serif:id="Ground"
+   transform="rotate(180,78.8385,44.29135)">
+                            <g
+   id="B12--GND1"
+   serif:id="B12, GND"
+   transform="matrix(1.43519,0,0,1,-6.01634,0)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#ebc400"
+   id="rect64" />
+                            </g>
+                            <g
+   id="B1--GND1"
+   serif:id="B1, GND"
+   transform="matrix(1.43519,0,0,1,-70.977,0)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#ebc400"
+   id="rect65" />
+                            </g>
+                            <g
+   id="A12--GND1"
+   serif:id="A12, GND"
+   transform="matrix(-1.43519,0,0,-1,163.694,88.5827)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#ebc400"
+   id="rect66" />
+                            </g>
+                            <g
+   id="A1--GND1"
+   serif:id="A1, GND"
+   transform="matrix(-1.43519,0,0,-1,228.654,88.5827)">
+                                <rect
+   x="80.726997"
+   y="40.157001"
+   width="2.0569999"
+   height="0.59100002"
+   style="fill:#ebc400"
+   id="rect67" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+<rect
+   id="rect68"
+   x="0.50703502"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect69"
+   x="0.50703502"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect70"
+   x="41.069847"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect71"
+   x="41.069847"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect72"
+   x="81.632675"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect73"
+   x="81.632675"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect74"
+   x="122.1955"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect75"
+   x="122.1955"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect76"
+   x="162.75836"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect77"
+   x="162.75836"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect78"
+   x="203.32121"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect79"
+   x="203.32121"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect80"
+   x="243.88403"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect81"
+   x="243.88403"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect82"
+   x="284.44681"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect83"
+   x="284.44681"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect84"
+   x="325.0097"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect85"
+   x="325.0097"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect86"
+   x="365.5726"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect87"
+   x="365.5726"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect88"
+   x="406.13544"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect89"
+   x="406.13544"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><rect
+   id="rect90"
+   x="446.69821"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="14.184744" /><rect
+   id="rect91"
+   x="446.69821"
+   width="37.520622"
+   height="21.295492"
+   fill="none"
+   stroke="#000000"
+   stroke-width="1.01407"
+   y="163.98059" /><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:none;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   x="20.693125"
+   y="9.6614285"
+   id="text103"><tspan
+     sodipodi:role="line"
+     id="tspan103"
+     x="20.693125"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A1</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="61.126976"
+   y="9.6614285"
+   id="text103-0"><tspan
+     sodipodi:role="line"
+     id="tspan103-6"
+     x="61.126976"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A2</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="19.153416"
+   y="29.594854"
+   id="text103-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-4"
+     x="19.153416"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">GND</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="141.31064"
+   y="29.594854"
+   id="text103-9-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0"
+     x="141.31064"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">VBUS</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="141.31064"
+   y="179.39069"
+   id="text103-9-9-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-7"
+     x="141.31064"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">VBUS</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="344.12485"
+   y="179.39069"
+   id="text103-9-9-7"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-6"
+     x="344.12485"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">VBUS</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="344.12485"
+   y="29.594854"
+   id="text103-9-9-73"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-65"
+     x="344.12485"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">VBUS</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="19.153416"
+   y="179.39069"
+   id="text103-9-91"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-7"
+     x="19.153416"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">GND</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="465.3446"
+   y="29.594854"
+   id="text103-9-7"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-1"
+     x="465.3446"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">GND</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="465.3446"
+   y="179.39069"
+   id="text103-9-1"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-5"
+     x="465.3446"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">GND</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="222.17592"
+   y="29.594854"
+   id="text103-9-9-6"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-3"
+     x="222.17592"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">USB+</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="263.16519"
+   y="29.594854"
+   id="text103-9-9-6-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-3-4"
+     x="263.16519"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">USB-</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="303.50986"
+   y="29.594854"
+   id="text103-9-9-73-8"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-65-1"
+     x="303.50986"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">485+</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="182.24783"
+   y="179.39069"
+   id="text103-9-9-73-8-2"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-65-1-9"
+     x="182.24783"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">485-</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="182.63196"
+   y="29.594854"
+   id="text103-9-9-6-3"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-3-9"
+     x="182.63196"
+     y="29.594854"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">CC1</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="303.30804"
+   y="179.39069"
+   id="text103-9-9-6-3-0"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-3-9-8"
+     x="303.30804"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">CC2</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="222.30287"
+   y="179.39069"
+   id="text103-9-9-73-8-2-8"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-65-1-9-5"
+     x="222.30287"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">ENC-</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="262.43924"
+   y="179.39069"
+   id="text103-9-9-73-8-2-8-0"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-0-65-1-9-5-9"
+     x="262.43924"
+     y="179.39069"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">ENC+</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="466.55228"
+   y="199.43805"
+   id="text103-6"><tspan
+     sodipodi:role="line"
+     id="tspan103-3"
+     x="466.55228"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B1</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="19.348726"
+   y="199.43805"
+   id="text103-6-8"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5"
+     x="19.348726"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B12</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="465.87195"
+   y="9.6614285"
+   id="text103-6-8-6"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1"
+     x="465.87195"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A12</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="425.28961"
+   y="9.6614285"
+   id="text103-6-8-6-1"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5"
+     x="425.28961"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A11</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="384.70728"
+   y="9.6614285"
+   id="text103-6-8-6-1-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8"
+     x="384.70728"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A10</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="344.16391"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8"
+     x="344.16391"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A9</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="303.73007"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4-1"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8-0"
+     x="303.73007"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A8</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="263.2962"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4-1-3"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8-0-0"
+     x="263.2962"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A7</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="222.86238"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4-1-3-4"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8-0-0-4"
+     x="222.86238"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A6</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="182.42853"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4-1-3-4-4"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8-0-0-4-4"
+     x="182.42853"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A5</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="141.99467"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4-1-3-4-4-7"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8-0-0-4-4-6"
+     x="141.99467"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A4</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="101.56081"
+   y="9.6614285"
+   id="text103-6-8-6-1-9-4-1-3-4-4-7-3"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-1-5-8-8-0-0-4-4-6-1"
+     x="101.56081"
+     y="9.6614285"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">A3</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="59.892021"
+   y="199.43805"
+   id="text103-6-8-7"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5"
+     x="59.892021"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B11</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="100.43531"
+   y="199.43805"
+   id="text103-6-8-7-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6"
+     x="100.43531"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B10</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="141.01767"
+   y="199.43805"
+   id="text103-6-8-7-9-2"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-1"
+     x="141.01767"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B9</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="181.7095"
+   y="199.43805"
+   id="text103-6-8-7-9-7"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8"
+     x="181.7095"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B8</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="222.40132"
+   y="199.43805"
+   id="text103-6-8-7-9-7-5"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8-7"
+     x="222.40132"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B7</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="263.09314"
+   y="199.43805"
+   id="text103-6-8-7-9-7-5-4"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8-7-1"
+     x="263.09314"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B6</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="303.78497"
+   y="199.43805"
+   id="text103-6-8-7-9-7-5-4-8"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8-7-1-5"
+     x="303.78497"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B5</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="344.47681"
+   y="199.43805"
+   id="text103-6-8-7-9-7-5-4-8-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8-7-1-5-7"
+     x="344.47681"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B4</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="385.16861"
+   y="199.43805"
+   id="text103-6-8-7-9-7-5-4-8-9-5"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8-7-1-5-7-3"
+     x="385.16861"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B3</tspan></text><text
+   xml:space="preserve"
+   style="font-size:13.3333px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="425.86044"
+   y="199.43805"
+   id="text103-6-8-7-9-7-5-4-8-9-5-8"><tspan
+     sodipodi:role="line"
+     id="tspan103-3-5-5-6-8-7-1-5-7-3-8"
+     x="425.86044"
+     y="199.43805"
+     style="font-size:13.3333px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">B2</tspan></text><path
+   style="fill:none;stroke:#000000;stroke-width:0.68;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+   id="rect1"
+   width="70"
+   height="80"
+   x="383.02072"
+   y="69.860786"
+   inkscape:path-effect="#path-effect1"
+   sodipodi:type="rect"
+   d="m 388.02072,69.860786 60,0 a 5.0000001,5.0000001 45 0 1 5,5.000001 v 70.000003 a 4.9999996,4.9999996 135 0 1 -5,5 h -60 a 4.9999984,4.9999984 45 0 1 -5,-5 V 74.860786 a 5,5 135 0 1 5,-5 z"
+   transform="translate(9.9792811,-11.860785)" /><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.68;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1"
+   id="rect1-6"
+   width="20"
+   height="6.9999995"
+   x="383.02072"
+   y="69.860786"
+   inkscape:path-effect="#path-effect1-3"
+   sodipodi:type="rect"
+   d="m 386.02072,69.860786 h 14 a 2.9999997,2.9999997 45 0 1 3,3 v 1 a 2.9999997,2.9999997 135 0 1 -3,3 h -14 a 3.0000003,3.0000003 45 0 1 -3,-3 v -0.999999 a 3.0000003,3.0000003 135 0 1 3,-3.000001 z"
+   transform="translate(34.979281,55.139217)" /><text
+   xml:space="preserve"
+   style="font-size:10.6667px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="428.09116"
+   y="53.599606"
+   id="text103-9-7-7"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-1-5"
+     x="428.09116"
+     y="53.599606"
+     style="font-size:10.6667px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">Top</tspan></text><path
+   style="clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle-3)"
+   d="m 468.26854,71.114577 c -18.61137,-3.972141 -37.22273,-7.94428 -55.8341,-11.916421"
+   id="path1-2"
+   inkscape:path-effect="#path-effect2-6"
+   inkscape:original-d="m 468.26854,71.114577 c -18.61137,-3.972141 -37.22273,-7.94428 -55.8341,-11.916421"
+   transform="translate(-55.21476,54.620902)"
+   sodipodi:nodetypes="cc" /><circle
+   style="fill:none;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+   id="path2"
+   cx="442.07132"
+   cy="128.5"
+   r="0.68392444" /><text
+   xml:space="preserve"
+   style="font-size:10.6667px;line-height:125%;font-family:'WenQuanYi Micro Hei Mono Light';-inkscape-font-specification:'WenQuanYi Micro Hei Mono Light, Normal';font-variant-ligatures:none;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;clip-rule:evenodd;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.97056px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1"
+   x="427.88281"
+   y="147.95461"
+   id="text103-9-7-7-9"><tspan
+     sodipodi:role="line"
+     id="tspan103-4-1-5-1"
+     x="427.88281"
+     y="147.95461"
+     style="font-size:10.6667px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.97056px">Bottom</tspan></text><g
+   id="g3"
+   transform="translate(0.50000254)"><path
+     style="fill:none;stroke:#000000;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+     d="m 435,129 c 0,0 0,-1 0,-1 0,0 -15,0 -15,0 0,0 0,1 0,1 z"
+     id="path3"
+     inkscape:path-effect="#path-effect3"
+     inkscape:original-d="m 435,129 v -1 h -15 v 1 z" /></g></svg>

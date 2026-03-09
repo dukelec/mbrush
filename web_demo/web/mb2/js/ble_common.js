@@ -1,0 +1,1 @@
+../../common/js/ble_common.js

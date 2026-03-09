@@ -1,0 +1,12 @@
+{
+  "short_name": "HKPrinter24",
+  "name": "HKPrinter24",
+  "icons": [
+    {
+      "src":"img/icon.png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": "/hk24/",
+  "display": "standalone"
+}

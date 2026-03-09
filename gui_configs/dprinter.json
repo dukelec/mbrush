@@ -1,0 +1,88 @@
+{
+    // fmt: [c]: string, b: int8_t, B: uint8_t, h: int16_t, H: uint16_t, i: int32_t, I: uint32_t, f: float
+    // show: 0: normal, 1: hex, 2: bytes
+    "reg": {
+        "list": [
+            [ 0x0000, 2, "H", 1, "magic_code", "Magic code: 0xcdcd" ],
+            [ 0x0002, 2, "H", 1, "conf_ver", "Config version" ],
+            [ 0x0004, 1, "B", 1, "conf_from", "0: default config, 1: all from flash, 2: partly from flash" ],
+            [ 0x0005, 1, "B", 0, "do_reboot", "Write 1 to reboot" ],
+            [ 0x0007, 1, "b", 0, "save_conf", "Write 1 to save current config to flash" ],
+
+            [ 0x0009, 1, "b", 0, "dbg_en", "1: Report debug message to host, 0: do not report" ],
+
+            [ 0x000c, 1, "B", 1, "bus_cfg_mac", "RS-485 port id, range: 0~254" ],
+            [ 0x0010, 4, "I", 0, "bus_cfg_baud_l", "RS-485 baud rate for first byte" ],
+            [ 0x0014, 4, "I", 0, "bus_cfg_baud_h", "RS-485 baud rate for follow bytes" ],
+            [ 0x0018, 2, "[B]", 1, "bus_cfg_filter_m", "Multicast address" ],
+            [ 0x001a, 1, "B", 0, "bus_cfg_mode", "0: Traditional, 1: Arbitration, 2: Break Sync" ],
+            [ 0x001c, 2, "H", 0, "bus_cfg_tx_permit_len", "Allow send wait time" ],
+            [ 0x001e, 2, "H", 0, "bus_cfg_max_idle_len", "Max idle wait time for BS mode" ],
+            [ 0x0020, 1, "B", 0, "bus_cfg_tx_pre_len", "Active TX_EN before TX" ],
+            [ 0x0024, 1, "B", 1, "bt_mac", "" ],
+            [ 0x0026, 2, "H", 0, "auto_spit_period", "" ],
+            [ 0x0028, 2, "H", 0, "auto_spit_timer", "" ],
+            [ 0x002a, 1, "B", 1, "dbg_raw_msk", "Config which raw debug data to be send" ],
+            [ 0x002c, 16, "{H,H}", 1, "dbg_raw[0]", "Config raw debug for plot0" ],
+
+            [ 0x0070, 4, "f", 0, "c_t0", "Cartridge temperature calibration data" ],
+            [ 0x0074, 16, "[f]", 0, "c_r0", "Cartridge temperature calibration data" ],
+            [ 0x00b6, 1, "B", 0, "enc_cfg", "bit0: exchange direction; bit1: step/dir mode" ],
+            [ 0x00b7, 1, "B", 0, "enc_div", "Encoder input div" ],
+            [ 0x00b8, 2, "H", 1, "enc_trig_f", "Forward start print point" ],
+            [ 0x00ba, 2, "H", 1, "enc_trig_b", "Backward start print point" ],
+            [ 0x00bc, 2, "H", 0, "const_period", "Const speed print" ],
+            [ 0x00be, 1, "b", 0, "print_dir", "Print direction: 0: forward; 1: backward" ],
+
+            [ 0x0141, 1, "B", 1, "p_state", "{!temperature, !ink, !verified, !detected, !data, print, spit, warm}" ],
+            [ 0x0142, 2, "H", 1, "enc_val", "Encoder value" ],
+            [ 0x0144, 4, "[B]", 1, "c_state", "{3'd0, temp high/low, !temperatue, !ink, !verified, !detected}" ],
+            [ 0x0148, 16, "[f]", 0, "c_ink_count", "Cartridge ink usage" ],
+            [ 0x0158, 16, "[f]", 0, "c_temperature", "Cartridge temperature" ],
+            [ 0x0168, 4, "f", 0, "temperature", "Ambient temperature" ],
+            [ 0x016c, 4, "i", 0, "prt_enc_pos", "" ],
+            [ 0x0170, 4, "i", 0, "prt_dat_pos", "" ],
+            [ 0x0174, 4, "f", 0, "voltage", "" ],
+            [ 0x0178, 4, "f", 0, "current", "" ],
+            [ 0x017c, 1, "b", 0, "dc_online", "" ],
+            [ 0x01ac, 1, "B", 1, "p_ctrl", "0x01: warm; 0x02: spit; 0x04: print; 0x10: force idle" ],
+            [ 0x01ad, 1, "B", 1, "d_ctrl", "0x10: clear all; 0x01: clear current draft; 0x02: submit file" ],
+            [ 0x01ae, 1, "B", 1, "e_ctrl", "0x10: reset encoder" ],
+            [ 0x01af, 1, "B", 1, "c_ctrl", "0x08: calibrate cartridge temperature" ],
+
+            [ 0x01f0, 16, "[I]", 1, "c_id", "cartridge id" ],
+            [ 0x0240, 4, "I", 1, "psram_f_start", "" ],
+            [ 0x0244, 4, "I", 1, "psram_f_end", "" ],
+            [ 0x0248, 4, "I", 1, "psram_w_offset", "" ],
+            [ 0x024c, 1, "B", 1, "p14_cnt", "" ],
+            [ 0x024d, 1, "B", 0, "p14_err", "" ],
+
+            [ 0x0298, 1, "B", 0, "ink_rec_bank", "" ],
+            [ 0x0299, 1, "B", 0, "ink_rec_idx", "" ]
+        ],
+    
+        // button groups
+        "reg_r": [["magic_code","conf_from"],["do_reboot","save_conf"],["dbg_en"],["bus_cfg_mac","bus_cfg_tx_pre_len"],["bt_mac"],["auto_spit_period","auto_spit_timer"],
+                  ["dbg_raw_msk","dbg_raw[0]"],["c_t0","c_r0"],["enc_cfg"],["enc_div","enc_trig_b"],["const_period"],["print_dir"],["p_state","c_state"],["c_ink_count","temperature"],
+                  ["prt_enc_pos","prt_dat_pos"],["voltage","dc_online"],["p_ctrl","c_ctrl"],["c_id"],["psram_f_start","psram_w_offset"],["p14_cnt","p14_err"],["ink_rec_bank","ink_rec_idx"]],
+        "reg_w": [["magic_code"],["conf_ver"],["do_reboot"],["save_conf"],["dbg_en"],["bus_cfg_mac","bus_cfg_tx_pre_len"],["bt_mac"],["auto_spit_period"],["auto_spit_timer"],
+                  ["dbg_raw_msk"],["dbg_raw[0]"],["c_t0","c_r0"],["enc_cfg"],["enc_div","enc_trig_b"],["const_period"],["print_dir"],["c_ink_count"],["p_ctrl"],["d_ctrl"],["e_ctrl"],["c_ctrl"]]
+    },
+    
+    "plot": {
+        "mask": "dbg_raw_msk",
+        "plots": [
+            {
+                "cfg_reg": "dbg_raw[0]",
+                "x_fmt": "I1",
+                "label": ["N", "enc_val", "prt_enc_pos", "prt_dat_pos"],
+                "cal": {
+                    "enc16": "_d[1].at(-1) & 0xfff"
+                }
+            }
+        ]
+    },
+
+    "iap": { "reboot": 0x0005, "keep_bl": 0x0006, "batch_pkts": 3 } // iap related register address
+}
+
