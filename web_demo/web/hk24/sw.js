@@ -6,21 +6,21 @@
 
 // update file list by gen_sw_list.sh
 
-var cache_name = 'hk24-1.8';
+var cache_name = 'hk24-2.0';
 var cache_files = {
     "/hk24/img/icon.png" : "f60de1de67d87f4984317c173e5f63dfa8d6b141e23f749f64154b94fdbb57a4",
-    "/hk24/js/workers/dpc_hk24/dpc-m.js" : "48a83768e166bda102213e6982ae2c95eccbc2e1fcdb393732d1f8960c1b983a",
-    "/hk24/js/workers/dpc_hk24/dpconv.js" : "0f6adcc5ca62170cc6e2915e084013ced5448819aaa7d5641e7af990bed03e9a",
-    "/hk24/js/workers/dpc_hk24/dpconv.wasm" : "d01d889727c59b041e25d9e48d1c5de82d9adf8b33882a8d58b8afcb61d97749",
+    "/hk24/js/workers/dpc_hk24/dpc-m.js" : "6dc0039eab6651cb8d0b70ae06c5a36b12626798a24493090e364291b5e0cb78",
+    "/hk24/js/workers/dpc_hk24/dpconv.js" : "55e23c07776b0ef6474b5023e09a6fac6e8d4a8351434246272ef83b309b0327",
+    "/hk24/js/workers/dpc_hk24/dpconv.wasm" : "1352eb2f65565eb7d0dbc1b9688214a5a48aa7faf5aa7186187e111f6b71567b",
     "/hk24/js/workers/dpc.js" : "94b7e8abad899d6e0f45c44ca541dd6310e438c048ff621b2906f0e6cc1c65bc",
     "/hk24/js/utils/helper.js" : "ae4ccb2104e190e2543f2ee950f708298924de3c7aa44bb62b54884897f47708",
     "/hk24/js/utils/idb.js" : "cb280305f4fd0cc5da5bd1364e172be79bddd50e85bfe5bf45a403602efc6432",
-    "/hk24/js/send_dpt.js" : "5b089fc8de2468d9693465d08c92ccb6bff7f7dae5ec8a904b8c678f9b430237",
+    "/hk24/js/send_dpt.js" : "9c53c0c37696c4beff08c208d9e820556b31e93cb62f12ef1c174eab3ffac446",
     "/hk24/js/app.js" : "2b976625228bb0099c8f7479e3f40caba6b53c5c643bdf24e011abbc95b8139f",
     "/hk24/js/ble_common.js" : "d7558cf9e039171228e700d00578dcdecf43fc55d93c7c7609478bba8271d23a",
     "/hk24/js/ota.js" : "60689bff504670208951affde8f23f3092df87b28fc6e2eed80f7a13f8227fb1",
     "/hk24/manifest.json" : "11fad839643c5a7a3a7503b983d297dec59dda578af4b1912a5735a8f9a82567",
-    "/hk24/" : "61a03dafafdc079e750df8b4e7707dab84ea7c0e0e411d5f699460a990126f82",
+    "/hk24/" : "0e0eb7a072093a5de384316eaf4722e6b2a4d36ced31bbe1f622f254270604ef",
     "/hk24/css/fontawesome-7.0.1.all.min.css" : "f6c5904966ef29cecdbc1d8d87240ac0fd595532db6475143e0e220924c688d0",
     "/hk24/css/bulma-1.0.2.css" : "113149035b8b7543113ca93d6f8c75a7ff4a73a1c0877d5e50c710aa1fe5f404",
     "/hk24/webfonts/fa-solid-900.woff2" : "ff6d96ef6f1b29124a8daa657809d480d7278401ab16320fdb3edf0b658d6492"

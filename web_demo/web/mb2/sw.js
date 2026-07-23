@@ -6,21 +6,21 @@
 
 // update file list by gen_sw_list.sh
 
-var cache_name = 'mb2-1.8';
+var cache_name = 'mb2-2.0';
 var cache_files = {
     "/mb2/img/icon.png" : "f60de1de67d87f4984317c173e5f63dfa8d6b141e23f749f64154b94fdbb57a4",
     "/mb2/js/workers/dpc.js" : "94b7e8abad899d6e0f45c44ca541dd6310e438c048ff621b2906f0e6cc1c65bc",
-    "/mb2/js/workers/dpc_mb2/dpc-m.js" : "48a83768e166bda102213e6982ae2c95eccbc2e1fcdb393732d1f8960c1b983a",
-    "/mb2/js/workers/dpc_mb2/dpconv.js" : "0f6adcc5ca62170cc6e2915e084013ced5448819aaa7d5641e7af990bed03e9a",
-    "/mb2/js/workers/dpc_mb2/dpconv.wasm" : "2212eede9a81108919b0d78fdbe6da9998371e82e03eef58b4a2a58094468912",
+    "/mb2/js/workers/dpc_mb2/dpc-m.js" : "6dc0039eab6651cb8d0b70ae06c5a36b12626798a24493090e364291b5e0cb78",
+    "/mb2/js/workers/dpc_mb2/dpconv.js" : "55e23c07776b0ef6474b5023e09a6fac6e8d4a8351434246272ef83b309b0327",
+    "/mb2/js/workers/dpc_mb2/dpconv.wasm" : "b403eac23f1a6b66900a39862754ff13d95b4faa276d2646064b1e6edc1b46e1",
     "/mb2/js/utils/helper.js" : "ae4ccb2104e190e2543f2ee950f708298924de3c7aa44bb62b54884897f47708",
     "/mb2/js/utils/idb.js" : "cb280305f4fd0cc5da5bd1364e172be79bddd50e85bfe5bf45a403602efc6432",
-    "/mb2/js/send_dpt.js" : "5b089fc8de2468d9693465d08c92ccb6bff7f7dae5ec8a904b8c678f9b430237",
+    "/mb2/js/send_dpt.js" : "9c53c0c37696c4beff08c208d9e820556b31e93cb62f12ef1c174eab3ffac446",
     "/mb2/js/app.js" : "2b976625228bb0099c8f7479e3f40caba6b53c5c643bdf24e011abbc95b8139f",
     "/mb2/js/ble_common.js" : "d7558cf9e039171228e700d00578dcdecf43fc55d93c7c7609478bba8271d23a",
     "/mb2/js/ota.js" : "60689bff504670208951affde8f23f3092df87b28fc6e2eed80f7a13f8227fb1",
     "/mb2/manifest.json" : "ea29c9b0c24dc9d1263805929c9f50e4f0bad64bb39ba423d0e0bc3232675e8e",
-    "/mb2/" : "61a03dafafdc079e750df8b4e7707dab84ea7c0e0e411d5f699460a990126f82",
+    "/mb2/" : "0e0eb7a072093a5de384316eaf4722e6b2a4d36ced31bbe1f622f254270604ef",
     "/mb2/css/fontawesome-7.0.1.all.min.css" : "f6c5904966ef29cecdbc1d8d87240ac0fd595532db6475143e0e220924c688d0",
     "/mb2/css/bulma-1.0.2.css" : "113149035b8b7543113ca93d6f8c75a7ff4a73a1c0877d5e50c710aa1fe5f404",
     "/mb2/webfonts/fa-solid-900.woff2" : "ff6d96ef6f1b29124a8daa657809d480d7278401ab16320fdb3edf0b658d6492"

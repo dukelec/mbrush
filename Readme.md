@@ -72,7 +72,7 @@ Supported CDNET functional ports — all are general-purpose except the last one
  - #08: IAP firmware upgrade
  - #09: Print debug reporting
  - #0A: Waveform debug reporting
- - #14: Print file DPT transfer
+ - #14: Print file DPTZ transfer
 
 Parameter table (read/write via port #05; `F`: retained after power-off, `!`: takes effect after reboot):
 
@@ -83,7 +83,7 @@ Parameter table (read/write via port #05; `F`: retained after power-off, `!`: ta
 <tr> <td>0x0000</td> <td>magic_code</td>        <td>R/W</td>    <td>u16</td>    <td>0xcdcd</td>
      <td>Fixed value to check if flash contains a valid register table</td>
 </tr>
-<tr> <td>0x0002</td> <td>conf_ver</td>          <td>R/W</td>    <td>u16</td>    <td>0x0200</td>
+<tr> <td>0x0002</td> <td>conf_ver</td>          <td>R/W</td>    <td>u16</td>    <td>0x0300</td>
      <td>Register table version: high byte: major, low byte: minor</td>
 </tr>
 <tr> <td>0x0004</td> <td>conf_from</td>         <td>R</td>      <td>u8</td>     <td>0</td>
@@ -132,7 +132,7 @@ Parameter table (read/write via port #05; `F`: retained after power-off, `!`: ta
 </tr>
 <tr> <td>0x001c</td> <td>bus_tx_permit_len</td> <td>R/W/F!</td> <td>u16</td>    <td>20</td>
      <td>
-        Waiting time to allows sending (10 bits)<br>
+        TX permit wait time (10 bits)<br>
         (Time unit: 1 bit duration)
      </td>
 </tr>
@@ -141,7 +141,7 @@ Parameter table (read/write via port #05; `F`: retained after power-off, `!`: ta
 </tr>
 <tr> <td>0x0020</td> <td>bus_tx_pre_len</td>    <td>R/W/F!</td> <td>u8</td>     <td>1</td>
      <td>
-        Enable TX_EN duration before TX output (2 bits)<br>
+        TE pre-assert time (2 bits)<br>
         (Ignored in Arbitration mode)
      </td>
 </tr>
@@ -285,6 +285,9 @@ Parameter table (read/write via port #05; `F`: retained after power-off, `!`: ta
 <tr> <td>0x01f0</td> <td>c_id</td>            <td>R</td>        <td>u32[4]</td> <td>--</td>
      <td>Cartridge unique ID</td>
 </tr>
+<tr> <td>0x023c</td> <td>dptz_rx</td>        <td>R</td>         <td>u32</td>    <td>0</td>
+     <td>Transferred file length</td>
+</tr>
 <tr> <td>0x0240</td> <td>psram_f_start</td>  <td>R</td>         <td>u32</td>    <td>0</td>
      <td>Submitted file start address</td>
 </tr>
@@ -305,11 +308,12 @@ Parameter table (read/write via port #05; `F`: retained after power-off, `!`: ta
 
 ### Print Data Transfer
 
-Transfer files in DPT proprietary format; see later sections for image conversion.
+Transfer files in DPTZ proprietary format; see later sections for image conversion.
 
 Registers related to file transfer:
 
- - psram_f_start to psram_f_end: start and end addresses of submitted files; equal = no print file
+ - dptz_rx: size of the received DPTZ file; the data is decompressed as it is received, and the decompressed data is written to PSRAM
+ - psram_f_start to psram_f_end: start and end addresses of the written file; equal = no print file
  - psram_f_end to psram_w_offset: start and end addresses of file being written; equal = not written
  - p14_cnt and p14_err: status of 0x14 write file port; can be read and modified
 
@@ -322,10 +326,10 @@ Command definitions:
 
 ```
 write:  [data]
-return: [err_flag_8, p_state_8, enc_val_16, psram_w_offset_32]
+return: [err_flag_8, p_state_8, enc_val_16, psram_w_offset_32, dptz_rx_32]
 ```
 
-`data`: DPT file slice, max 251 bytes per transfer.
+`data`: DPTZ file slice, max 251 bytes per transfer.
 
 Temporary port number:
  - Bit3 = 1 → no reply; 0 → normal reply
@@ -337,10 +341,15 @@ Modifying p14_cnt / p14_err:
  - Write an empty packet (data length = 0) to 0x14 port
 
 Reply:
- - err_flag: 0 = no error; 1 = cnt error; subsequent writes discarded until error cleared
+ - err_flag:
+   - 0: No error
+   - 1: cnt error; subsequent writes are discarded until the error is cleared
+   - 2: Invalid DPTZ file header
+   - 3: Corrupted data cannot be decompressed; write 0x01 to d_ctrl to clear the transferred DPTZ content
  - p_state: current printer status
  - enc_val: current position encoder count
  - psram_w_offset: psram_w_offset value when current packet was successfully written
+ - dptz_rx_32: dptz_rx value when current packet was successfully received
 
 
 #### Efficient Transfer Method
@@ -373,7 +382,7 @@ To be implemented: append data to a submitted file during printing to support un
 
 ```
 $ cd cli_tools/serial_send_file
-$ ./send_dpt.py --file xxx.dpt
+$ ./send_dpt.py --file xxx.dptz
 ```
 
 You can add the `--verbose` option to view low-level serial packets.
@@ -490,4 +499,3 @@ Without `-1`, multiple lines are generated, suitable for printing large content 
 For full parameter details, see the help:
 
 `$ node dpconv.js --help`
-

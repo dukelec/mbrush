@@ -12,7 +12,8 @@ const sub_size1 = 244 - 2;
 const sub_size2 = 495 - 4;
 
 const RP_d_ctrl = 0x01ad;
-const RP_w_offset = 0x0248;
+const RP_dptz_rx = 0x023c;
+const RP_p14_cnt = 0x024c;
 
 
 function prepare_tx_pkts1(dat) {
@@ -68,7 +69,7 @@ function prepare_tx_pkts2(dat) {
 }
 
 
-async function write_data() {
+async function write_data(dptz_size) {
     let pend_ret = [];
     let w_idx = 0;
     let progress = -1;
@@ -113,22 +114,28 @@ async function write_data() {
                 while (true) {
                     if (!csa.ble_mosi || ++retry_cnt > 3)
                         return -1;
-                    let csa_dat = await csa_read(RP_w_offset, 6);
-                    if (csa_dat == null || csa_dat[0] != 5)
+                    let csa_dat = await csa_read(RP_dptz_rx, 18);
+                    if (csa_dat == null || csa_dat[0] != 5 || csa_dat.length < 21)
                         continue;
                     console.log(` - retry rx: ${dat2hex(csa_dat)}`);
                     let dv = new DataView(csa_dat.buffer);
-                    let csa_ofs = dv.getUint32(3, true);
-                    let csa_cnt = dv.getUint8(7, true);
-                    let csa_err = dv.getUint8(8, true);
-                    let ack_idx = Math.floor(csa_ofs / sub_size);
-                    let set_ofs = ack_idx * sub_size;
+                    let dptz_rx = dv.getUint32(3, true);
+                    let csa_cnt = dv.getUint8(19, true);
+                    let csa_err = dv.getUint8(20, true);
+                    if (dptz_rx > dptz_size) {
+                        console.log(`dptz_rx error: ${dptz_rx} > ${dptz_size}`);
+                        return -1;
+                    }
+                    if (dptz_rx == dptz_size) {
+                        console.log(`dptz_rx ${dptz_rx}, all data received`);
+                        w_idx = csa.dpt_pkts.length;
+                        pend_ret = []; // clear
+                        break;
+                    }
+                    let ack_idx = Math.floor(dptz_rx / sub_size);
                     let set_cnt = csa.dpt_pkts[ack_idx][0] & 7;
-                    console.log(`csa_offset ${csa_ofs} -> ${set_ofs} (${w_idx * sub_size}), cnt ${csa_cnt} -> ${set_cnt}, err ${csa_err}`);
-                    let set_dat = new Uint8Array([0x00, 0x00, 0x00, 0x00, set_cnt, 0x00]);
-                    dv = new DataView(set_dat.buffer);
-                    dv.setInt32(0, set_ofs, true);
-                    await csa_write(RP_w_offset, set_dat);
+                    console.log(`dptz_rx ${dptz_rx} -> ${ack_idx * sub_size} (${w_idx * sub_size}), cnt ${csa_cnt} -> ${set_cnt}, err ${csa_err}`);
+                    await csa_write(RP_p14_cnt, new Uint8Array([set_cnt, 0x00]));
                     w_idx = ack_idx;
                     pend_ret = []; // clear
                     break;
@@ -155,7 +162,7 @@ async function send_dpt(dpt_dat) {
     await csa_write(RP_d_ctrl, new Uint8Array([0x10])); // clear file
     console.log(`Writing data ...`);
     let start_time = performance.now();
-    let ret = await write_data();
+    let ret = await write_data(dpt_dat.length);
     let end_time = performance.now();
     let delta_time = (end_time - start_time) / 1000;
     let speed = dpt_dat.length / delta_time / 1000;
