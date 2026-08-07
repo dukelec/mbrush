@@ -6,14 +6,12 @@
  */
 
 import { dat2hex, readable_size, dat_append } from './utils/helper.js'
-import { send_command, csa_write, csa_read } from './ble_common.js'
+import { send_command, csa_write } from './ble_common.js'
 
 const sub_size1 = 244 - 2;
 const sub_size2 = 495 - 4;
 
 const RP_d_ctrl = 0x01ad;
-const RP_dptz_rx = 0x023c;
-const RP_p14_cnt = 0x024c;
 
 
 function prepare_tx_pkts1(dat) {
@@ -69,18 +67,67 @@ function prepare_tx_pkts2(dat) {
 }
 
 
+// map resume position (dptz bytes consumed by printer) to dpt_pkts index;
+// half: first sub-frame of a dual-frame entry already received
+function resume_idx(pos) {
+    let cur = 0;
+    for (let i = 0; i < csa.dpt_pkts.length; i++) {
+        if (pos == cur)
+            return [i, false];
+        const e = csa.dpt_pkts[i];
+        cur += e.length - (e.length <= 253 ? 2 : 4);
+        if (pos < cur)
+            return [i, true];
+    }
+    return [csa.dpt_pkts.length, false];
+}
+
+// empty pkt clears recoverable errors and reports progress; its reply has bit7
+// of err_flag set and is queued after every pending reply
+async function sync_recover(dptz_size) {
+    for (let retry = 0; retry < 3; retry++) {
+        if (!csa.ble_mosi)
+            return -1;
+        await send_command(new Uint8Array([0x60, 20]), false);
+        while (true) {
+            let rx = await csa.ble_rx_q.get(2500);
+            if (rx == null)
+                break; // resend empty pkt
+            if (rx[0] != 20 || !(rx[2] & 0x80))
+                continue; // stale reply
+            let err = rx[2] & 0x7f;
+            let dv = new DataView(rx.buffer);
+            let dptz_rx = dv.getUint32(10, true);
+            console.log(` - sync: err ${err}, dptz_rx ${dptz_rx}`);
+            if (err == 3 || dptz_rx > dptz_size) {
+                console.log('unrecoverable, clear draft');
+                await csa_write(RP_d_ctrl, new Uint8Array([0x01]));
+                return -1;
+            }
+            return dptz_rx; // 0: restart from the beginning
+        }
+    }
+    return -1;
+}
+
 async function write_data(dptz_size) {
     let pend_ret = [];
     let w_idx = 0;
+    let w_half = false;
     let progress = -1;
-    const sub_size = csa.dpt_pkts[0].length <= 244 ? sub_size1 : sub_size2;
-    
+    let err_cnt = 0;
+    let err_pos = -1;
+
     while (true) {
         if (pend_ret.length < 2 && w_idx < csa.dpt_pkts.length) {
             if (csa.conf.debug_level >= 3)
                 console.log(` - tx group ... ${pend_ret.length}`);
             while (true) {
                 let dat = csa.dpt_pkts[w_idx];
+                if (w_half) {
+                    dat = dat.slice(253); // second sub-frame only
+                    w_half = false;
+                }
                 await send_command(dat, false);
                 w_idx++;
                 let last_port = dat.length <= 253 ? dat[0] : dat[253];
@@ -94,10 +141,15 @@ async function write_data(dptz_size) {
                 progress = last_progress;
                 console.log(`Progress: ${progress}% (${w_idx} / ${csa.dpt_pkts.length})`);
             }
-            
+
         } else if (pend_ret.length) {
             let rx = await csa.ble_rx_q.get(2500);
-            
+
+            if (rx != null && (rx[0] != 20 || (rx[2] & 0x80))) {
+                if (csa.conf.debug_level >= 2)
+                    console.log(` - skip rx: ${dat2hex(rx)}`);
+                continue; // foreign port or stale sync reply
+            }
             if (rx != null && rx[2] == 0) { // no err
                 if (rx[1] == pend_ret[0]) {
                     if (csa.conf.debug_level >= 2)
@@ -110,36 +162,21 @@ async function write_data(dptz_size) {
                     console.log(" - rx port error");
                 }
             } else {
-                let retry_cnt = 0;
-                while (true) {
-                    if (!csa.ble_mosi || ++retry_cnt > 3)
-                        return -1;
-                    let csa_dat = await csa_read(RP_dptz_rx, 18);
-                    if (csa_dat == null || csa_dat[0] != 5 || csa_dat.length < 21)
-                        continue;
-                    console.log(` - retry rx: ${dat2hex(csa_dat)}`);
-                    let dv = new DataView(csa_dat.buffer);
-                    let dptz_rx = dv.getUint32(3, true);
-                    let csa_cnt = dv.getUint8(19, true);
-                    let csa_err = dv.getUint8(20, true);
-                    if (dptz_rx > dptz_size) {
-                        console.log(`dptz_rx error: ${dptz_rx} > ${dptz_size}`);
-                        return -1;
-                    }
-                    if (dptz_rx == dptz_size) {
-                        console.log(`dptz_rx ${dptz_rx}, all data received`);
-                        w_idx = csa.dpt_pkts.length;
-                        pend_ret = []; // clear
-                        break;
-                    }
-                    let ack_idx = Math.floor(dptz_rx / sub_size);
-                    let set_cnt = csa.dpt_pkts[ack_idx][0] & 7;
-                    console.log(`dptz_rx ${dptz_rx} -> ${ack_idx * sub_size} (${w_idx * sub_size}), cnt ${csa_cnt} -> ${set_cnt}, err ${csa_err}`);
-                    await csa_write(RP_p14_cnt, new Uint8Array([set_cnt, 0x00]));
-                    w_idx = ack_idx;
-                    pend_ret = []; // clear
-                    break;
+                let pos = await sync_recover(dptz_size);
+                if (pos < 0)
+                    return -1;
+                err_cnt = pos > err_pos ? 1 : err_cnt + 1;
+                err_pos = pos;
+                if (err_cnt > 5) {
+                    console.log('no progress, abort');
+                    return -1;
                 }
+                if (pos == dptz_size)
+                    console.log(`dptz_rx ${pos}, all data received`);
+                else
+                    console.log(`dptz_rx ${pos}, resume (was pkt ${w_idx})`);
+                [w_idx, w_half] = resume_idx(pos);
+                pend_ret = []; // clear
             }
         } else {
             if (csa.conf.debug_level >= 2)

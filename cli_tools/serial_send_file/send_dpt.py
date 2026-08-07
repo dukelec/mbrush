@@ -23,8 +23,6 @@ R_save_conf = 0x0007 # len: 1
 R_p_ctrl = 0x01ac
 R_d_ctrl = 0x01ad
 R_e_ctrl = 0x01ae
-R_dptz_rx = 0x023c
-R_p14_cnt = 0x024c
 
 import sys, os
 import struct
@@ -132,9 +130,34 @@ def clear_data_rx():
         s.clear()
 
 
+# empty pkt clears recoverable errors and reports progress; its reply has bit7
+# of err_flag set and is queued after every pending reply
+def sync_recover(dptz_size):
+    for _ in range(3):
+        clear_data_rx()
+        sock_list[0].sendto(b'', (target_addr, 20))
+        while True:
+            rx, _ = sock_list[0].recvfrom(timeout=2.5)
+            if rx == None:
+                break # resend empty pkt
+            if not (rx[0] & 0x80):
+                continue # stale reply
+            err = rx[0] & 0x7f
+            dptz_rx, = struct.unpack_from("<I", rx, 8)
+            print(f'  sync: err {err}, dptz_rx {dptz_rx}')
+            if err == 3 or dptz_rx > dptz_size:
+                print('unrecoverable, clear draft')
+                csa_write(R_d_ctrl, b'\x01')
+                return -1
+            return dptz_rx # 0: restart from the beginning
+    return -1
+
+
 def write_data(dpt_pkts, dptz_size):
     pend_ret = []
     w_idx = 0
+    err_cnt = 0
+    err_pos = -1
     clear_data_rx()
 
     while True:
@@ -149,36 +172,28 @@ def write_data(dpt_pkts, dptz_size):
         elif len(pend_ret):
             port = pend_ret[0]
             rx, _ = sock_list[port & 0xf].recvfrom(timeout=2.5)
+            if rx != None and (rx[0] & 0x80):
+                continue # stale sync reply
             if rx != None and len(rx) and rx[0] == 0:
                 print(f'  write ret: {rx.hex()}')
                 pend_ret.pop(0)
             else:
                 if rx != None:
                     print(f'  write ret error: {rx.hex()}')
-                clear_data_rx()
-                csa_dat = None
-                for _ in range(3):
-                    csa_dat = csa_read(R_dptz_rx, 18)
-                    if csa_dat != None and len(csa_dat) >= 19:
-                        break
-                if csa_dat == None or len(csa_dat) < 19:
+                pos = sync_recover(dptz_size)
+                if pos < 0:
                     return -1
-                print(f'  retry rx: {csa_dat.hex()}')
-                dptz_rx, csa_cnt, csa_err = struct.unpack_from("<I12xBB", csa_dat, 1)
-                if dptz_rx > dptz_size:
-                    print(f'dptz_rx error: {dptz_rx} > {dptz_size}')
+                err_cnt = 1 if pos > err_pos else err_cnt + 1
+                err_pos = pos
+                if err_cnt > 5:
+                    print('no progress, abort')
                     return -1
-                if dptz_rx == dptz_size:
-                    print(f'dptz_rx {dptz_rx}, all data received')
+                if pos == dptz_size:
+                    print(f'dptz_rx {pos}, all data received')
                     w_idx = len(dpt_pkts)
-                    pend_ret.clear()
-                    clear_data_rx()
-                    break
-                ack_idx = dptz_rx // sub_size
-                set_cnt = dpt_pkts[ack_idx][0] & 7
-                print(f'dptz_rx {dptz_rx} -> {ack_idx * sub_size} ({w_idx * sub_size}), cnt {csa_cnt} -> {set_cnt}, err {csa_err}')
-                csa_write(R_p14_cnt, struct.pack("<BB", set_cnt, 0))
-                w_idx = ack_idx
+                else:
+                    print(f'dptz_rx {pos}, resume from pkt {pos // sub_size} (was {w_idx})')
+                    w_idx = pos // sub_size
                 pend_ret.clear()
                 clear_data_rx()
         else:

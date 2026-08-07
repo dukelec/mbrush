@@ -322,6 +322,8 @@ The storage is a circular buffer of 8 MB. To calculate file size via subtracti
 
 #### Function Port 0x14: Write Print Data
 
+The description in this section applies to firmware v4.0 and above.
+
 Command definitions:
 
 ```
@@ -333,19 +335,20 @@ return: [err_flag_8, p_state_8, enc_val_16, psram_w_offset_32, dptz_rx_32]
 
 Temporary port number:
  - Bit3 = 1 → no reply; 0 → normal reply
- - Bit[2:0] = auto-increment sequence cnt; first packet = 0; if sequence error, set error flag and discard data
+ - Bit[2:0] = auto-increment sequence cnt; the first packet of each DPTZ file = 0; if sequence error, set error flag and discard data
 
 Modifying p14_cnt / p14_err:
  - Directly read/write p14_cnt / p14_err registers
  - Clear via d_ctrl register
- - Write an empty packet (data length = 0) to 0x14 port
+ - Write an empty packet (data length = 0) to 0x14 port: clears recoverable errors (err_flag 1 and 2) without modifying p14_cnt
 
 Reply:
- - err_flag:
+ - err_flag (bit[5:0]):
    - 0: No error
    - 1: cnt error; subsequent writes are discarded until the error is cleared
    - 2: Invalid DPTZ file header
    - 3: Corrupted data cannot be decompressed; write 0x01 to d_ctrl to clear the transferred DPTZ content
+ - err_flag bit7 = 1: reply to an empty packet (err bits report the value before clearing)
  - p_state: current printer status
  - enc_val: current position encoder count
  - psram_w_offset: psram_w_offset value when current packet was successfully written
@@ -359,6 +362,12 @@ To improve throughput, the following method can be used:
 
  1. Send up to two groups of packets at a time, each group containing multiple packets; only the last packet requires a reply.
  2. After receiving the reply for the previous group, if no error occurred, send one more group.
+ 3. On an error reply or a reply timeout: stop sending, send an empty packet, and discard
+    incoming replies until the reply with bit7 of err_flag set arrives — replies are sent
+    in order, so it is always the last one and no stale reply can follow it. Then:
+    - err bits = 3: write 0x01 to d_ctrl, then retransmit the file
+    - Otherwise: resume from the dptz_rx of the reply (always at packet granularity,
+      0 = retransmit from the beginning)
 
 Example (one group of 5 packets):  
 <img src="docs/img/send_file.svg">
