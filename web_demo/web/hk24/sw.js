@@ -6,9 +6,9 @@
 
 // update file list by gen_sw_list.py
 
-var cache_name = 'hk24-2.1';
+var cache_name = 'hk24-2.2';
 var cache_files = {
-    "/hk24/" : "70cbd28a9a08fe7fe42e9553aaeeebe89c1fb1790609706429596d0fc5374c2d",
+    "/hk24/" : "28e3fcbea25f2256836d5c516c13b1262b6e42a5a00dffa518fe70070ce077d7",
     "/hk24/css/bulma-1.0.2.css" : "113149035b8b7543113ca93d6f8c75a7ff4a73a1c0877d5e50c710aa1fe5f404",
     "/hk24/css/fontawesome-7.0.1.all.min.css" : "f6c5904966ef29cecdbc1d8d87240ac0fd595532db6475143e0e220924c688d0",
     "/hk24/img/icon.png" : "f60de1de67d87f4984317c173e5f63dfa8d6b141e23f749f64154b94fdbb57a4",
@@ -21,7 +21,7 @@ var cache_files = {
     "/hk24/js/workers/dpc.js" : "94b7e8abad899d6e0f45c44ca541dd6310e438c048ff621b2906f0e6cc1c65bc",
     "/hk24/js/workers/dpc_hk24/dpc-m.js" : "6dc0039eab6651cb8d0b70ae06c5a36b12626798a24493090e364291b5e0cb78",
     "/hk24/js/workers/dpc_hk24/dpconv.js" : "55e23c07776b0ef6474b5023e09a6fac6e8d4a8351434246272ef83b309b0327",
-    "/hk24/js/workers/dpc_hk24/dpconv.wasm" : "1352eb2f65565eb7d0dbc1b9688214a5a48aa7faf5aa7186187e111f6b71567b",
+    "/hk24/js/workers/dpc_hk24/dpconv.wasm" : "8732511da41b0e0161a2ca813a199cd0e388c2c3c7cbc227bacb00999c9ca0a5",
     "/hk24/manifest.json" : "11fad839643c5a7a3a7503b983d297dec59dda578af4b1912a5735a8f9a82567",
     "/hk24/webfonts/fa-solid-900.woff2" : "ff6d96ef6f1b29124a8daa657809d480d7278401ab16320fdb3edf0b658d6492"
 };
