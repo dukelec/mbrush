@@ -29,7 +29,7 @@ button {
 <section class="section">
     <div class="container is-flex is-align-items-center is-justify-content-space-between">
         <h1 class="title is-size-4">HKPrinter Web App</h1>
-        <p><span id="app_name"></span> / v2.2</p>
+        <p><span id="app_name"></span> / v2.3</p>
     </div>
 
     <div class="container">
@@ -40,6 +40,18 @@ button {
         <br>
         <img id="img_preview" style="height: 120px; width: 240px; border: 1px solid #ccc; padding: 1px;"></img>
         <br>
+        <div class="is-inline-flex" style="align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <label class="checkbox"><input type="checkbox" id="multi_row_en" onchange="conv_change()"> Multi-row</label>
+            Max Size: <input type="text" id="out_w_mm" size="3" value="50" onchange="conv_change()">
+            x <input type="text" id="out_h_mm" size="3" value="50" onchange="conv_change()"> mm
+            <label class="checkbox"><input type="checkbox" id="feather_en" checked onchange="conv_change()"> Feather</label>
+        </div>
+        <br>
+        <div class="is-inline-flex" style="align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            Saturation: <input type="text" id="conv_cs" size="3" value="100" onchange="conv_change()"> %
+            Ink: <input type="text" id="conv_ink" size="3" value="100" onchange="conv_change()"> %
+            <span id="conv_info"></span>
+        </div>
         <br>
         <button class="button is-small" id="connect_btn"><i class="fa fa-link"></i> &nbsp; BLE Connect</button>
         <button class="button is-small" id="disconnect_btn" disabled><i class="fa fa-unlink"></i> &nbsp; Disconnect</button>

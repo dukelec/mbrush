@@ -138,7 +138,7 @@ async function flash_reload() {
 }
 
 // erase the stored files (the used range plus the len word after it)
-async function flash_clear() {
+async function flash_clear(reload=true) {
     let info = await flash_scan();
     if (!info)
         return -1;
@@ -147,13 +147,15 @@ async function flash_clear() {
     if (await flash_erase(FLASH_BASE, len))
         return -1;
     console.log('Flash: all images cleared');
-    await flash_reload();
-    await flash_update_info();
+    if (reload) {
+        await flash_reload();
+        await flash_update_info();
+    }
     return 0;
 }
 
 // append a dptz file after the stored ones
-async function flash_append(dpt) {
+async function flash_append(dpt, reload=true) {
     let info = await flash_update_info();
     if (!info)
         return -1;
@@ -209,9 +211,11 @@ async function flash_append(dpt) {
         }
     }
     console.log(`Flash: image #${info.files.length} saved`);
-    await flash_reload();
-    await flash_update_info();
+    if (reload) {
+        await flash_reload();
+        await flash_update_info();
+    }
     return 0;
 }
 
-export { flash_update_info, flash_clear, flash_append };
+export { flash_update_info, flash_reload, flash_clear, flash_append };

@@ -204,10 +204,11 @@ async function send_dpt(dpt_dat) {
     let delta_time = (end_time - start_time) / 1000;
     let speed = dpt_dat.length / delta_time / 1000;
     if (!ret) {
-        console.log(`Data write completed: ${readable_size(dpt_dat.length)} (${csa.prj.dpt.length} B), ` +
+        console.log(`Data write completed: ${readable_size(dpt_dat.length)} (${dpt_dat.length} B), ` +
                     `${delta_time.toFixed(3)} Sec, ${speed.toFixed(3)} KB/s`);
         await csa_write(RP_d_ctrl, new Uint8Array([0x02])); // submit file
     }
+    return ret;
 }
 
 

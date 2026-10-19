@@ -6,22 +6,23 @@
 
 // update file list by gen_sw_list.py
 
-var cache_name = 'hk14-2.2';
+var cache_name = 'hk14-2.3';
 var cache_files = {
-    "/hk14/" : "28e3fcbea25f2256836d5c516c13b1262b6e42a5a00dffa518fe70070ce077d7",
+    "/hk14/" : "39ca3b0a1404a49e9132ba8607d5d470f4f61a80326d3626ce8ff1f96ad208e2",
     "/hk14/css/bulma-1.0.2.css" : "113149035b8b7543113ca93d6f8c75a7ff4a73a1c0877d5e50c710aa1fe5f404",
     "/hk14/css/fontawesome-7.0.1.all.min.css" : "f6c5904966ef29cecdbc1d8d87240ac0fd595532db6475143e0e220924c688d0",
     "/hk14/img/icon.png" : "f60de1de67d87f4984317c173e5f63dfa8d6b141e23f749f64154b94fdbb57a4",
-    "/hk14/js/app.js" : "2b976625228bb0099c8f7479e3f40caba6b53c5c643bdf24e011abbc95b8139f",
-    "/hk14/js/ble_common.js" : "d7558cf9e039171228e700d00578dcdecf43fc55d93c7c7609478bba8271d23a",
+    "/hk14/js/app.js" : "412278bd65c3dfc23f75caa7cf61495d95259f01f98cd06b5f8a9c7cdcde9fce",
+    "/hk14/js/ble_common.js" : "c47e7d7fc154ce4740dcff207f3e3c67967e8666f893f1a9b8d7f32d34be1f6f",
+    "/hk14/js/flash_store.js" : "a0972ae0f81835e1b5944f0ddef6502843b903ad1870aeb0db4d9a5638c04d02",
     "/hk14/js/ota.js" : "60689bff504670208951affde8f23f3092df87b28fc6e2eed80f7a13f8227fb1",
-    "/hk14/js/send_dpt.js" : "6b43a5178f610661d2bcbfeecf9b55c1440f13bfa175de38cba8cfa95bca09c0",
+    "/hk14/js/send_dpt.js" : "e02db86a96cc23fa0af44fdff6ec0cbe1f7fb5ecb01faeeea4bc06153f7187e0",
     "/hk14/js/utils/helper.js" : "ae4ccb2104e190e2543f2ee950f708298924de3c7aa44bb62b54884897f47708",
     "/hk14/js/utils/idb.js" : "cb280305f4fd0cc5da5bd1364e172be79bddd50e85bfe5bf45a403602efc6432",
-    "/hk14/js/workers/dpc.js" : "94b7e8abad899d6e0f45c44ca541dd6310e438c048ff621b2906f0e6cc1c65bc",
-    "/hk14/js/workers/dpc_hk14/dpc-m.js" : "6dc0039eab6651cb8d0b70ae06c5a36b12626798a24493090e364291b5e0cb78",
+    "/hk14/js/workers/dpc.js" : "99579113183cc2b77588a332c2ae4b3c5d26212aee95c5a239d20d10246550dd",
+    "/hk14/js/workers/dpc_hk14/dpc-m.js" : "0810ed57a2834b1ed23338a1d8e8e30e8fb03c85f2a65bb0e0ff7b1382dfe376",
     "/hk14/js/workers/dpc_hk14/dpconv.js" : "55e23c07776b0ef6474b5023e09a6fac6e8d4a8351434246272ef83b309b0327",
-    "/hk14/js/workers/dpc_hk14/dpconv.wasm" : "f9ba7668fdda9fcb76036a12bfcb4ba55f8f0686624331c4db62b210edea060c",
+    "/hk14/js/workers/dpc_hk14/dpconv.wasm" : "1f04ae7f3007d7451ee47cad9e63ee4990dc094367cd1229782fdaa583b5e4ea",
     "/hk14/manifest.json" : "10ede3c3ac53231b3867653545ea745916ca37c5e6fc907baf54a585915decfa",
     "/hk14/webfonts/fa-solid-900.woff2" : "ff6d96ef6f1b29124a8daa657809d480d7278401ab16320fdb3edf0b658d6492"
 };
