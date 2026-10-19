@@ -10,6 +10,7 @@ import { Queue, read_file, val2hex, load_img, img2png, hex2bin, download, crc16,
 import { send_command, csa_write, csa_read, ble_connect, ble_disconnect, read_dev_info } from './ble_common.js';
 import { send_dpt } from './send_dpt.js';
 import { ota_write } from './ota.js';
+import { flash_update_info, flash_clear, flash_append } from './flash_store.js';
 import { dpc } from './workers/dpc.js';
 
 const R_save_conf = 0x0007;
@@ -211,26 +212,33 @@ document.getElementById('open_hex').onchange = async function() {
 };
 
 
-document.getElementById('connect_btn').onclick = ble_connect;
+document.getElementById('connect_btn').onclick = async () => {
+    await ble_connect();
+    if (csa.ble_mosi) {
+        document.getElementById('flash_clear_btn').disabled = false;
+        await flash_update_info();
+    }
+};
 document.getElementById('disconnect_btn').onclick = ble_disconnect;
-document.getElementById('dev_info_btn').onclick = read_dev_info;
+document.getElementById('dev_info_btn').onclick = async () => {
+    await read_dev_info();
+    await flash_update_info();
+};
+document.getElementById('flash_clear_btn').onclick = async () => {
+    if (!confirm('Erase all images stored in the device flash?'))
+        return;
+    await flash_clear();
+};
 document.getElementById('write_dat_btn').onclick = async () => {
     if (!csa.prj.dpt) {
         console.log(`No image selected!`);
         return;
     }
     console.log(`Data size: ${readable_size(csa.prj.dpt.length)} (${csa.prj.dpt.length} B)`);
-    if (!csa.conf.write_flash) {
+    if (csa.conf.write_flash)
+        await flash_append(csa.prj.dpt); // stored in flash, the device sends it to the printer
+    else
         await send_dpt(csa.prj.dpt);
-        return;
-    }
-    let crc = crc16(csa.prj.dpt);
-    let hdr = new Uint8Array([0, 0, 0, 0]);
-    let dv = new DataView(hdr.buffer);
-    dv.setUint32(0, csa.prj.dpt.length, true);
-    let crc_dat = new Uint8Array([crc & 0xff, crc >> 8]);
-    const bin = dat_append(dat_append(hdr, csa.prj.dpt), crc_dat);
-    await ota_write(bin, 0x00187000, false);
 };
 
 document.getElementById('at32_ota_btn').onclick = async () => {

@@ -82,6 +82,8 @@ async function ble_connect() {
             document.getElementById('disconnect_btn').disabled = true;
             document.getElementById('dev_info_btn').disabled = true;
             document.getElementById('write_dat_btn').disabled = true;
+            document.getElementById('flash_clear_btn').disabled = true;
+            document.getElementById('flash_info').innerText = '';
         }, { once: true });
 
         csa.ble_ser = await csa.ble_dev.gatt.connect();
