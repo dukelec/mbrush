@@ -1,0 +1,178 @@
+{
+    // fmt: [c]: string, b: int8_t, B: uint8_t, h: int16_t, H: uint16_t, i: int32_t, I: uint32_t, f: float
+    // show: 0: normal, 1: hex, 2: bytes
+    "reg": {
+        "list": [
+            [ 0x0000, 2, "H", 1, "magic_code", "Magic code 0xcdcd, marks a valid register table in flash" ],
+            [ 0x0002, 2, "H", 1, "conf_ver", "Register table version, high byte: major, low byte: minor" ],
+            [ 0x0004, 1, "B", 1, "conf_from", "0: default config, 1: all from flash, 2: default from bt_mac on (only major version matches)" ],
+            [ 0x0005, 1, "B", 0, "do_reboot", "Write 1: reboot to bootloader, 2: normal reboot", [0, 2] ],
+            [ 0x0007, 1, "b", 0, "save_conf", "Write 1 to save current config to flash", [0, 1] ],
+
+            [ 0x0009, 1, "b", 0, "dbg_en", "1: report debug prints to host, 0: do not report" ],
+
+            [ 0x000c, 1, "B", 1, "bus_cfg_mac", "RS-485 address, range: 0~254", [0, 254] ],
+            [ 0x0010, 4, "I", 0, "bus_cfg_baud_l", "Baud rate of the first byte, default 2 Mbps" ],
+            [ 0x0014, 4, "I", 0, "bus_cfg_baud_h", "Baud rate of the following bytes, default 20 Mbps" ],
+            [ 0x0018, 2, "[B]", 1, "bus_cfg_filter_m", "Multicast address filter" ],
+            [ 0x001a, 1, "B", 0, "bus_cfg_mode", "0: traditional half-duplex, 1: arbitration, 2: break sync", [0, 2] ],
+            [ 0x001c, 2, "H", 0, "bus_cfg_tx_permit_len", "Idle time before tx is permitted, unit: bit time" ],
+            [ 0x001e, 2, "H", 0, "bus_cfg_max_idle_len", "Max idle wait time in break sync mode, unit: bit time" ],
+            [ 0x0020, 1, "B", 0, "bus_cfg_tx_pre_len", "TX_EN lead time before tx, unit: bit time, ignored in arbitration mode" ],
+            [ 0x0024, 1, "B", 1, "bt_mac", "RS-485 address of the BLE board" ],
+            [ 0x0026, 2, "H", 0, "auto_spit_period", "Auto spit period in seconds, 0: disabled; needs USB power to stay on" ],
+            [ 0x0028, 2, "H", 0, "auto_spit_timer", "Auto spit countdown in seconds, reset by printer operations" ],
+            [ 0x002a, 1, "B", 1, "dbg_raw_msk", "1: enable waveform debug" ],
+            [ 0x002c, 16, "{H,H}", 1, "dbg_raw", "Waveform debug data sources: {address, length} × 4" ],
+
+            [ 0x0070, 4, "f", 0, "c_t0", "Cartridge temperature calibration (unused)" ],
+            [ 0x0074, 16, "[f]", 0, "c_r0", "Cartridge temperature calibration (unused)" ],
+            [ 0x00b6, 1, "B", 0, "enc_cfg", "bit1: input mode, 0: A/B, 1: STEP/DIR; bit0: swap A/B or invert DIR; applied after save & reboot", [0, 3] ],
+            [ 0x00b7, 1, "B", 0, "enc_div", "Set by the dpt file; bit7: input × 2; bit[6:0]: input ÷ (val + 1)" ],
+            [ 0x00b8, 2, "H", 1, "enc_trig_f", "Encoder position to start printing when moving forward" ],
+            [ 0x00ba, 2, "H", 1, "enc_trig_b", "Encoder position to start printing when moving backward" ],
+            [ 0x00bc, 2, "H", 0, "const_period", "Non-zero: constant speed printing, period in µs" ],
+            [ 0x00be, 1, "b", 0, "print_dir", "Set by the dpt file; 0: print when moving forward, 1: backward", [0, 1] ],
+
+            [ 0x0141, 1, "B", 1, "p_state", "bit[2:0] = 0: idle; bit7: temp error, 6: no ink (unused), 5: cartridge invalid, 4: no cartridge, 3: no data, 2: printing, 1: spitting, 0: warming" ],
+            [ 0x0142, 2, "H", 1, "enc_val", "Position encoder value, cleared by e_ctrl" ],
+            [ 0x0144, 4, "[B]", 1, "c_state", "One byte per cartridge, CMYK order; bit4: 0 temp low, 1 temp high; bit3: temp error, 2: no ink (unused), 1: invalid, 0: not detected" ],
+            [ 0x0148, 16, "[f]", 0, "c_ink_count", "Ink usage record, CMYK order, unit: mL" ],
+            [ 0x0158, 16, "[f]", 0, "c_temperature", "Printhead temperature, CMYK order" ],
+            [ 0x0168, 4, "f", 0, "temperature", "Ambient temperature" ],
+            [ 0x016c, 4, "i", 0, "prt_enc_pos", "Print move position, see Print Position in the Readme" ],
+            [ 0x0170, 4, "i", 0, "prt_dat_pos", "File print position, negative while warming, see Print Position in the Readme" ],
+            [ 0x0174, 4, "f", 0, "voltage", "Single cell LiPo battery voltage (V)" ],
+            [ 0x0178, 4, "f", 0, "current", "Printhead current (mA)" ],
+            [ 0x017c, 1, "b", 0, "dc_online", "1: charger connected" ],
+            [ 0x01ac, 1, "B", 1, "p_ctrl", "Write 0x01: warm, 0x02: spit, 0x04: print, 0x10: cancel job", [[0, 2], [4, 4], [16, 16], [128, 128]] ],
+            [ 0x01ad, 1, "B", 1, "d_ctrl", "Write 0x01: clear unsubmitted data, 0x02: submit file, 0x10: clear all data", [[0, 2], [16, 16]] ],
+            [ 0x01ae, 1, "B", 1, "e_ctrl", "Write 0x10: clear enc_val", [[0, 0], [16, 16]] ],
+            [ 0x01af, 1, "B", 1, "c_ctrl", "Write 0x08: calibrate cartridge temperature (unused)", [[0, 0], [8, 8]] ],
+
+            [ 0x01f0, 16, "[I]", 1, "c_id", "Cartridge unique id" ],
+            [ 0x0240, 4, "I", 1, "psram_f_start", "Start address of the submitted file (8 MB ring buffer)" ],
+            [ 0x0244, 4, "I", 1, "psram_f_end", "End address of the submitted file, equals start: no file" ],
+            [ 0x0248, 4, "I", 1, "psram_w_offset", "End address of the file being written" ],
+            [ 0x024c, 1, "B", 1, "p14_cnt", "Sequence cnt of file transfer port 0x14" ],
+            [ 0x024d, 1, "B", 0, "p14_err", "Port 0x14 error, 0: none, 1: cnt error, 2: invalid file header, 3: corrupted data" ],
+
+            [ 0x0298, 1, "B", 0, "ink_rec_bank", "Ink record bank, for debugging only" ],
+            [ 0x0299, 1, "B", 0, "ink_rec_idx", "Ink record index, for debugging only" ]
+        ],
+
+        // section titles over the list: the register a section starts with -> title
+        "seps": {
+            "magic_code": "System",
+            "dbg_en": "Debug",
+            "bus_cfg_mac": "Bus (save & reboot to apply)",
+            "bt_mac": "Bluetooth",
+            "auto_spit_period": "Auto spit",
+            "dbg_raw_msk": "Waveform debug",
+            "c_t0": "Cartridge",
+            "enc_cfg": "Encoder",
+            "p_state": "Status",
+            "p_ctrl": "Control",
+            "c_id": "Cartridge id",
+            "psram_f_start": "File transfer",
+            "ink_rec_bank": "Ink record (debug)"
+        },
+
+        // button groups
+        "sets": {
+            "reg": {
+                "r": [["magic_code","conf_from"],["do_reboot","save_conf"],["dbg_en"],["bus_cfg_mac","bus_cfg_tx_pre_len"],["bt_mac"],["auto_spit_period","auto_spit_timer"],["dbg_raw_msk","dbg_raw"],["c_t0","c_r0"],["enc_cfg"],["enc_div","enc_trig_b"],["const_period"],["print_dir"],["p_state","c_state"],["c_ink_count","temperature"],["prt_enc_pos","prt_dat_pos"],["voltage","dc_online"],["p_ctrl","c_ctrl"],["c_id"],["psram_f_start","psram_w_offset"],["p14_cnt","p14_err"],["ink_rec_bank","ink_rec_idx"]],
+                "w": [["magic_code"],["conf_ver"],["do_reboot"],["save_conf"],["dbg_en"],["bus_cfg_mac","bus_cfg_tx_pre_len"],["bt_mac"],["auto_spit_period"],["auto_spit_timer"],["dbg_raw_msk"],["dbg_raw"],["c_t0","c_r0"],["enc_cfg"],["enc_div","enc_trig_b"],["const_period"],["print_dir"],["c_ink_count"],["p_ctrl"],["d_ctrl"],["e_ctrl"],["c_ctrl"]]
+            }
+        },
+
+        // other languages: "list" for the register descriptions, "seps" for the section titles
+        "trans": {
+            "zh-CN": {
+                "list": {
+                    "magic_code": "固定值 0xcdcd，用于检测 flash 中的寄存器表是否有效",
+                    "conf_ver": "寄存器表版本，高字节：主版本，低字节：子版本",
+                    "conf_from": "0：默认配置，1：全部来自 flash，2：bt_mac 及之后为默认（仅主版本匹配）",
+                    "do_reboot": "写 1：重启至 bootloader，写 2：普通重启",
+                    "save_conf": "写 1 保存当前配置到 flash",
+                    "dbg_en": "1：上报调试打印，0：不上报",
+                    "bus_cfg_mac": "RS-485 地址，范围：0~254",
+                    "bus_cfg_baud_l": "首字节波特率，默认 2 Mbps",
+                    "bus_cfg_baud_h": "后续字节波特率，默认 20 Mbps",
+                    "bus_cfg_filter_m": "组播地址过滤",
+                    "bus_cfg_mode": "0：传统半双工，1：仲裁，2：BS 同步",
+                    "bus_cfg_tx_permit_len": "空闲后允许发送的等待时间，单位：bit 时长",
+                    "bus_cfg_max_idle_len": "BS 模式最大空闲等待时间，单位：bit 时长",
+                    "bus_cfg_tx_pre_len": "发送前提前使能 TX_EN 的时间，单位：bit 时长，仲裁模式忽略",
+                    "bt_mac": "蓝牙板的 RS-485 地址",
+                    "auto_spit_period": "自动喷废墨周期，单位秒，0：不启用；需插 USB 保持开机",
+                    "auto_spit_timer": "自动喷废墨倒计时，单位秒，操作打印机会复位",
+                    "dbg_raw_msk": "1：开启波形调试",
+                    "dbg_raw": "波形调试数据来源：{地址, 长度} × 4",
+                    "c_t0": "墨盒温度校准数据（未使用）",
+                    "c_r0": "墨盒温度校准数据（未使用）",
+                    "enc_cfg": "bit1 输入模式，0：A/B，1：STEP/DIR；bit0：交换 A/B 或取反 DIR；保存并重启后生效",
+                    "enc_div": "由 dpt 文件设置；bit7：输入 ×2；bit[6:0]：输入 ÷ (val + 1)",
+                    "enc_trig_f": "正向移动时开始打印的编码器位置",
+                    "enc_trig_b": "反向移动时开始打印的编码器位置",
+                    "const_period": "非 0：匀速打印，周期单位 µs",
+                    "print_dir": "由 dpt 文件设置；0：正向移动打印，1：反向移动打印",
+                    "p_state": "bit[2:0] 为 0：空闲；bit7：温度异常，6：缺墨（未使用），5：墨盒无效，4：未装墨盒，3：无数据，2：打印中，1：喷废墨中，0：预热中",
+                    "enc_val": "位置编码器值，可通过 e_ctrl 清零",
+                    "c_state": "每墨盒一字节，CMYK 顺序；bit4：0 温度过低，1 温度过高；bit3：温度异常，2：缺墨（未使用），1：墨盒无效，0：未检测到墨盒",
+                    "c_ink_count": "墨量记录，CMYK 顺序，单位 mL",
+                    "c_temperature": "喷头温度，CMYK 顺序",
+                    "temperature": "环境温度",
+                    "prt_enc_pos": "打印移动位置，详见 Readme 打印位置说明",
+                    "prt_dat_pos": "文件打印位置，预热时为负，详见 Readme 打印位置说明",
+                    "voltage": "单节锂电池电压 (V)",
+                    "current": "喷头电流 (mA)",
+                    "dc_online": "1：已接充电器",
+                    "p_ctrl": "写 0x01：预热，0x02：喷废墨，0x04：打印，0x10：取消任务",
+                    "d_ctrl": "写 0x01：清除未提交数据，0x02：提交文件，0x10：清除所有数据",
+                    "e_ctrl": "写 0x10：清零 enc_val",
+                    "c_ctrl": "写 0x08：标定墨盒温度（未使用）",
+                    "c_id": "墨盒唯一编码",
+                    "psram_f_start": "已提交文件的起始地址（8 MB 环形缓冲）",
+                    "psram_f_end": "已提交文件的结束地址，与起始相等：无文件",
+                    "psram_w_offset": "正在写入文件的结束地址",
+                    "p14_cnt": "文件传输端口 0x14 的序号 cnt",
+                    "p14_err": "0x14 端口错误，0：无，1：cnt 错误，2：文件头无效，3：数据损坏",
+                    "ink_rec_bank": "墨水记录 bank，仅调试使用",
+                    "ink_rec_idx": "墨水记录索引，仅调试使用"
+                },
+                "seps": {
+                    "magic_code": "系统",
+                    "dbg_en": "调试",
+                    "bus_cfg_mac": "总线（保存并重启后生效）",
+                    "bt_mac": "蓝牙",
+                    "auto_spit_period": "自动喷废墨",
+                    "dbg_raw_msk": "波形调试",
+                    "c_t0": "墨盒",
+                    "enc_cfg": "编码器",
+                    "p_state": "状态",
+                    "p_ctrl": "控制",
+                    "c_id": "墨盒 ID",
+                    "psram_f_start": "文件传输",
+                    "ink_rec_bank": "墨水记录（调试用）"
+                }
+            }
+        }
+    },
+
+    "plot": {
+        "mask": "dbg_raw_msk",
+        "plots": [
+            {
+                "cfg_reg": "dbg_raw",
+                "x_fmt": "H1",
+                "label": ["N", "enc_val", "prt_enc_pos", "prt_dat_pos"],
+                "cal": {
+                    "enc16": "_d[1].at(-1) & 0xfff"
+                }
+            }
+        ]
+    },
+
+    "iap": { "reboot": 0x0005, "keep_bl": 0x0006, "batch_pkts": 3 } // iap related register address
+}
